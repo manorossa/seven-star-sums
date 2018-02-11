@@ -1,8 +1,11 @@
 import React from 'react';
+import Settings from './Settings'
 
     const Header = () => {
         return (
-            <div>My header as a component </div>
+            <div className='container'>SEVEN STAR SUMS
+                <Settings />
+            </div>
         )
     }
 

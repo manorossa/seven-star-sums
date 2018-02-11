@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import './components/Header'
 import Header from './components/Header';
+import Sum from './components/Sum'
+import Answer from './components/Answer'
+import Check from './components/Check'
+import Result from './components/Result'
+import Score from './components/Score'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Seven star sums</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Sum />
+        <Answer />
+        <Check />
+        <Result />
+        <Score />
       </div>
     );
   }
