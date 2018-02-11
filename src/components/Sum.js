@@ -1,13 +1,13 @@
 import React from 'react';
 
-    const Sum = () => {
+    const Sum = (props) => {
         return (
             <div className='container'>
                 <div>Num 1</div>
-                <div>Op 1</div>
+                <div>{props.op1}</div>
                 <div>Num 2</div>
-                <div>Op 2</div>
-                <div>Num 3</div>
+                <div>{props.op2}</div>
+                <div>{props.num3}</div>
             </div>
         )
     }

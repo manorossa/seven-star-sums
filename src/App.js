@@ -11,9 +11,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      num1: null,
       num2: '?',
       num3: 20,
-      num1: null,
       op1: '+',
       op2: '='
     };
@@ -23,7 +23,13 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Sum />
+        <Sum 
+          num1={this.state.num1}
+          num2={this.state.num2}
+          num3={this.state.num3}
+          op1={this.state.op1}
+          op2={this.state.op2}
+          />
         <Answer />
         <Check />
         <Result />
