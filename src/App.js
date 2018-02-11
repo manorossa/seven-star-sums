@@ -10,10 +10,19 @@ import Score from './components/Score'
 class App extends Component {
   constructor(props) {
     super(props);
+
+    const defineSumNumber = (base) => {
+      // return 'i work';
+      return Math.floor(Math.random() * Math.floor(base));
+      // this.setState({num1: num1});
+    };
+
+    const baseNum = 20;
+
     this.state = {
-      num1: null,
       num2: '?',
       num3: 20,
+      num1: defineSumNumber(this.num3),
       op1: '+',
       op2: '='
     };
