@@ -6,12 +6,14 @@ import Answer from './components/Answer'
 import Check from './components/Check'
 import Result from './components/Result'
 import Score from './components/Score'
+import Splashscreen from './components/Splashscreen';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      showSplash: true,
       usedNums: [],
       baseNum: 20,
       num1: null,
@@ -23,26 +25,33 @@ class App extends Component {
   }
 
   getRandomNumber = (base) => {
-    return (Math.floor(Math.random() * Math.floor(base)) + 1);
+    return Math.floor(Math.random() * Math.floor(base));
   };
 
   defineSum = () => {
     let maxNum = this.state.baseNum - 2;
-    let number3 = this.getRandomNumber(maxNum);
+    let number3 = this.getRandomNumber(maxNum) + 1;
+    const newUsedNums = [...this.state.usedNums, number3];
     this.setState( { 
-      usedNums: [...this.state.usedNums, number3], 
+      usedNums: newUsedNums, 
       num1: number3,
       num3: this.state.baseNum
     } )
   };
 
-  componentDidMount() {
+  startGameHandler() {
     this.defineSum();
+    this.setState({
+      showSplash: false
+    })
   }
 
   render() {
     return (
       <div className="App">
+        {this.state.showSplash ? <Splashscreen 
+          startgame={() => this.startGameHandler()}
+        /> : null}
         <Header />
         <Sum 
           num1={this.state.num1}

@@ -6,6 +6,7 @@ import React from 'react';
                 <div>Result</div>
                 <div>Tick</div>
                 <div>Cross</div>
+                <button>Next question</button>
             </div>
         )
     }
