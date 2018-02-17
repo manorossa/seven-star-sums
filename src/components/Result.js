@@ -1,12 +1,12 @@
 import React from 'react';
 
-    const Result = () => {
+    const Result = (props) => {
         return (
             <div className='container'>
                 <div>Result</div>
                 <div>Tick</div>
                 <div>Cross</div>
-                <button>Next question</button>
+                <button onClick={props.nextQ}>Next question</button>
             </div>
         )
     }
