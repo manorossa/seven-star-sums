@@ -10,19 +10,16 @@ import Splashscreen from './components/Splashscreen';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showSplash: true,
-      possibleNums: [],
-      baseNum: 20,
-      num1: null,
-      num2: '?',
-      num3: null,
-      op1: '+',
-      op2: '='
-    };
-  }
+  state = {
+    showSplash: true,
+    possibleNums: [],
+    baseNum: 20,
+    num1: null,
+    num2: '?',
+    num3: null,
+    op1: '+',
+    op2: '='
+  };
 
   // Function to create a random number. Will be used throughout app
   getRandomNumber = (base) => {
