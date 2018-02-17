@@ -20,7 +20,7 @@ class App extends Component {
     op1: '+',
     op2: '='
   };
-
+  
   // Function to create a random number. Will be used throughout app
   getRandomNumber = (base) => {
     return Math.floor(Math.random() * Math.floor(base));
@@ -29,30 +29,34 @@ class App extends Component {
   // Function to define the sum to be solved. For addition and subtraction
   // Runs at the beginning of the game, and every time the next question button is pressed
   defineSum = () => {
-    let maxNum = this.state.possibleNums.length;
-    let randomNumIndex = this.getRandomNumber(maxNum);
-    let randomNum = this.state.possibleNums[randomNumIndex];
-    console.log(`maxNum is ${maxNum}, randomNum is ${randomNum}, randomNumIndex is ${randomNumIndex}`)
-    const possibleNums = [...this.state.possibleNums].filter( val => val !== randomNum );
+    // Destructure the relevant state elements
+    const { possibleNums, baseNum } = this.state;
+    // Choose a random number from the possible numbers array, 
+    // based on the length of the possible numbers array
+    let randomNum = possibleNums[this.getRandomNumber(possibleNums.length)];
 
     this.setState( { 
       num1: randomNum,
-      num3: this.state.baseNum,
-      possibleNums: possibleNums
+      num3: baseNum,
+      // remove the chosen random number from the array of possible numbers and update the state
+      possibleNums: [...possibleNums].filter( val => val !== randomNum )
     } )
   };
 
   // Function to define the possible answers to a sum. For addition and subtraction.
   // Runs once at the beginning of the game, then calls the defineSum function as a callback
   definePossibleNums = () => {
+    // Destructure the relevant state elements
+    const { possibleNums, baseNum } = this.state;
+    // Create and empty array, fill it with numbers from 1 to (baseNum -1),
+    // this defines the possible numbers to be used in the left hand side of the sum
     let newNums = [];
-    for (let i = 1; i < this.state.baseNum; i++) {
+    for (let i = 1; i < baseNum; i++) {
       newNums.push(i);
     }
-    const possibleNums = [...this.state.possibleNums].concat(newNums);
 
     this.setState( { 
-      possibleNums: possibleNums, 
+      possibleNums: [...possibleNums].concat(newNums), 
     }, () => {this.defineSum()});
   }
 
@@ -68,9 +72,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.showSplash ? <Splashscreen 
+        { !!this.state.showSplash && <Splashscreen 
           startgame={() => this.startGameHandler()} //need full function here to pass this to nested function
-        /> : null}
+        /> }
         <Header />
         <Sum 
           num1={this.state.num1}
