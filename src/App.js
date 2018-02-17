@@ -18,7 +18,9 @@ class App extends Component {
     num2: '?',
     num3: null,
     op1: '+',
-    op2: '='
+    op2: '=',
+    possibleAns: [],
+    correctAns: null
   };
   
   // Function to create a random number. Will be used throughout app
@@ -30,16 +32,40 @@ class App extends Component {
   // Runs at the beginning of the game, and every time the next question button is pressed
   defineSum = () => {
     // Destructure the relevant state elements
-    const { possibleNums, baseNum } = this.state;
+    const { possibleNums, baseNum, op1 } = this.state;
     // Choose a random number from the possible numbers array, 
     // based on the length of the possible numbers array
     let randomNum = possibleNums[this.getRandomNumber(possibleNums.length)];
+    // Define how to get answers based on the operator
+    const answerMethod = {
+      '+': (a, b) => a - b
+    }
+    // Define correct answer, and two other possibles
+    const answer1 = answerMethod[op1](baseNum, randomNum);
+    const answer2 = answer1 + (this.getRandomNumber(3)+1);
+    const answer3 = answer1 - (this.getRandomNumber(3)+1);
+    // Put the possible answers into an array, ready to be shuffled
+    const answerArray = [answer1, answer2, answer3];
+    // console.log(`A1=${answer1}, A2=${answer2}, A3=${answer3},`);
+    // Create a random order of indices of 0, 1 and 2
+    let answerSet = new Set(), i = 0, a;
+    while (i < 3) {
+      a = this.getRandomNumber(3);
+      answerSet.add(a);
+      i = answerSet.size;
+    }
+    // console.log(answerSet);
+    // shuffle the possible answer array according to the random order of indices
+    const possibleAns = [...answerSet].map(x => answerArray[x]);
+    // console.log(possibleAns);
 
     this.setState( { 
       num1: randomNum,
       num3: baseNum,
       // remove the chosen random number from the array of possible numbers and update the state
-      possibleNums: [...possibleNums].filter( val => val !== randomNum )
+      possibleNums: [...possibleNums].filter( val => val !== randomNum ),
+      possibleAns: possibleAns,
+      correctAns: answer1
     } )
   };
 
@@ -73,7 +99,7 @@ class App extends Component {
     return (
       <div className="App">
         { !!this.state.showSplash && <Splashscreen 
-          startgame={() => this.startGameHandler()} //need full function here to pass this to nested function
+          startgame={() => this.startGameHandler()} //need full function here to pass 'this' to nested function
         /> }
         <Header />
         <Sum 
