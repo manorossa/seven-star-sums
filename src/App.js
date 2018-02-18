@@ -37,13 +37,16 @@ class App extends Component {
     // based on the length of the possible numbers array
     let randomNum = possibleNums[this.getRandomNumber(possibleNums.length)];
     // Define how to get answers based on the operator
+    // @todo add other methods when needed
     const answerMethod = {
       '+': (a, b) => a - b
     }
     // Define correct answer, and two other possibles
     const answer1 = answerMethod[op1](baseNum, randomNum);
-    const answer2 = answer1 + (this.getRandomNumber(3)+1);
-    const answer3 = answer1 - (this.getRandomNumber(3)+1);
+    let answer2 = answer1 + (this.getRandomNumber(3)+1);
+    answer2 = (answer2 > 20 ? 20 : answer2) // Don't allow random answer to be higher than 20
+    let answer3 = answer1 - (this.getRandomNumber(3)+1);
+    answer3 = (answer3 < 0 ? 0 : answer3) // Don't allow random answer to be negative
     // Put the possible answers into an array, ready to be shuffled
     const answerArray = [answer1, answer2, answer3];
     // console.log(`A1=${answer1}, A2=${answer2}, A3=${answer3},`);
@@ -88,18 +91,22 @@ class App extends Component {
 
   // Function to start the game and hide the splash screen.
   // Can be expanded to start different games (addition, subtraction, times table)
-  startGameHandler() {
+  startGameHandler = () => {
     this.definePossibleNums();     
     this.setState({
       showSplash: false
     });
   }
 
+  answerClickHandler = (value) => {
+    console.log(`A button with the value of ${value} has been clicked.`)
+  }
+
   render() {
     return (
       <div className="App">
         { !!this.state.showSplash && <Splashscreen 
-          startgame={() => this.startGameHandler()} //need full function here to pass 'this' to nested function
+          startgame={this.startGameHandler}
         /> }
         <Header />
         <Sum 
@@ -109,7 +116,9 @@ class App extends Component {
           op1={this.state.op1}
           op2={this.state.op2}
           />
-        <Answer />
+        <Answer 
+          answers={this.state.possibleAns}
+          clicked={this.answerClickHandler}/>
         <Check />
         <Result nextQ={this.defineSum}/>
         <Score />
