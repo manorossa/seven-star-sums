@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Sum from './components/Sum'
-import Answer from './components/Answer'
+import Answers from './components/Answers'
 import Check from './components/Check'
 import Result from './components/Result'
 import Score from './components/Score'
@@ -116,7 +116,7 @@ class App extends Component {
           op1={this.state.op1}
           op2={this.state.op2}
           />
-        <Answer 
+        <Answers 
           answers={this.state.possibleAns}
           clicked={this.answerClickHandler}/>
         <Check />
