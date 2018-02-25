@@ -12,6 +12,7 @@ class App extends Component {
 
   state = {
     showSplash: true,
+    gameStatus: 'showSum',
     possibleNums: [],
     baseNum: 20,
     num1: null,
@@ -99,7 +100,11 @@ class App extends Component {
   }
 
   answerClickHandler = (value) => {
-    console.log(`A button with the value of ${value} has been clicked.`)
+    console.log(`A button with the value of ${value} has been clicked.`);
+    this.setState({
+      gameStatus: 'confirmAnswer',
+      num2: value
+    })
   }
 
   render() {
@@ -116,11 +121,17 @@ class App extends Component {
           op1={this.state.op1}
           op2={this.state.op2}
           />
+        { this.state.gameStatus === 'showSum' ? 
         <Answers 
           answers={this.state.possibleAns}
           clicked={this.answerClickHandler}/>
+        : null }
+        { this.state.gameStatus === 'confirmAnswer' ?
         <Check />
+        : null }
+        { this.state.gameStatus === 'showResult' ?
         <Result nextQ={this.defineSum}/>
+        : null }
         <Score />
       </div>
     );
