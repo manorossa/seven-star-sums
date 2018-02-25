@@ -159,9 +159,11 @@ class App extends Component {
           noClicked={this.noCheckHandler}/>
         : null }
         { this.state.gameStatus === 'showResult' ?
-        <Result nextQ={this.defineSum}/>
+        <Result 
+          nextQ={this.defineSum}
+          rightWrong={this.state.gotItRight}/>
         : null }
-        <Score />
+        <Score displayScore={this.state.score}/>
       </div>
     );
   }
