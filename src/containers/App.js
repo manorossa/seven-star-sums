@@ -21,7 +21,9 @@ class App extends Component {
     op1: '+',
     op2: '=',
     possibleAns: [],
-    correctAns: null
+    correctAns: null,
+    gotItRight: null,
+    score: 0
   };
   
   // Function to create a random number. Will be used throughout app
@@ -45,7 +47,7 @@ class App extends Component {
     // Define correct answer, and two other possibles
     const answer1 = answerMethod[op1](baseNum, randomNum);
     let answer2 = answer1 + (this.getRandomNumber(3)+1);
-    answer2 = (answer2 > 20 ? 20 : answer2) // Don't allow random answer to be higher than 20
+    answer2 = (answer2 > baseNum ? baseNum : answer2) // Don't allow random answer to be higher than the baseNum
     let answer3 = answer1 - (this.getRandomNumber(3)+1);
     answer3 = (answer3 < 0 ? 0 : answer3) // Don't allow random answer to be negative
     // Put the possible answers into an array, ready to be shuffled
@@ -64,12 +66,15 @@ class App extends Component {
     // console.log(possibleAns);
 
     this.setState( { 
+      gameStatus: 'showSum',
       num1: randomNum,
+      num2: '?',
       num3: baseNum,
       // remove the chosen random number from the array of possible numbers and update the state
       possibleNums: [...possibleNums].filter( val => val !== randomNum ),
       possibleAns: possibleAns,
-      correctAns: answer1
+      correctAns: answer1,
+      gotItRight: null
     } )
   };
 
@@ -107,6 +112,28 @@ class App extends Component {
     })
   }
 
+  noCheckHandler = () => {
+    this.setState({
+      gameStatus: 'showSum',
+      num2: '?'
+    })
+  }
+
+  yesCheckHandler = () => {
+    if (this.state.num2 === this.state.correctAns) {
+      this.setState(prevState => ({
+        gameStatus: 'showResult',
+        gotItRight: true,
+        score: prevState.score + 1
+      }))
+    } else {
+      this.setState({
+        gameStatus: 'showResult',
+        gotItRight: false
+      })
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -127,7 +154,9 @@ class App extends Component {
           clicked={this.answerClickHandler}/>
         : null }
         { this.state.gameStatus === 'confirmAnswer' ?
-        <Check />
+        <Check 
+          yesClicked={this.yesCheckHandler}
+          noClicked={this.noCheckHandler}/>
         : null }
         { this.state.gameStatus === 'showResult' ?
         <Result nextQ={this.defineSum}/>
