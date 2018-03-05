@@ -12,7 +12,7 @@ class App extends Component {
 
   state = {
     showSplash: true,
-    gameStatus: 'showSum',
+    gameStatus: 'startGame', // Possible values: 'startGame', 'showSum', 'confirmAnswer', 'showResult', 'endWin', 'endLose'
     possibleNums: [],
     baseNum: 20,
     num1: null,
@@ -104,8 +104,36 @@ class App extends Component {
     });
   }
 
+  // Function to reset the game to the starting state
+  resetGameHandler = () => {
+    this.setState({
+      possibleNums: [],
+      score: 0
+    }, () => {this.startGameHandler()});
+  }
+
+  // Function to check if the player has reached the max score, or has run out of possible answers
+  checkForEndGame = () => {
+      // Destructure the relevant state elements
+      const { possibleNums, score } = this.state;  
+      // Check if score has reached 7
+      if (score === 7) {
+        this.setState({
+          gameStatus: 'endWin',
+          showSplash: true
+        });
+      }
+      else if (possibleNums.length === 0) {
+        this.setState({
+          gameStatus: 'endLose',
+          showSplash: true
+        });
+      }
+      else { return };
+  }
+
   answerClickHandler = (value) => {
-    console.log(`A button with the value of ${value} has been clicked.`);
+    // console.log(`A button with the value of ${value} has been clicked.`);
     this.setState({
       gameStatus: 'confirmAnswer',
       num2: value
@@ -125,12 +153,12 @@ class App extends Component {
         gameStatus: 'showResult',
         gotItRight: true,
         score: prevState.score + 1
-      }))
+      }), () => {this.checkForEndGame()})
     } else {
       this.setState({
         gameStatus: 'showResult',
         gotItRight: false
-      })
+      }, () => {this.checkForEndGame()})
     }
   }
 
@@ -139,6 +167,8 @@ class App extends Component {
       <div className="App">
         { !!this.state.showSplash && <Splashscreen 
           startgame={this.startGameHandler}
+          resetgame={this.resetGameHandler}
+          status={this.state.gameStatus}
         /> }
         <Header />
         <Sum 
