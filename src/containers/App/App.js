@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from '../components/Header/Header';
-import Sum from '../components/Sum/Sum'
-import Answers from '../components/Answers/Answers'
-import Check from '../components/Check/Check'
-import Result from '../components/Result/Result'
-import Score from '../components/Score/Score'
-import Splashscreen from '../components/Splashscreen/Splashscreen';
+import Header from '../../components/Header/Header';
+import Sum from '../../components/Sum/Sum'
+import Answers from '../../components/Answers/Answers'
+import Check from '../../components/Check/Check'
+import Result from '../../components/Result/Result'
+import Score from '../../components/Score/Score'
+import Splashscreen from '../../components/Splashscreen/Splashscreen';
 
 class App extends Component {
 
@@ -51,7 +51,6 @@ class App extends Component {
     answer3 = (answer3 < 0 ? 0 : answer3) // Don't allow random answer to be negative
     // Put the possible answers into an array, ready to be shuffled
     const answerArray = [answer1, answer2, answer3];
-    // console.log(`A1=${answer1}, A2=${answer2}, A3=${answer3},`);
     // Create a random order of indices of 0, 1 and 2
     let answerSet = new Set(), i = 0, a;
     while (i < 3) {
@@ -59,10 +58,8 @@ class App extends Component {
       answerSet.add(a);
       i = answerSet.size;
     }
-    // console.log(answerSet);
     // shuffle the possible answer array according to the random order of indices
     const possibleAns = [...answerSet].map(x => answerArray[x]);
-    // console.log(possibleAns);
 
     this.setState( { 
       gameStatus: 'showSum',
@@ -131,7 +128,6 @@ class App extends Component {
   }
 
   answerClickHandler = (value) => {
-    // console.log(`A button with the value of ${value} has been clicked.`);
     this.setState({
       gameStatus: 'confirmAnswer',
       num2: value
