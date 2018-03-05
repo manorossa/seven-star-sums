@@ -1,11 +1,13 @@
 import React from 'react';
 
-    const Result = ({nextQ}) => {
+    const Result = ({nextQ, rightWrong}) => {
         return (
             <div className='container'>
-                <div>Result</div>
-                <div>Tick</div>
-                <div>Cross</div>
+                <div>
+                    {rightWrong ? 
+                    'Yay, you got the sum right! You get another star!'
+                    : 'Unlucky! That\'s the wrong answer. Try another sum.' }
+                </div>
                 <button onClick={nextQ}>Next question</button>
             </div>
         )

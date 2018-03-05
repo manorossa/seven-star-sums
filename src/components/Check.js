@@ -1,11 +1,11 @@
 import React from 'react';
 
-    const Check = () => {
+    const Check = ({yesClicked, noClicked}) => {
         return (
             <div className='container'>
                 <div>Are you sure?</div>
-                <div>Yes</div>
-                <div>No</div>
+                <button onClick={yesClicked}>Yes</button>
+                <button onClick={noClicked}>No</button>
             </div>
         )
     }
