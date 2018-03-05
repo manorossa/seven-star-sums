@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from '../components/Header';
-import Sum from '../components/Sum'
-import Answers from '../components/Answers'
-import Check from '../components/Check'
-import Result from '../components/Result'
-import Score from '../components/Score'
-import Splashscreen from '../components/Splashscreen';
+import Header from '../components/Header/Header';
+import Sum from '../components/Sum/Sum'
+import Answers from '../components/Answers/Answers'
+import Check from '../components/Check/Check'
+import Result from '../components/Result/Result'
+import Score from '../components/Score/Score'
+import Splashscreen from '../components/Splashscreen/Splashscreen';
 
 class App extends Component {
 
