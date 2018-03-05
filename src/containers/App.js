@@ -17,7 +17,6 @@ class App extends Component {
     baseNum: 20,
     num1: null,
     num2: '?',
-    num3: null,
     op1: '+',
     op2: '=',
     possibleAns: [],
@@ -69,7 +68,6 @@ class App extends Component {
       gameStatus: 'showSum',
       num1: randomNum,
       num2: '?',
-      num3: baseNum,
       // remove the chosen random number from the array of possible numbers and update the state
       possibleNums: [...possibleNums].filter( val => val !== randomNum ),
       possibleAns: possibleAns,
@@ -174,7 +172,7 @@ class App extends Component {
         <Sum 
           num1={this.state.num1}
           num2={this.state.num2}
-          num3={this.state.num3}
+          baseNum={this.state.baseNum}
           op1={this.state.op1}
           op2={this.state.op2}
           />
