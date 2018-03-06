@@ -1,5 +1,12 @@
+@import 'base-styles/_variables.scss';
+
 .App {
+  width: 90%;
   max-width: 1000px;
+  margin: 3vh auto;
+  background-color: $lightest;
+  border: 10px solid $light;
+  border-radius: 1vh;
 }
 
 div {
