@@ -18,3 +18,32 @@ div {
   flex-direction: row;
 }
 
+// TYPOGRAPHY
+
+h1 {
+  font: {
+    size: 3.8vw;
+    weight: $bold;
+  }
+}
+
+h2 {
+  font: {
+    size: 3vw;
+    weight: $bold;
+  }
+}
+
+h3 {
+  font: {
+    size: 2.4vw;
+    weight: $bold;
+  }
+}
+
+p {
+  font: {
+    size: 1.5vw;
+    weight: $bold;
+  }
+}
