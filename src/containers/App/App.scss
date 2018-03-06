@@ -26,6 +26,7 @@ h1 {
     size: 3.8vw;
     weight: $bold;
   }
+  margin: 0 0 2vh;
 }
 
 %h2,
@@ -34,6 +35,7 @@ h2 {
     size: 3vw;
     weight: $bold;
   }
+  margin: 0 0 2vh;
 }
 
 %h3,
@@ -42,6 +44,7 @@ h3 {
     size: 2.4vw;
     weight: $bold;
   }
+  margin: 0 0 1vh;
 }
 
 %h4,
@@ -50,6 +53,7 @@ h4 {
     size: 1.9vw;
     weight: $bold;
   }
+  margin: 0 0 1vh;
 }
 
 p {
@@ -75,7 +79,6 @@ button {
   @extend %h4;
   min-width: 10vw;
   padding: 1.3vh 1.3vw;
-  margin: 2vw;
   text-align: center;
   background-color: $dark;
   color: $white;
