@@ -1,5 +1,6 @@
 import React from 'react';
 import Star from './Star';
+import './Score.css';
 
     const Score = ({displayScore}) => {
         let stars = [];
@@ -11,9 +12,11 @@ import Star from './Star';
                 />)
         }
         return (
-            <div className='container'>
-                <div>Your score is...</div>
-                <div>{stars}</div>
+            <div className='score-strip'>
+                <div className='container score-container'>
+                    <div><h4 className='white-text'>Your score is:</h4></div>
+                    <div>{stars}</div>
+                </div>
             </div>
         )
     }

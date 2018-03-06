@@ -2,7 +2,7 @@ import React from 'react';
 
 const Answer = ({value, clicked}) => {
     return (
-        <button onClick={clicked}>
+        <button className='round-button round-large' onClick={clicked}>
             {value}
         </button>
     )
