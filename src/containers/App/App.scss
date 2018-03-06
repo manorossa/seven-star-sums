@@ -56,6 +56,7 @@ h4 {
   margin: 0 0 1vh;
 }
 
+%p,
 p {
   font: {
     size: 1.5vw;
@@ -73,6 +74,10 @@ p {
 button {
   font-family: $font-family;
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .horizontal-button {

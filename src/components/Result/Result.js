@@ -1,9 +1,12 @@
 import React from 'react';
-import '../Answers/Answers.css'
+import '../Answers/Answers.css';
+import './Result.css';
 
     const Result = ({nextQ, rightWrong}) => {
+        let borderStyle = rightWrong ? 'green-border' : 'red-border';
+
         return (
-            <div className='answer-strip'>
+            <div className={`answer-strip ${borderStyle}`}>
                 <div className='container answer-container'>
                     <div className='result-container'>
                         <h4 className='white-text'>

@@ -171,6 +171,7 @@ class App extends Component {
           baseNum={this.state.baseNum}
           op1={this.state.op1}
           op2={this.state.op2}
+          rightWrong={this.state.gotItRight}
           />
         { this.state.gameStatus === 'showSum' ? 
         <Answers 
