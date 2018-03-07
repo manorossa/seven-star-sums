@@ -5,7 +5,7 @@ import './Header.css'
     const Header = () => {
         return (
             <div className='container header-container'><h1>SEVEN STAR SUMS</h1>
-                <Settings />
+                {/* <Settings /> */}
             </div>
         )
     }
