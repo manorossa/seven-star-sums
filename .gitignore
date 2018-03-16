@@ -9,6 +9,13 @@
 # production
 /build
 
+# assets
+/assets
+
+# compiled CSS
+src/**/*.css
+src/containers/App/App.css
+
 # misc
 .DS_Store
 .env.local
@@ -19,5 +26,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-/assets

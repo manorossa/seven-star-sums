@@ -1,0 +1,20 @@
+@import 'base-styles/_variables.scss';
+
+.score-strip {
+    background-color: $darkest;
+}
+
+.score-container {
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+
+    svg {
+        margin-right: 1vw;
+        width: 7vw;
+        height: 7vw;
+        max-width: 70px;
+        max-height: 70px;
+    }
+}

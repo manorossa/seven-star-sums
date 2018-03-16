@@ -1,10 +1,11 @@
 import React from 'react';
-import Settings from './Settings'
+// import Settings from './Settings'
+import './Header.css'
 
     const Header = () => {
         return (
-            <div className='container'>SEVEN STAR SUMS
-                <Settings />
+            <div className='container header-container'><h1>SEVEN STAR SUMS</h1>
+                {/* <Settings /> */}
             </div>
         )
     }

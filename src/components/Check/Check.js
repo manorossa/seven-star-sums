@@ -1,11 +1,14 @@
 import React from 'react';
+import '../Answers/Answers.css'
 
     const Check = ({yesClicked, noClicked}) => {
         return (
-            <div className='container'>
-                <div>Are you sure?</div>
-                <button onClick={yesClicked}>Yes</button>
-                <button onClick={noClicked}>No</button>
+            <div className='answer-strip'>
+                <div className='container answer-container'>
+                    <div><h4 className='white-text'>Are you sure?</h4></div>
+                    <button className='horizontal-button' onClick={yesClicked}>Yes</button>
+                    <button className='horizontal-button' onClick={noClicked}>No</button>
+                </div>
             </div>
         )
     }

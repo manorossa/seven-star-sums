@@ -1,8 +1,9 @@
 import React from 'react';
+import './Header.css'
 
     const Settings = () => {
         return (
-            <div>Settings</div>
+            <button className='small-horizontal-button'>Settings</button>
         )
     }
 
