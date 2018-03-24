@@ -2,7 +2,7 @@ import React from 'react';
 import Star from './Star';
 import './Score.css';
 
-    const Score = ({displayScore}) => {
+    const Score = ({displayScore, livesLeft}) => {
         let stars = [];
         for (let i=1; i <= 7; i++) {
             stars.push(<Star
@@ -16,6 +16,9 @@ import './Score.css';
                 <div className='container score-container'>
                     <div><h4 className='white-text'>Your score is:</h4></div>
                     <div>{stars}</div>
+                </div>
+                <div className='container score-container'>
+                    <h4 className='white-text'>You have {livesLeft} lives left.</h4>
                 </div>
             </div>
         )

@@ -22,7 +22,8 @@ class App extends Component {
     possibleAns: [],
     correctAns: null,
     gotItRight: null,
-    score: 0
+    score: 0,
+    livesLeft: null
   };
   
   // Function to create a random number. Will be used throughout app
@@ -86,7 +87,8 @@ class App extends Component {
     }
 
     this.setState( { 
-      possibleNums: [...possibleNums].concat(newNums), 
+      possibleNums: [...possibleNums].concat(newNums),
+      livesLeft: baseNum - 2 - 7 
     }, () => {this.defineSum()});
   }
 
@@ -149,10 +151,11 @@ class App extends Component {
         score: prevState.score + 1
       }), () => {this.checkForEndGame()})
     } else {
-      this.setState({
+      this.setState(prevState => ({
         gameStatus: 'showResult',
-        gotItRight: false
-      }, () => {this.checkForEndGame()})
+        gotItRight: false,
+        livesLeft: prevState.livesLeft - 1
+      }), () => {this.checkForEndGame()})
     }
   }
 
@@ -186,9 +189,13 @@ class App extends Component {
         { this.state.gameStatus === 'showResult' ?
         <Result 
           nextQ={this.defineSum}
-          rightWrong={this.state.gotItRight}/>
+          rightWrong={this.state.gotItRight}
+          score={this.state.score} 
+          correctAns={this.state.correctAns} />
         : null }
-        <Score displayScore={this.state.score}/>
+        <Score 
+        displayScore={this.state.score}
+        livesLeft={this.state.livesLeft}/>
       </div>
     );
   }
