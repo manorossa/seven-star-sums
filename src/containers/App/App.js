@@ -88,7 +88,7 @@ class App extends Component {
 
     this.setState( { 
       possibleNums: [...possibleNums].concat(newNums),
-      livesLeft: baseNum - 2 - 7 
+      livesLeft: baseNum - 2 
     }, () => {this.defineSum()});
   }
 
@@ -148,7 +148,8 @@ class App extends Component {
       this.setState(prevState => ({
         gameStatus: 'showResult',
         gotItRight: true,
-        score: prevState.score + 1
+        score: prevState.score + 1,
+        livesLeft: prevState.livesLeft - 1
       }), () => {this.checkForEndGame()})
     } else {
       this.setState(prevState => ({

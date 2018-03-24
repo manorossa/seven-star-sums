@@ -42,6 +42,9 @@ p {
 .white-text {
   color: #fff; }
 
+.lightest-text {
+  color: #d7ecfd; }
+
 button {
   font-family: "Quicksand", "Arial", sans-serif;
   cursor: pointer; }
