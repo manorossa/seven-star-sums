@@ -112,7 +112,7 @@ class App extends Component {
   // Function to check if the player has reached the max score, or has run out of possible answers
   checkForEndGame = () => {
       // Destructure the relevant state elements
-      const { possibleNums, score } = this.state;  
+      const { livesLeft, score } = this.state;  
       // Check if score has reached 7
       if (score === 7) {
         this.setState({
@@ -120,7 +120,7 @@ class App extends Component {
           showSplash: true
         });
       }
-      else if (possibleNums.length === 0) {
+      else if (livesLeft === 0) {
         this.setState({
           gameStatus: 'endLose',
           showSplash: true
