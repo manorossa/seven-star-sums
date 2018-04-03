@@ -23,6 +23,7 @@ class App extends Component {
     correctAns: null,
     gotItRight: null,
     score: 0,
+    totalLives: null,
     livesLeft: null
   };
   
@@ -90,6 +91,7 @@ class App extends Component {
 
     this.setState( { 
       possibleNums: [...possibleNums].concat(newNums),
+      totalLives: baseNum - 8,
       livesLeft: baseNum - 8 
     }, () => {this.defineSum()});
   }
@@ -203,6 +205,7 @@ class App extends Component {
         : null }
         <Score 
         displayScore={this.state.score}
+        totalLives={this.state.totalLives}
         livesLeft={this.state.livesLeft}/>
       </div>
     );
