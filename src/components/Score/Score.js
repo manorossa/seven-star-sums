@@ -18,7 +18,7 @@ import './Score.css';
                     <div>{stars}</div>
                 </div>
                 <div className='container score-container no-top-padding'>
-                    <h4 className='lightest-text'>You have {livesLeft} questions left.</h4>
+                    <h4 className='lightest-text'>You have {livesLeft} lives left.</h4>
                 </div>
             </div>
         )

@@ -34,6 +34,8 @@ class App extends Component {
   // Function to define the sum to be solved. For addition and subtraction
   // Runs at the beginning of the game, and every time the next question button is pressed
   defineSum = () => {
+    // First check to see if the game has ended
+    if (this.checkForEndGame()){return};
     // Destructure the relevant state elements
     const { possibleNums, baseNum, op1 } = this.state;
     // Choose a random number from the possible numbers array, 
@@ -88,7 +90,7 @@ class App extends Component {
 
     this.setState( { 
       possibleNums: [...possibleNums].concat(newNums),
-      livesLeft: baseNum - 2 
+      livesLeft: baseNum - 8 
     }, () => {this.defineSum()});
   }
 
@@ -119,14 +121,16 @@ class App extends Component {
           gameStatus: 'endWin',
           showSplash: true
         });
+        return true;
       }
+      // Check if player has run out of lives
       else if (livesLeft === 0) {
         this.setState({
           gameStatus: 'endLose',
           showSplash: true
         });
+        return true;
       }
-      else { return };
   }
 
   answerClickHandler = (value) => {
@@ -148,15 +152,14 @@ class App extends Component {
       this.setState(prevState => ({
         gameStatus: 'showResult',
         gotItRight: true,
-        score: prevState.score + 1,
-        livesLeft: prevState.livesLeft - 1
-      }), () => {this.checkForEndGame()})
+        score: prevState.score + 1
+      }))
     } else {
       this.setState(prevState => ({
         gameStatus: 'showResult',
         gotItRight: false,
         livesLeft: prevState.livesLeft - 1
-      }), () => {this.checkForEndGame()})
+      }))
     }
   }
 
