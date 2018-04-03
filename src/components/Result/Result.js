@@ -13,7 +13,7 @@ import './Result.css';
                         <h4 className='white-text'>
                         {rightWrong ? 
                         `Yay, you got the sum right! Have ${starNum} star!`
-                        : `Unlucky! The correct answer was ${correctAns}. Try another sum.` }
+                        : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.` }
                         </h4>
                     </div>
                     <button className='horizontal-button' onClick={nextQ}>Next question</button>
