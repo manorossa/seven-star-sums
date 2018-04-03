@@ -10,3 +10,8 @@ body {
   font-family: "Quicksand", "Arial", sans-serif;
   background-color: #220277;
   line-height: 1.2; }
+
+a {
+  color: #fff;
+  margin-left: 5vw;
+  font-size: 1.2vw; }
