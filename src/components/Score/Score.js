@@ -17,7 +17,7 @@ import './Score.css';
         for (let j=1; j <= totalLives; j++) {
             hearts.push(<Heart
                 key={j}
-                fill={j <= livesLeft ? '#e74c3c' : '##220277'}
+                fill={j <= livesLeft ? '#e74c3c' : '#220277'}
                 />)
         }
 
