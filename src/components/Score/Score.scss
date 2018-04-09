@@ -10,11 +10,24 @@
     width: 90%;
     margin: 0 auto;
 
-    svg {
+    .star > svg {
         margin-right: 1vw;
         width: 7vw;
         height: 7vw;
         max-width: 70px;
         max-height: 70px;
+    }
+
+    .heart > svg {
+        margin-right: .5vw;
+        width: 3vw;
+        height: 3vw;
+        max-width: 30px;
+        max-height: 30px;
+    }
+
+    &.no-top-padding {
+        padding-top: 1rem;
+        border-top: 1px solid $lightest; 
     }
 }
