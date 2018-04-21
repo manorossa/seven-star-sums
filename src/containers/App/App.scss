@@ -97,6 +97,7 @@ button {
 
 .round-button {
   @extend %h2;
+  margin-bottom: 0;
   border: 6px solid $dark;
   border-radius: 50%;
   display: flex;
