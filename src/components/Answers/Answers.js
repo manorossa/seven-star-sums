@@ -11,11 +11,9 @@ import './Answers.css'
           } );
 
         return (
-            <div className='answer-strip'>
-                <div className='container answer-container'>
-                    <div><h4 className='white-text'>Choose an answer:</h4></div>
-                    {answerMap}
-                </div>
+            <div className='container answer-container'>
+                <div><h4 className='white-text'>Choose an answer:</h4></div>
+                {answerMap}
             </div>
         )
     }

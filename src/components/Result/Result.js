@@ -7,17 +7,15 @@ import './Result.css';
         let starNum = score === 1 ? 'a' : 'another';
 
         return (
-            <div className={`answer-strip ${borderStyle}`}>
-                <div className='container answer-container'>
-                    <div className='result-container'>
-                        <h4 className='white-text'>
-                        {rightWrong ? 
-                        `Yay, you got the sum right! Have ${starNum} star!`
-                        : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.` }
-                        </h4>
-                    </div>
-                    <button className='horizontal-button' onClick={nextQ}>Next question</button>
+            <div className={`container answer-container ${borderStyle}`}>
+                <div className='result-container'>
+                    <h4 className='white-text'>
+                    {rightWrong ? 
+                    `Yay, you got the sum right! Have ${starNum} star!`
+                    : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.` }
+                    </h4>
                 </div>
+                <button className='horizontal-button' onClick={nextQ}>Next question</button>
             </div>
         )
     }
