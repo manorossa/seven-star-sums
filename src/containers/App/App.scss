@@ -19,6 +19,13 @@
   padding: 3vh 3vw;
 }
 
+.answer-strip {
+  background-color: $light;
+  height: 14vw;
+  max-height: 14vw;
+  overflow: hidden;
+}
+
 // TYPOGRAPHY
 
 h1 {
