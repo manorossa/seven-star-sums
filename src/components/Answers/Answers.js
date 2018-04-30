@@ -19,7 +19,7 @@ import './Answers.css'
             mountOnEnter 
             unmountOnExit 
             in={show} 
-            timeout={800}
+            timeout={1200}
             classNames="height-anim">
                 <div className='container answer-container'>
                     <div><h4 className='white-text'>Choose an answer:</h4></div>

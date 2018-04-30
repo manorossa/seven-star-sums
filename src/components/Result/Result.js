@@ -14,7 +14,7 @@ import './Result.css';
             mountOnEnter 
             unmountOnExit 
             in={show} 
-            timeout={800}
+            timeout={1200}
             classNames="height-anim">
                 <div className={`container answer-container ${borderStyle}`}>
                     <div className='result-container'>
