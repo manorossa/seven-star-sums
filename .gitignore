@@ -26,3 +26,4 @@ src/containers/App/App.css
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/containers/App/App.css

@@ -3,7 +3,7 @@ import './Sum.css'
 
     const Sum = ({num1, num2, op1, op2, baseNum, rightWrong}) => {
         let borderColour
-        if (rightWrong === null) {
+        if (rightWrong === null || num2 === '?') {
             borderColour = '';
         } else {
             borderColour = rightWrong ? 'border-green' : 'border-red';

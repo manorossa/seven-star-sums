@@ -9,15 +9,39 @@
   border-radius: 1vh;
 }
 
-// div {
-//   padding: 20px;
-// }
-
 .container {
   display: flex;
   flex-direction: row;
   padding: 3vh 3vw;
 }
+
+.answer-strip {
+  background-color: $light;
+  height: 14vw;
+  max-height: 14vw;
+  overflow: hidden;
+  display: flex;
+}
+
+
+//FLEXBOX ORDER
+
+.flex-order--1 {
+  order: 1;
+}
+
+.flex-order--2 {
+  order: 2;
+}
+
+.flex-order--3 {
+  order: 3;
+}
+
+.flex-order--4 {
+  order: 4;
+}
+
 
 // TYPOGRAPHY
 
@@ -97,6 +121,7 @@ button {
 
 .round-button {
   @extend %h2;
+  margin-bottom: 0;
   border: 6px solid $dark;
   border-radius: 50%;
   display: flex;

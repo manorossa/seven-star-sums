@@ -11,6 +11,25 @@
   flex-direction: row;
   padding: 3vh 3vw; }
 
+.answer-strip {
+  background-color: #6878cc;
+  height: 14vw;
+  max-height: 14vw;
+  overflow: hidden;
+  display: flex; }
+
+.flex-order--1 {
+  order: 1; }
+
+.flex-order--2 {
+  order: 2; }
+
+.flex-order--3 {
+  order: 3; }
+
+.flex-order--4 {
+  order: 4; }
+
 h1 {
   font-size: 3.8vw;
   font-weight: 700;
@@ -61,6 +80,7 @@ button {
   border-radius: 1vh; }
 
 .round-button {
+  margin-bottom: 0;
   border: 6px solid #28128d;
   border-radius: 50%;
   display: flex;

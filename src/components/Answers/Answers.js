@@ -1,8 +1,9 @@
 import React from 'react';
 import Answer from './answer';
 import './Answers.css'
+import withAnimation from '../../HOCs/withAnimation/withAnimation';
 
-    const Answers = ({answers, clicked}) => {
+    const Answers = ({answers, clicked, gameStatus}) => {
         let answerMap = answers.map( ( answer, index ) => {
             return <Answer
                 key={index}
@@ -10,14 +11,14 @@ import './Answers.css'
                 clicked={() => clicked(answer)} />
           } );
 
+        let order = gameStatus === 'showSum' ? 'flex-order--1' : 'flex-order--4' ;
+
         return (
-            <div className='answer-strip'>
-                <div className='container answer-container'>
-                    <div><h4 className='white-text'>Choose an answer:</h4></div>
-                    {answerMap}
-                </div>
+            <div className={`container answer-container ${order}`}>
+                <div><h4 className='white-text'>Choose an answer:</h4></div>
+                {answerMap}
             </div>
         )
     }
 
-export default Answers;
+export default withAnimation(Answers, 'showSum');
