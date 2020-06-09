@@ -9,10 +9,6 @@
   border-radius: 1vh;
 }
 
-// div {
-//   padding: 20px;
-// }
-
 .container {
   display: flex;
   flex-direction: row;
@@ -27,7 +23,9 @@
   display: flex;
 }
 
+
 //FLEXBOX ORDER
+
 .flex-order--1 {
   order: 1;
 }
@@ -43,6 +41,7 @@
 .flex-order--4 {
   order: 4;
 }
+
 
 // TYPOGRAPHY
 

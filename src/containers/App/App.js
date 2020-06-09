@@ -197,26 +197,20 @@ class App extends Component {
           rightWrong={this.state.gotItRight}
           />
         <div className='answer-strip'>
-          {/* { this.state.gameStatus === 'showSum' ?  */}
           <Answers 
             answers={this.state.possibleAns}
             clicked={this.answerClickHandler}
             gameStatus={this.state.gameStatus}/>
-          {/* : null } */}
-          {/* { this.state.gameStatus === 'confirmAnswer' ? */}
           <Check 
             yesClicked={this.yesCheckHandler}
             noClicked={this.noCheckHandler}
             gameStatus={this.state.gameStatus}/>
-          {/* : null } */}
-          {/* { this.state.gameStatus === 'showResult' ? */}
           <Result 
             nextQ={this.nextQuestionHandler}
             rightWrong={this.state.gotItRight}
             score={this.state.score} 
             correctAns={this.state.correctAns}
             gameStatus={this.state.gameStatus} />
-          {/* : null } */}
         </div>
         <Score 
         displayScore={this.state.score}

@@ -7,7 +7,6 @@
     margin: 0 auto;
     padding: 2vw 5%;
     flex: 1 0 auto;
-    // height: 14vw;
 }
 
 .result-container {
@@ -17,7 +16,6 @@
 .height-anim-enter {
     opacity: 0;
     transform: translateX(-100%);
-    // height: 0;
   }
   
 .height-anim-enter-active {
@@ -31,7 +29,6 @@
 .height-anim-exit {
     opacity: 1;
     transform: translateX(-100%);
-    // height: 14vw;
   }
   
   @keyframes heightUp {
