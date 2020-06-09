@@ -14,7 +14,7 @@ import withAnimation from '../../HOCs/withAnimation/withAnimation';
         let order = gameStatus === 'showSum' ? 'flex-order--1' : 'flex-order--4' ;
 
         return (
-            <div id='ANSWER' className={`container answer-container ${order}`}>
+            <div className={`container answer-container ${order}`}>
                 <div><h4 className='white-text'>Choose an answer:</h4></div>
                 {answerMap}
             </div>

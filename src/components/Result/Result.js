@@ -8,7 +8,7 @@ import withAnimation from '../../HOCs/withAnimation/withAnimation';
         let starNum = score === 1 ? 'a' : 'another';
 
         return (
-            <div id='RESULT' className={`container answer-container flex-order--2 ${borderStyle}`}>
+            <div className={`container answer-container flex-order--2 ${borderStyle}`}>
                 <div className='result-container'>
                     <h4 className='white-text'>
                     {rightWrong ? 
