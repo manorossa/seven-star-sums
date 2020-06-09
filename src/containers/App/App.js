@@ -72,8 +72,7 @@ class App extends Component {
       // remove the chosen random number from the array of possible numbers and update the state
       possibleNums: [...possibleNums].filter( val => val !== randomNum ),
       possibleAns: possibleAns,
-      correctAns: answer1,
-      gotItRight: null
+      correctAns: answer1
     } )
   };
 
@@ -168,6 +167,17 @@ class App extends Component {
     }
   }
 
+  // When the player hits next question, tee up next q, but delay the game status change 
+  // so that user does not see a correct answer suddenly change to being wrong.
+  nextQuestionHandler = () => {
+    this.defineSum();
+    setTimeout(() => {
+      this.setState( { 
+        gotItRight: null
+      })
+    }, 800)
+  }
+
   // React render method here
   render() {
     return (
@@ -201,7 +211,7 @@ class App extends Component {
           {/* : null } */}
           {/* { this.state.gameStatus === 'showResult' ? */}
           <Result 
-            nextQ={this.defineSum}
+            nextQ={this.nextQuestionHandler}
             rightWrong={this.state.gotItRight}
             score={this.state.score} 
             correctAns={this.state.correctAns}
