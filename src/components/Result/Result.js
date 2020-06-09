@@ -16,7 +16,7 @@ import './Result.css';
             in={show} 
             timeout={1200}
             classNames="height-anim">
-                <div className={`container answer-container ${borderStyle}`}>
+                <div id='RESULT' className={`container answer-container flex-order--2 ${borderStyle}`}>
                     <div className='result-container'>
                         <h4 className='white-text'>
                         {rightWrong ? 

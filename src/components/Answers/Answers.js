@@ -13,6 +13,8 @@ import './Answers.css'
 
         let show = gameStatus === 'showSum' ? true : false ;
         console.log(show);
+        console.log(gameStatus);
+        let order = gameStatus === 'showSum' ? 'flex-order--1' : 'flex-order--4' ;
 
         return (
             <CSSTransition 
@@ -21,7 +23,7 @@ import './Answers.css'
             in={show} 
             timeout={1200}
             classNames="height-anim">
-                <div className='container answer-container'>
+                <div id='ANSWER' className={`container answer-container ${order}`}>
                     <div><h4 className='white-text'>Choose an answer:</h4></div>
                     {answerMap}
                 </div>
