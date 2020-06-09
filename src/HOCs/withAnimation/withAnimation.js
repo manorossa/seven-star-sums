@@ -10,7 +10,7 @@ const withAnimation = (WrappedComponent, showStatus) => (props) => {
       unmountOnExit 
       in={show} 
       timeout={1200}
-      classNames="height-anim">
+      classNames="slide-anim">
         <WrappedComponent {...props} />
       </CSSTransition>
   )
