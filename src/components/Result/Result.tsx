@@ -3,7 +3,14 @@ import '../Answers/Answers.css';
 import './Result.css';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
 
-    const Result = ({nextQ, rightWrong, score, correctAns}) => {
+interface ResultProps {
+    nextQ(): void;
+    rightWrong: boolean;
+    score: number;
+    correctAns: number;
+}
+
+    const Result: React.FC<ResultProps> = ({nextQ, rightWrong, score, correctAns}) => {
         let borderStyle = rightWrong ? 'green-border' : 'red-border';
         let starNum = score === 1 ? 'a' : 'another';
 
