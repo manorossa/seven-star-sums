@@ -1,5 +1,5 @@
 import React from 'react';
-import Answer from './answer';
+import Answer from './Answer/Answer';
 import './Answers.css'
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
 
