@@ -1,7 +1,11 @@
 import React from 'react';
 import CSSTransition from "react-transition-group/CSSTransition";
 
-const withAnimation = (WrappedComponent, showStatus) => (props) => {
+interface WrappedProps {
+  gameStatus: string;
+}
+
+const withAnimation = <P extends object>(WrappedComponent: React.FC<P>, showStatus: string) => (props: P & WrappedProps) => {
   let show = props.gameStatus === showStatus ? true : false ;
 
   return (
