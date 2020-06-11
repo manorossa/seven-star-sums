@@ -2,12 +2,12 @@ import React from 'react';
 import './Sum.css'
 
 interface SumProps {
-    num1: number;
+    num1: number | null;
     num2: number | string;
     op1: string;
     op2: string;
     baseNum: number;
-    rightWrong: boolean;
+    rightWrong: boolean | null;
 }
 
 const Sum: React.FC<SumProps> = ({num1, num2, op1, op2, baseNum, rightWrong}) => {

@@ -5,9 +5,9 @@ import withAnimation from '../../HOCs/withAnimation/withAnimation';
 
 interface ResultProps {
     nextQ(): void;
-    rightWrong: boolean;
+    rightWrong: boolean | null;
     score: number;
-    correctAns: number;
+    correctAns: number | null;
 }
 
     const Result: React.FC<ResultProps> = ({nextQ, rightWrong, score, correctAns}) => {
