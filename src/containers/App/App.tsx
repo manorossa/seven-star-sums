@@ -7,10 +7,11 @@ import Check from '../../components/Check/Check'
 import Result from '../../components/Result/Result'
 import Score from '../../components/Score/Score'
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
+import { AppState, AnswerMethodsObj } from '../../types/types';
 
-class App extends Component {
+class App extends Component<{}, AppState> {
 
-  state = {
+  state: AppState = {
     showSplash: true,
     gameStatus: 'startGame', // Possible values: 'startGame', 'showSum', 'confirmAnswer', 'showResult', 'endWin', 'endLose'
     possibleNums: [],
@@ -23,12 +24,12 @@ class App extends Component {
     correctAns: null,
     gotItRight: null,
     score: 0,
-    totalLives: null,
-    livesLeft: null
+    totalLives: 0,
+    livesLeft: 0
   };
   
   // Method to create a random number. Will be used throughout app
-  getRandomNumber = (base) => {
+  getRandomNumber = (base: number) => {
     return Math.floor(Math.random() * Math.floor(base));
   };
 
@@ -44,7 +45,7 @@ class App extends Component {
     let randomNum = possibleNums[this.getRandomNumber(possibleNums.length)];
     // Define how to get answers based on the operator
     // @todo add other methods when needed
-    const answerMethod = {
+    const answerMethod: AnswerMethodsObj = {
       '+': (a, b) => a - b
     }
     // Define correct answer, and two other possibles
@@ -56,7 +57,7 @@ class App extends Component {
     // Put the possible answers into an array, ready to be shuffled
     const answerArray = [answer1, answer2, answer3];
     // Create a random order of indices of 0, 1 and 2
-    let answerSet = new Set(), i = 0, a;
+    let answerSet: Set<number> = new Set(), i = 0, a;
     while (i < 3) {
       a = this.getRandomNumber(3);
       answerSet.add(a);
@@ -83,7 +84,7 @@ class App extends Component {
     const { possibleNums, baseNum } = this.state;
     // Create and empty array, fill it with numbers from 1 to (baseNum -1),
     // this defines the possible numbers to be used in the left hand side of the sum
-    let newNums = [];
+    let newNums: number[] = [];
     for (let i = 1; i < baseNum; i++) {
       newNums.push(i);
     }
@@ -135,7 +136,7 @@ class App extends Component {
   }
 
   // Method to move the game into the phase where the player checks their answer
-  answerClickHandler = (value) => {
+  answerClickHandler = (value: number) => {
     this.setState({
       gameStatus: 'confirmAnswer',
       num2: value

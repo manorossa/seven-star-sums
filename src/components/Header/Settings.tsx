@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css'
 
-    const Settings = () => {
+    const Settings: React.FC = () => {
         return (
             <button className='small-horizontal-button'>Settings</button>
         )
