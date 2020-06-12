@@ -1,9 +1,10 @@
 import React from 'react';
 import './Sum.css'
+import { AnswerButton } from '../../containers/App/App';
 
 interface SumProps {
     num1: number | null;
-    num2: number | string;
+    num2: AnswerButton;
     op1: string;
     op2: string;
     baseNum: number;

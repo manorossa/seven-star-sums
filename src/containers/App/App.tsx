@@ -8,13 +8,17 @@ import Result from '../../components/Result/Result'
 import Score from '../../components/Score/Score'
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
 
+export type GameStates = 'startGame' | 'showSum' | 'confirmAnswer' | 'showResult' | 'endWin' | 'endLose';
+
+export type AnswerButton = number | '?';
+
 export interface AppState {
   showSplash: boolean;
-  gameStatus: string;
+  gameStatus: GameStates;
   possibleNums: number[];
   baseNum: number;
   num1: number | null;
-  num2: number | string;
+  num2: AnswerButton;
   op1: string;
   op2: string;
   possibleAns: number[];

@@ -13,7 +13,7 @@ const Score: React.FC<ScoreProps> = ({displayScore, totalLives, livesLeft}) => {
     let stars = [];
     for (let i=1; i <= 7; i++) {
         stars.push(<Star
-            key={i}
+            key={`star-${i}`}
             fill={i <= displayScore ? '#fff100' : '#ccc'}
             stroke={i <= displayScore ? '#ff9b00' : '#888'}
             />)
@@ -22,7 +22,7 @@ const Score: React.FC<ScoreProps> = ({displayScore, totalLives, livesLeft}) => {
     let hearts = [];
     for (let j=1; j <= totalLives; j++) {
         hearts.push(<Heart
-            key={j}
+            key={`heart-${j}`}
             fill={j <= livesLeft ? '#e74c3c' : '#220277'}
             />)
     }
