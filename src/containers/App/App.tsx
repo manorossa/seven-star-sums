@@ -35,7 +35,7 @@ interface AnswerMethodsObj {
 
 class App extends Component<{}, AppState> {
 
-  state = {
+  state: AppState = {
     showSplash: true,
     gameStatus: 'startGame', // Possible values: 'startGame', 'showSum', 'confirmAnswer', 'showResult', 'endWin', 'endLose'
     possibleNums: [],
@@ -114,7 +114,7 @@ class App extends Component<{}, AppState> {
     }
 
     this.setState( { 
-      possibleNums: [...possibleNums].concat(newNums as never[]),
+      possibleNums: [...possibleNums].concat(newNums),
       totalLives: baseNum - 8,
       livesLeft: baseNum - 8 
     }, () => {this.defineSum()});
