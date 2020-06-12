@@ -4,7 +4,7 @@ import './Answers.css'
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
 import { AppState } from '../../types/types';
 
-interface AnswersProps {
+interface AnswersProps extends React.HTMLAttributes<HTMLDivElement> {
     answers: AppState["possibleAns"];
     clicked(answer: number): void;
     gameStatus: AppState["gameStatus"]; 

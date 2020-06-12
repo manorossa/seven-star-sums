@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface AnswerProps {
+interface AnswerProps extends React.HTMLAttributes<HTMLButtonElement> {
     value: number;
     clicked(): void; 
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface StarProps {
+interface StarProps extends React.HTMLAttributes<HTMLSpanElement> {
     fill: string;
     stroke: string;
 }

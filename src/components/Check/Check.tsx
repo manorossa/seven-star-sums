@@ -2,7 +2,7 @@ import React from 'react';
 import '../Answers/Answers.css'
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
 
-interface CheckProps {
+interface CheckProps extends React.HTMLAttributes<HTMLDivElement> {
     yesClicked(): void;
     noClicked(): void;
 }

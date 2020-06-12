@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface HeartProps {
+interface HeartProps extends React.HTMLAttributes<HTMLSpanElement> {
     fill: string;
 }
 

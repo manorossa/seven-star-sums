@@ -4,7 +4,7 @@ import Heart from '../Icons/Heart';
 import './Score.css';
 import { AppState } from '../../types/types';
 
-interface ScoreProps {
+interface ScoreProps extends React.HTMLAttributes<HTMLDivElement> {
     displayScore: AppState["score"];
     totalLives: AppState["totalLives"];
     livesLeft: AppState["livesLeft"];

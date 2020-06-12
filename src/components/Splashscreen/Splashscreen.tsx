@@ -2,7 +2,7 @@ import React from 'react';
 import './Splashscreen.css';
 import { AppState } from '../../types/types';
 
-interface SplashscreenProps {
+interface SplashscreenProps extends React.HTMLAttributes<HTMLDivElement> {
     startgame(): void;
     resetgame(): void;
     status: AppState["gameStatus"];

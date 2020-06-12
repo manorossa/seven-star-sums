@@ -2,7 +2,7 @@ import React from 'react';
 import './Sum.css'
 import { AppState } from '../../types/types';
 
-interface SumProps {
+interface SumProps extends React.HTMLAttributes<HTMLDivElement> {
     num1: AppState["num1"];
     num2: AppState["num2"];
     op1: AppState["op1"];
