@@ -2,12 +2,12 @@ import React from 'react';
 import Answer from './Answer/Answer';
 import './Answers.css'
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
-import { GameStates } from '../../containers/App/App';
+import { AppState } from '../../types/types';
 
 interface AnswersProps {
-    answers: number[];
+    answers: AppState["possibleAns"];
     clicked(answer: number): void;
-    gameStatus: GameStates; 
+    gameStatus: AppState["gameStatus"]; 
 }
 
 const Answers: React.FC<AnswersProps> = ({answers, clicked, gameStatus}) => {

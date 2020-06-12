@@ -2,12 +2,13 @@ import React from 'react';
 import '../Answers/Answers.css';
 import './Result.css';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
+import { AppState } from '../../types/types';
 
 interface ResultProps {
     nextQ(): void;
-    rightWrong: boolean | null;
-    score: number;
-    correctAns: number | null;
+    rightWrong: AppState["gotItRight"];
+    score: AppState["score"];
+    correctAns: AppState["correctAns"];
 }
 
     const Result: React.FC<ResultProps> = ({nextQ, rightWrong, score, correctAns}) => {

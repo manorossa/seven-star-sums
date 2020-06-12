@@ -1,14 +1,14 @@
 import React from 'react';
 import './Sum.css'
-import { AnswerButton } from '../../containers/App/App';
+import { AppState } from '../../types/types';
 
 interface SumProps {
-    num1: number | null;
-    num2: AnswerButton;
-    op1: string;
-    op2: string;
-    baseNum: number;
-    rightWrong: boolean | null;
+    num1: AppState["num1"];
+    num2: AppState["num2"];
+    op1: AppState["op1"];
+    op2: AppState["op2"];
+    baseNum: AppState["baseNum"];
+    rightWrong: AppState["gotItRight"];
 }
 
 const Sum: React.FC<SumProps> = ({num1, num2, op1, op2, baseNum, rightWrong}) => {

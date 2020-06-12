@@ -2,11 +2,12 @@ import React from 'react';
 import Star from '../Icons/Star';
 import Heart from '../Icons/Heart';
 import './Score.css';
+import { AppState } from '../../types/types';
 
 interface ScoreProps {
-    displayScore: number;
-    totalLives: number;
-    livesLeft: number;
+    displayScore: AppState["score"];
+    totalLives: AppState["totalLives"];
+    livesLeft: AppState["livesLeft"];
 }
 
 const Score: React.FC<ScoreProps> = ({displayScore, totalLives, livesLeft}) => {

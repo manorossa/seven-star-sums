@@ -1,11 +1,11 @@
 import React from 'react';
 import './Splashscreen.css';
-import { GameStates } from '../../containers/App/App';
+import { AppState } from '../../types/types';
 
 interface SplashscreenProps {
     startgame(): void;
     resetgame(): void;
-    status: GameStates;
+    status: AppState["gameStatus"];
 }
 
 const Splashscreen: React.FC<SplashscreenProps> = ({startgame, resetgame, status}) => {
