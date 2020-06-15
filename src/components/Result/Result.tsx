@@ -13,19 +13,20 @@ interface ResultProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Result: React.FC<ResultProps> = ({ nextQ, rightWrong, score, correctAns }) => {
   const borderStyle = rightWrong ? 'green-border' : 'red-border';
-  let starNum = score === 1 ? 'a' : 'another';
+  const starNum = score === 1 ? 'a' : 'another';
 
   return (
     <div className={`container answer-container flex-order--2 ${borderStyle}`}>
-      <div className='result-container'>
-        <h4 className='white-text'>
+      <div className="result-container">
+        <h4 className="white-text">
           {rightWrong
             ? `Yay, you got the sum right! Have ${starNum} star!`
-            : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.`
-          }
+            : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.`}
         </h4>
       </div>
-      <button className='horizontal-button' onClick={nextQ}>Next question</button>
+      <button className="horizontal-button" onClick={nextQ}>
+        Next question
+      </button>
     </div>
   );
 };

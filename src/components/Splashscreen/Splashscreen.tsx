@@ -23,7 +23,9 @@ const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, statu
       splash = (
         <div>
           <h3>Well done! You&rsquo;ve got seven stars!</h3>
-          <button className='horizontal-button' onClick={resetgame}>Play again!</button>
+          <button className="horizontal-button" onClick={resetgame}>
+            Play again!
+          </button>
         </div>
       );
       break;
@@ -31,7 +33,9 @@ const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, statu
       splash = (
         <div>
           <h3>Unlucky! You&rsquo;ve run out lives...</h3>
-          <button className='horizontal-button' onClick={resetgame}>Try again!</button>
+          <button className="horizontal-button" onClick={resetgame}>
+            Try again!
+          </button>
         </div>
       );
       break;
@@ -40,8 +44,8 @@ const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, statu
   }
 
   return (
-      <div className='screen'>
-          <div className='splash'>
+    <div className="screen">
+      <div className="splash">
         <h1>Seven Star Sums</h1>
         {splash}
       </div>

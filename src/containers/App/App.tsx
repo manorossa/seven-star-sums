@@ -58,7 +58,9 @@ class App extends Component<{}, AppState> {
     // Put the possible answers into an array, ready to be shuffled
     const answerArray = [answer1, answer2, answer3];
     // Create a random order of indices of 0, 1 and 2
-    let answerSet: Set<number> = new Set(); let i = 0; let a;
+    const answerSet: Set<number> = new Set();
+    let i = 0;
+    let a;
     while (i < 3) {
       a = this.getRandomNumber(3);
       answerSet.add(a);
@@ -126,25 +128,25 @@ class App extends Component<{}, AppState> {
 
   // Method to check if the player has reached the max score, or has run out of possible answers
   checkForEndGame = () => {
-      // Destructure the relevant state elements
-      const { livesLeft, score } = this.state;  
-      // Check if score has reached 7
-      if (score === 7) {
-        this.setState({
-          gameStatus: 'endWin',
-          showSplash: true
-        });
-        return true;
-      }
-      // Check if player has run out of lives
-      if (livesLeft === 0) {
-        this.setState({
-          gameStatus: 'endLose',
-          showSplash: true
-        });
-        return true;
-      }
-  }
+    // Destructure the relevant state elements
+    const { livesLeft, score } = this.state;
+    // Check if score has reached 7
+    if (score === 7) {
+      this.setState({
+        gameStatus: 'endWin',
+        showSplash: true
+      });
+      return true;
+    }
+    // Check if player has run out of lives
+    if (livesLeft === 0) {
+      this.setState({
+        gameStatus: 'endLose',
+        showSplash: true
+      });
+      return true;
+    }
+  };
 
   // Method to move the game into the phase where the player checks their answer
   answerClickHandler = (value: number) => {
