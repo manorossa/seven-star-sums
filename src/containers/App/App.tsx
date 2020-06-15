@@ -214,7 +214,7 @@ class App extends Component<{}, AppState> {
           <Answers
             answers={this.state.possibleAns}
             clicked={this.answerClickHandler}
-            gameStatus={this.state.gameStatus} />
+            gameStatus={this.state.gameStatus}
           />
           <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={this.state.gameStatus} />
           <Result
