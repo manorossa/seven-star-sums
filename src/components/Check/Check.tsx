@@ -13,10 +13,10 @@ const Check: React.FC<CheckProps> = ({ yesClicked, noClicked }) => {
       <div>
         <h4 className="white-text">Are you sure?</h4>
       </div>
-      <button className="horizontal-button" onClick={yesClicked}>
+      <button type="button" className="horizontal-button" onClick={yesClicked}>
         Yes
       </button>
-      <button className="horizontal-button" onClick={noClicked}>
+      <button type="button" className="horizontal-button" onClick={noClicked}>
         No
       </button>
     </div>

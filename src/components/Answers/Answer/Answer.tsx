@@ -7,7 +7,7 @@ interface AnswerProps extends React.HTMLAttributes<HTMLButtonElement> {
 
 const Answer: React.FC<AnswerProps> = ({ value, clicked }) => {
   return (
-    <button className="round-button round-large" onClick={clicked}>
+    <button type="button" className="round-button round-large" onClick={clicked}>
       {value}
     </button>
   );

@@ -14,7 +14,7 @@ const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, statu
   switch (status) {
     case 'startGame':
       splash = (
-        <button className="horizontal-button" onClick={startgame}>
+        <button type="button" className="horizontal-button" onClick={startgame}>
           Start the sums!
         </button>
       );
@@ -23,7 +23,7 @@ const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, statu
       splash = (
         <div>
           <h3>Well done! You&rsquo;ve got seven stars!</h3>
-          <button className="horizontal-button" onClick={resetgame}>
+          <button type="button" className="horizontal-button" onClick={resetgame}>
             Play again!
           </button>
         </div>
@@ -33,7 +33,7 @@ const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, statu
       splash = (
         <div>
           <h3>Unlucky! You&rsquo;ve run out lives...</h3>
-          <button className="horizontal-button" onClick={resetgame}>
+          <button type="button" className="horizontal-button" onClick={resetgame}>
             Try again!
           </button>
         </div>

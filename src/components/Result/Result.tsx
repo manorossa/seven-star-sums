@@ -24,7 +24,7 @@ const Result: React.FC<ResultProps> = ({ nextQ, rightWrong, score, correctAns })
             : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.`}
         </h4>
       </div>
-      <button className="horizontal-button" onClick={nextQ}>
+      <button type="button" className="horizontal-button" onClick={nextQ}>
         Next question
       </button>
     </div>
