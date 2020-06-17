@@ -168,19 +168,20 @@ class App extends Component<{}, AppState> {
 
   // If the player is sure about their answer, check if the answer is correct and show the result
   yesCheckHandler = () => {
-    if (this.state.num2 === this.state.correctAns) {
+    const { num2, correctAns } = this.state;
+    if (num2 === correctAns) {
       this.setState((prevState) => ({
         gameStatus: 'showResult',
         gotItRight: true,
         score: prevState.score + 1
       }));
-    } else {
-      this.setState((prevState) => ({
-        gameStatus: 'showResult',
-        gotItRight: false,
-        livesLeft: prevState.livesLeft - 1
-      }));
+      return;
     }
+    this.setState((prevState) => ({
+      gameStatus: 'showResult',
+      gotItRight: false,
+      livesLeft: prevState.livesLeft - 1
+    }));
   };
 
   // When the player hits next question, tee up next q, but delay the game status change
