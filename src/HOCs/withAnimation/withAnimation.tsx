@@ -6,9 +6,11 @@ interface WrappedProps {
   gameStatus: AppState['gameStatus'];
 }
 
-const withAnimation = <P extends object>(WrappedComponent: React.FC<P>, showStatus: AppState['gameStatus']) => (
-  props: P & WrappedProps
-) => {
+/* eslint-disable  @typescript-eslint/explicit-function-return-type */
+const withAnimation = <P extends object>(
+  WrappedComponent: React.ComponentType<P>,
+  showStatus: AppState['gameStatus']
+) => (props: P & WrappedProps) => {
   const show = props.gameStatus === showStatus;
 
   return (
