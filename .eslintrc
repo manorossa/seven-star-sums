@@ -34,6 +34,9 @@
     }],
     "react/jsx-props-no-spreading": ["error", {
       "custom": "ignore"
+    }],
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
     }]
   }
 }
