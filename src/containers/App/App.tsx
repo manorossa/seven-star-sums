@@ -146,6 +146,8 @@ class App extends Component<{}, AppState> {
       });
       return true;
     }
+
+    return false;
   };
 
   // Method to move the game into the phase where the player checks their answer
