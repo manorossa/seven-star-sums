@@ -1,3 +1,4 @@
 node_modules
 public
 src/registerServiceWorker.js
+src/containers/App/App.test.js
