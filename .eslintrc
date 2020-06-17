@@ -1,9 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "settings": {
     "react": {
       "pragma": "React",
@@ -26,18 +24,28 @@
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
     "react/prop-types": 0,
     "react/state-in-constructor": [1, "never"],
-    "import/extensions": ["error", "ignorePackages", {
-      "js": "never",
-      "mjs": "never",
-      "jsx": "never",
-      "ts": "never",
-      "tsx": "never"
-    }],
-    "react/jsx-props-no-spreading": ["error", {
-      "custom": "ignore"
-    }],
-    "no-plusplus": ["error", {
-      "allowForLoopAfterthoughts": true
-    }]
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "mjs": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "react/jsx-props-no-spreading": [
+      "error",
+      {
+        "custom": "ignore"
+      }
+    ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ]
   }
 }
