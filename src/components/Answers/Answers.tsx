@@ -11,8 +11,8 @@ interface AnswersProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Answers: React.FC<AnswersProps> = ({ answers, clicked, gameStatus }) => {
-  const answerMap = answers.map((answer, index) => {
-    return <Answer key={index} value={answer} clicked={() => clicked(answer)} />;
+  const answerMap = answers.map((answer) => {
+    return <Answer key={`answer-${answer}`} value={answer} clicked={() => clicked(answer)} />;
   });
 
   const order = gameStatus === 'showSum' ? 'flex-order--1' : 'flex-order--4';
