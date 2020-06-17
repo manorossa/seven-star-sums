@@ -28,13 +28,13 @@ class App extends Component<{}, AppState> {
   };
 
   // Method to create a random number. Will be used throughout app
-  getRandomNumber = (base: number) => {
+  getRandomNumber = (base: number): number => {
     return Math.floor(Math.random() * Math.floor(base));
   };
 
   // Method to define the sum to be solved. For addition and subtraction
   // Runs at the beginning of the game, and every time the next question button is pressed
-  defineSum = () => {
+  defineSum = (): void => {
     // First check to see if the game has ended
     if (this.checkForEndGame()) {
       return;
@@ -82,7 +82,7 @@ class App extends Component<{}, AppState> {
 
   // Method to define the possible answers to a sum. For addition and subtraction.
   // Runs once at the beginning of the game, then calls the defineSum method as a callback
-  definePossibleNums = () => {
+  definePossibleNums = (): void => {
     // Destructure the relevant state elements
     const { possibleNums, baseNum } = this.state;
     // Create and empty array, fill it with numbers from 1 to (baseNum -1),
@@ -106,7 +106,7 @@ class App extends Component<{}, AppState> {
 
   // Method to start the game and hide the splash screen.
   // Can be expanded to start different games (addition, subtraction, times table)
-  startGameHandler = () => {
+  startGameHandler = (): void => {
     this.definePossibleNums();
     this.setState({
       showSplash: false
@@ -114,7 +114,7 @@ class App extends Component<{}, AppState> {
   };
 
   // Method to reset the game to the starting state
-  resetGameHandler = () => {
+  resetGameHandler = (): void => {
     this.setState(
       {
         possibleNums: [],
@@ -127,7 +127,7 @@ class App extends Component<{}, AppState> {
   };
 
   // Method to check if the player has reached the max score, or has run out of possible answers
-  checkForEndGame = () => {
+  checkForEndGame = (): boolean => {
     // Destructure the relevant state elements
     const { livesLeft, score } = this.state;
     // Check if score has reached 7
@@ -151,7 +151,7 @@ class App extends Component<{}, AppState> {
   };
 
   // Method to move the game into the phase where the player checks their answer
-  answerClickHandler = (value: number) => {
+  answerClickHandler = (value: number): void => {
     this.setState({
       gameStatus: 'confirmAnswer',
       num2: value
@@ -159,7 +159,7 @@ class App extends Component<{}, AppState> {
   };
 
   // If the player is not happy with their selected answer, allow them to reset and choose another one
-  noCheckHandler = () => {
+  noCheckHandler = (): void => {
     this.setState({
       gameStatus: 'showSum',
       num2: '?'
@@ -167,7 +167,7 @@ class App extends Component<{}, AppState> {
   };
 
   // If the player is sure about their answer, check if the answer is correct and show the result
-  yesCheckHandler = () => {
+  yesCheckHandler = (): void => {
     const { num2, correctAns } = this.state;
     if (num2 === correctAns) {
       this.setState((prevState) => ({
@@ -186,7 +186,7 @@ class App extends Component<{}, AppState> {
 
   // When the player hits next question, tee up next q, but delay the game status change
   // so that user does not see a correct answer suddenly change to being wrong.
-  nextQuestionHandler = () => {
+  nextQuestionHandler = (): void => {
     this.defineSum();
     setTimeout(() => {
       this.setState({
@@ -196,7 +196,7 @@ class App extends Component<{}, AppState> {
   };
 
   // React render method here
-  render() {
+  render(): JSX.Element {
     const {
       showSplash,
       gameStatus,
