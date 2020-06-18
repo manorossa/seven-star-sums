@@ -1,5 +1,6 @@
 import React from 'react';
 import './Sum.css';
+import '../_atoms/Button/Button.css';
 import { AppState } from '../../types/types';
 
 interface SumProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -20,11 +21,11 @@ const Sum: React.FC<SumProps> = ({ num1, num2, op1, op2, baseNum, rightWrong }) 
   }
   return (
     <div className="container sum-container">
-      <div className="round-button round-large">{num1}</div>
-      <div className="round-button round-small">{op1}</div>
-      <div className={`round-button round-large ${borderColour}`}>{num2}</div>
-      <div className="round-button round-small">{op2}</div>
-      <div className="round-button round-large">{baseNum}</div>
+      <div className="btn--round btn--round-large">{num1}</div>
+      <div className="btn--round btn--round-small">{op1}</div>
+      <div className={`btn--round btn--round-large ${borderColour}`}>{num2}</div>
+      <div className="btn--round btn--round-small">{op2}</div>
+      <div className="btn--round btn--round-large">{baseNum}</div>
     </div>
   );
 };
