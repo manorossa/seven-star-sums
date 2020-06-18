@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../_atoms/Button/Button';
 import '../Answers/Answers.css';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
 
@@ -8,17 +9,18 @@ interface CheckProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Check: React.FC<CheckProps> = ({ yesClicked, noClicked }) => {
+  const modifiers = 'horizontal';
   return (
     <div className="container answer-container flex-order--3">
       <div>
         <h4 className="white-text">Are you sure?</h4>
       </div>
-      <button type="button" className="horizontal-button" onClick={yesClicked}>
+      <Button type="button" handler={yesClicked} modifiers={modifiers}>
         Yes
-      </button>
-      <button type="button" className="horizontal-button" onClick={noClicked}>
+      </Button>
+      <Button type="button" handler={noClicked} modifiers={modifiers}>
         No
-      </button>
+      </Button>
     </div>
   );
 };
