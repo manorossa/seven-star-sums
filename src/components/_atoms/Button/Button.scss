@@ -18,6 +18,17 @@
     color: $white;
     border: 4px solid $white;
     border-radius: 1vh;
+
+    &-small {
+      font: {
+        size: 1.5vw;
+        weight: $regular;
+      }
+      min-width: 5vw;
+      padding: 0.7vh 0.7vw;
+      border: 2px solid $white;
+      border-radius: 0.7vh;
+    }
   }
 
   &--round {
