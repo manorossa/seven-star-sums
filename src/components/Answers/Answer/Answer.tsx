@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../../_atoms/Button/Button';
 
 interface AnswerProps extends React.HTMLAttributes<HTMLButtonElement> {
   value: number;
@@ -6,10 +7,11 @@ interface AnswerProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 const Answer: React.FC<AnswerProps> = ({ value, clicked }) => {
+  const modifiers = ['round', 'round-large'];
   return (
-    <button type="button" className="round-button round-large" onClick={clicked}>
+    <Button type="button" handler={clicked} modifiers={modifiers}>
       {value}
-    </button>
+    </Button>
   );
 };
 
