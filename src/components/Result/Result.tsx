@@ -1,8 +1,9 @@
 import React from 'react';
-import '../Answers/Answers.css';
-import './Result.css';
+import Button from '../_atoms/Button/Button';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
 import { AppState } from '../../types/types';
+import '../Answers/Answers.css';
+import './Result.css';
 
 interface ResultProps extends React.HTMLAttributes<HTMLDivElement> {
   nextQ(): void;
@@ -14,6 +15,7 @@ interface ResultProps extends React.HTMLAttributes<HTMLDivElement> {
 const Result: React.FC<ResultProps> = ({ nextQ, rightWrong, score, correctAns }) => {
   const borderStyle = rightWrong ? 'green-border' : 'red-border';
   const starNum = score === 1 ? 'a' : 'another';
+  const modifiers = 'horizontal';
 
   return (
     <div className={`container answer-container flex-order--2 ${borderStyle}`}>
@@ -24,9 +26,9 @@ const Result: React.FC<ResultProps> = ({ nextQ, rightWrong, score, correctAns })
             : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.`}
         </h4>
       </div>
-      <button type="button" className="horizontal-button" onClick={nextQ}>
+      <Button type="button" handler={nextQ} modifiers={modifiers}>
         Next question
-      </button>
+      </Button>
     </div>
   );
 };
