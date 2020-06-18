@@ -29,7 +29,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint:fix"
+      "pre-commit": "npm run lint:fix"
     }
   },
   "homepage": "https://seven-star-sums.netlify.app/",
