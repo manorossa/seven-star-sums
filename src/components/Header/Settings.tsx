@@ -1,11 +1,19 @@
 import React from 'react';
+import Button from '../_atoms/Button/Button';
 import './Header.css';
 
 const Settings: React.FC = () => {
+  const modifiers = ['horizontal', 'horizontal-small'];
   return (
-    <button type="button" className="small-horizontal-button">
+    <Button
+      type="button"
+      handler={(): void => {
+        alert('Settings');
+      }}
+      modifiers={modifiers}
+    >
       Settings
-    </button>
+    </Button>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../_atoms/Button/Button';
 import './Splashscreen.css';
 import { AppState } from '../../types/types';
 
@@ -10,22 +11,23 @@ interface SplashscreenProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, status }) => {
   let splash: JSX.Element = <div />;
+  const modifiers = 'horizontal';
 
   switch (status) {
     case 'startGame':
       splash = (
-        <button type="button" className="horizontal-button" onClick={startgame}>
+        <Button type="button" handler={startgame} modifiers={modifiers}>
           Start the sums!
-        </button>
+        </Button>
       );
       break;
     case 'endWin':
       splash = (
         <div>
           <h3>Well done! You&rsquo;ve got seven stars!</h3>
-          <button type="button" className="horizontal-button" onClick={resetgame}>
+          <Button type="button" handler={resetgame} modifiers={modifiers}>
             Play again!
-          </button>
+          </Button>
         </div>
       );
       break;
@@ -33,9 +35,9 @@ const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, statu
       splash = (
         <div>
           <h3>Unlucky! You&rsquo;ve run out lives...</h3>
-          <button type="button" className="horizontal-button" onClick={resetgame}>
+          <Button type="button" handler={resetgame} modifiers={modifiers}>
             Try again!
-          </button>
+          </Button>
         </div>
       );
       break;

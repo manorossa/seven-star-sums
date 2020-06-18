@@ -21,6 +21,7 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "react/button-has-type": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
     "react/prop-types": 0,
     "react/state-in-constructor": [1, "never"],
