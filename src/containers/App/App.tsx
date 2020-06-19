@@ -218,19 +218,24 @@ class App extends Component<{}, AppState> {
           <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} status={gameStatus} />
         )}
         <Header />
-        <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
-        <div className="answer-strip">
-          <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
-          <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={gameStatus} />
-          <Result
-            nextQ={this.nextQuestionHandler}
-            rightWrong={gotItRight}
-            score={score}
-            correctAns={correctAns}
-            gameStatus={gameStatus}
-          />
+        <div className="stage">
+          <div className="sheet--settings" />
+          <div className="sheet--game">
+            <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
+            <div className="answer-strip">
+              <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
+              <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={gameStatus} />
+              <Result
+                nextQ={this.nextQuestionHandler}
+                rightWrong={gotItRight}
+                score={score}
+                correctAns={correctAns}
+                gameStatus={gameStatus}
+              />
+            </div>
+            <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
+          </div>
         </div>
-        <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
       </div>
     );
   }
