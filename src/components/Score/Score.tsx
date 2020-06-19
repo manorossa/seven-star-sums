@@ -1,6 +1,6 @@
 import React from 'react';
-import Star from '../Icons/Star';
-import Heart from '../Icons/Heart';
+import Star from '../../UI/atoms/Icons/Star';
+import Heart from '../../UI/atoms/Icons/Heart';
 import './Score.css';
 import { AppState } from '../../types/types';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sum.css';
-import '../_atoms/Button/Button.css';
+import '../../UI/atoms/Button/Button.css';
 import { AppState } from '../../types/types';
 
 interface SumProps extends React.HTMLAttributes<HTMLDivElement> {
