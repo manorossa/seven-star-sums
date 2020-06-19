@@ -1,5 +1,5 @@
 import React from 'react';
-import SettingsButton from './SettingsButton';
+import SettingsButton from '../SettingsButton/SettingsButton';
 import './Header.css';
 
 interface HeaderProps {
