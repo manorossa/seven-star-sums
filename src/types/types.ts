@@ -1,4 +1,4 @@
-type GameStates = 'startGame' | 'showSum' | 'confirmAnswer' | 'showResult' | 'endWin' | 'endLose';
+type GameStates = 'startGame' | 'showSettings' | 'showSum' | 'confirmAnswer' | 'showResult' | 'endWin' | 'endLose';
 
 type AnswerButton = number | '?';
 

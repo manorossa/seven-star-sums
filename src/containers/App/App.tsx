@@ -195,6 +195,12 @@ class App extends Component<{}, AppState> {
     }, 800);
   };
 
+  showSettingsHandler = (): void => {
+    this.setState({
+      gameStatus: 'showSettings'
+    });
+  };
+
   // React render method here
   render(): JSX.Element {
     const {
@@ -217,24 +223,26 @@ class App extends Component<{}, AppState> {
         {!!showSplash && (
           <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} status={gameStatus} />
         )}
-        <Header />
+        <Header showSettings={this.showSettingsHandler} />
         <div className="stage">
-          <div className="sheet--settings" />
-          <div className="sheet--game">
-            <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
-            <div className="answer-strip">
-              <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
-              <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={gameStatus} />
-              <Result
-                nextQ={this.nextQuestionHandler}
-                rightWrong={gotItRight}
-                score={score}
-                correctAns={correctAns}
-                gameStatus={gameStatus}
-              />
+          {gameStatus === 'showSettings' && <div className="sheet--settings">Settings!</div>}
+          {gameStatus !== 'showSettings' && (
+            <div className="sheet--game">
+              <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
+              <div className="answer-strip">
+                <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
+                <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={gameStatus} />
+                <Result
+                  nextQ={this.nextQuestionHandler}
+                  rightWrong={gotItRight}
+                  score={score}
+                  correctAns={correctAns}
+                  gameStatus={gameStatus}
+                />
+              </div>
+              <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
             </div>
-            <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
-          </div>
+          )}
         </div>
       </div>
     );

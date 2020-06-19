@@ -1,12 +1,16 @@
 import React from 'react';
-// import Settings from './Settings'
+import SettingsButton from './SettingsButton';
 import './Header.css';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  showSettings(): void;
+}
+
+const Header: React.FC<HeaderProps> = ({ showSettings }) => {
   return (
     <div className="container header-container">
       <h1>SEVEN STAR SUMS</h1>
-      {/* <Settings /> */}
+      <SettingsButton showSettings={showSettings} />
     </div>
   );
 };
