@@ -6,6 +6,7 @@ import Answers from '../../components/Answers/Answers';
 import Check from '../../components/Check/Check';
 import Result from '../../components/Result/Result';
 import Score from '../../components/Score/Score';
+import SettingsSheet from '../../components/SettingsSheet/SettingsSheet';
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
 import { AppState, AnswerMethodsObj } from '../../types/types';
 
@@ -225,7 +226,7 @@ class App extends Component<{}, AppState> {
         )}
         <Header showSettings={this.showSettingsHandler} />
         <div className="stage">
-          {gameStatus === 'showSettings' && <div className="sheet--settings">Settings!</div>}
+          {gameStatus === 'showSettings' && <SettingsSheet />}
           {gameStatus !== 'showSettings' && (
             <div className="sheet--game">
               <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
