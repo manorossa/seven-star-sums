@@ -26,3 +26,8 @@ interface AnswerMethod {
 export interface AnswerMethodsObj {
   [key: string]: AnswerMethod;
 }
+
+export interface SettingsPayload {
+  baseNum: number;
+  operator: '+' | 'x';
+}

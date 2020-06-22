@@ -8,7 +8,7 @@ import Result from '../../components/Result/Result';
 import Score from '../../components/Score/Score';
 import SettingsSheet from '../../components/SettingsSheet/SettingsSheet';
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
-import { AppState, AnswerMethodsObj } from '../../types/types';
+import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
@@ -48,7 +48,8 @@ class App extends Component<{}, AppState> {
     // Define how to get answers based on the operator
     // @todo add other methods when needed
     const answerMethod: AnswerMethodsObj = {
-      '+': (a, b) => a - b
+      '+': (a, b) => a - b,
+      x: (a, b) => a * b
     };
     // Define correct answer, and two other possibles
     const answer1 = answerMethod[op1](baseNum, randomNum);
@@ -202,6 +203,18 @@ class App extends Component<{}, AppState> {
     });
   };
 
+  settingsHandler = (payload: SettingsPayload): void => {
+    this.setState(
+      {
+        baseNum: payload.baseNum,
+        op1: payload.operator
+      },
+      () => {
+        this.resetGameHandler();
+      }
+    );
+  };
+
   // React render method here
   render(): JSX.Element {
     const {
@@ -226,7 +239,7 @@ class App extends Component<{}, AppState> {
         )}
         <Header showSettings={this.showSettingsHandler} />
         <div className="stage">
-          {gameStatus === 'showSettings' && <SettingsSheet />}
+          {gameStatus === 'showSettings' && <SettingsSheet handleSettings={this.settingsHandler} />}
           {gameStatus !== 'showSettings' && (
             <div className="sheet--game">
               <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
