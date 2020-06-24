@@ -14,6 +14,23 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   const pairs = operator === '+';
   const horizButtons = 'horizontal';
   const smallRoundButtons = ['round', 'round-small'];
+  const tableOptions = [2, 3, 4, 5, 8, 10];
+  const pairOptions = [10, 20];
+
+  const buttonMap = (options: number[]) =>
+    options.map(
+      (option): JSX.Element => {
+        return (
+          <Button type="button" handler={() => setBaseNum(option)} modifiers={smallRoundButtons}>
+            {option}
+          </Button>
+        );
+      }
+    );
+
+  const pairMap = buttonMap(pairOptions);
+  const tableMap = buttonMap(tableOptions);
+
   return (
     <div className="sheet--settings">
       <div className="settings__panel settings__panel--1">
@@ -31,39 +48,13 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
         {!!pairs && (
           <>
             <h3>Choose your number pair:</h3>
-            <div className="settings__button-container">
-              <Button type="button" handler={() => setBaseNum(10)} modifiers={smallRoundButtons}>
-                10
-              </Button>
-              <Button type="button" handler={() => setBaseNum(20)} modifiers={smallRoundButtons}>
-                20
-              </Button>
-            </div>
+            <div className="settings__button-container">{pairMap}</div>
           </>
         )}
         {!pairs && (
           <>
             <h3>Choose your times tables:</h3>
-            <div className="settings__button-container">
-              <Button type="button" handler={() => setBaseNum(2)} modifiers={smallRoundButtons}>
-                2
-              </Button>
-              <Button type="button" handler={() => setBaseNum(3)} modifiers={smallRoundButtons}>
-                3
-              </Button>
-              <Button type="button" handler={() => setBaseNum(4)} modifiers={smallRoundButtons}>
-                4
-              </Button>
-              <Button type="button" handler={() => setBaseNum(5)} modifiers={smallRoundButtons}>
-                5
-              </Button>
-              <Button type="button" handler={() => setBaseNum(8)} modifiers={smallRoundButtons}>
-                8
-              </Button>
-              <Button type="button" handler={() => setBaseNum(10)} modifiers={smallRoundButtons}>
-                10
-              </Button>
-            </div>
+            <div className="settings__button-container">{tableMap}</div>
             <p>
               Base number is:
               {baseNum}
