@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { SettingsPayload } from '../../types/types';
@@ -8,6 +8,8 @@ interface SettingsSheetProps {
 }
 
 const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
+  const [timesNumber, setTimesNumber] = useState(2);
+
   const horizButtons = 'horizontal';
   const smallRoundButtons = ['round', 'round-small'];
   return (
@@ -31,28 +33,32 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
           </Button>
         </div>
       </div>
-      <div className="settings__panel settings__panel--1">
+      <div className="settings__panel settings__panel--2">
         <h3>Choose your times tables:</h3>
         <div className="settings__button-container">
-          <Button type="button" handler={(): void => alert('2')} modifiers={smallRoundButtons}>
+          <Button type="button" handler={() => setTimesNumber(2)} modifiers={smallRoundButtons}>
             2
           </Button>
-          <Button type="button" handler={(): void => alert('3')} modifiers={smallRoundButtons}>
+          <Button type="button" handler={() => setTimesNumber(3)} modifiers={smallRoundButtons}>
             3
           </Button>
-          <Button type="button" handler={(): void => alert('4')} modifiers={smallRoundButtons}>
+          <Button type="button" handler={() => setTimesNumber(4)} modifiers={smallRoundButtons}>
             4
           </Button>
-          <Button type="button" handler={(): void => alert('5')} modifiers={smallRoundButtons}>
+          <Button type="button" handler={() => setTimesNumber(5)} modifiers={smallRoundButtons}>
             5
           </Button>
-          <Button type="button" handler={(): void => alert('8')} modifiers={smallRoundButtons}>
+          <Button type="button" handler={() => setTimesNumber(8)} modifiers={smallRoundButtons}>
             8
           </Button>
-          <Button type="button" handler={(): void => alert('10')} modifiers={smallRoundButtons}>
+          <Button type="button" handler={() => setTimesNumber(10)} modifiers={smallRoundButtons}>
             10
           </Button>
         </div>
+        <p>
+          Times number is:
+          {timesNumber}
+        </p>
       </div>
     </div>
   );
