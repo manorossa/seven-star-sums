@@ -54,7 +54,9 @@ class App extends Component<{}, AppState> {
     // Define correct answer, and two other possibles
     const answer1 = answerMethod[op1](baseNum, randomNum);
     let answer2 = answer1 + (this.getRandomNumber(3) + 1);
-    answer2 = answer2 > baseNum ? baseNum : answer2; // Don't allow random answer to be higher than the baseNum
+    if (op1 === '+') {
+      answer2 = answer2 > baseNum ? baseNum : answer2; // Don't allow random answer to be higher than the baseNum
+    }
     let answer3 = answer1 - (this.getRandomNumber(3) + 1);
     answer3 = answer3 < 0 ? 0 : answer3; // Don't allow random answer to be negative
     // Put the possible answers into an array, ready to be shuffled
@@ -86,19 +88,20 @@ class App extends Component<{}, AppState> {
   // Runs once at the beginning of the game, then calls the defineSum method as a callback
   definePossibleNums = (): void => {
     // Destructure the relevant state elements
-    const { possibleNums, baseNum } = this.state;
+    const { possibleNums, baseNum, op1 } = this.state;
     // Create and empty array, fill it with numbers from 1 to (baseNum -1),
     // this defines the possible numbers to be used in the left hand side of the sum
     const newNums: number[] = [];
-    for (let i = 1; i < baseNum; i++) {
+    const numLimit = op1 === '+' ? baseNum : 13;
+    for (let i = 1; i < numLimit; i++) {
       newNums.push(i);
     }
 
     this.setState(
       {
         possibleNums: [...possibleNums].concat(newNums),
-        totalLives: baseNum - 8,
-        livesLeft: baseNum - 8
+        totalLives: 5,
+        livesLeft: 5
       },
       () => {
         this.defineSum();

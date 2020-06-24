@@ -20,11 +20,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
         >
           Number pairs
         </Button>
-        <Button
-          type="button"
-          handler={(): void => handleSettings({ baseNum: 12, operator: 'x' })}
-          modifiers={modifiers}
-        >
+        <Button type="button" handler={(): void => handleSettings({ baseNum: 3, operator: 'x' })} modifiers={modifiers}>
           Times tables
         </Button>
       </div>
