@@ -1,3 +1,5 @@
+@import 'base-styles/_variables.scss';
+
 .sheet--settings {
   padding: 5vw;
   display: flex;
@@ -6,13 +8,20 @@
 }
 
 .settings {
+  &__panel {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid $dark;
+    margin-bottom: 5vh;
+  }
+
   &__button-container {
     display: flex;
     justify-content: space-between;
     width: 80%;
-    margin-top: 3vh;
+    margin: 3vh auto;
 
-    .btn {
+    .btn--horizontal {
       flex: 0 1 40%;
     }
   }
