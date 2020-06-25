@@ -43,13 +43,15 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
   const smallRoundButtonsActive = ['round', 'round-small', 'round-white-border', 'green-border'];
 
+  const operatorOptions = ['+', 'x'];
+  const operatorText = ['Number pairs', 'Times tables'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const pairOptions = [10, 20];
   const difficultyOptions = [7, 5, 3];
   const difficultyText = ['Medium: 7', 'Hard: 5', ' Very hard: 3'];
 
   const buttonMap = (
-    options: number[],
+    options: any[],
     stateCheck: string | number,
     panelNum: number,
     buttonStyle: string[][],
@@ -64,6 +66,9 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
         }
         let handle: GenericFunc;
         switch (panelNum) {
+          case 1:
+            handle = (): void => panel1Handler(option);
+            break;
           case 2:
             handle = (): void => panel2Handler(option);
             break;
@@ -81,6 +86,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
       }
     );
 
+  const operatorMap = buttonMap(operatorOptions, operator, 1, [horizButtons, horizButtonsActive], operatorText);
   const pairMap = buttonMap(pairOptions, baseNum, 2, [smallRoundButtons, smallRoundButtonsActive], pairOptions);
   const tableMap = buttonMap(tableOptions, baseNum, 2, [smallRoundButtons, smallRoundButtonsActive], tableOptions);
   const difficultyMap = buttonMap(difficultyOptions, difficulty, 3, [horizButtons, horizButtonsActive], difficultyText);
@@ -89,14 +95,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     <div className="sheet--settings">
       <div className="settings__panel settings__panel--1">
         <h3>What type of sums do you want to play today?</h3>
-        <div className="settings__button-container">
-          <Button type="button" handler={(): void => panel1Handler('+')} modifiers={horizButtons}>
-            Number pairs
-          </Button>
-          <Button type="button" handler={(): void => panel1Handler('x')} modifiers={horizButtons}>
-            Times tables
-          </Button>
-        </div>
+        <div className="settings__button-container">{operatorMap}</div>
       </div>
       <div className={`settings__panel settings__panel--2 settings__panel--${panel2viz}`}>
         {!!pairs && (
