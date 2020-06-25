@@ -21,6 +21,10 @@
     width: 80%;
     margin: 3vh auto;
 
+    &--small {
+      width: 40%;
+    }
+
     .btn--horizontal {
       flex: 0 1 40%;
     }
