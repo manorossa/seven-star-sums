@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
-import { SettingsPayload } from '../../types/types';
+import { SettingsPayload, GenericFunc } from '../../types/types';
 
 interface SettingsSheetProps {
   handleSettings(payload: SettingsPayload): void;
@@ -37,35 +37,45 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   // RENDERING LOGIC
   const pairs = operator === '+';
   const horizButtons = 'horizontal';
+  // const horizButtonsActive = ['horizontal', 'green-border'];
   const horizGreenButtons = ['horizontal', 'horizontal-green'];
   const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
   const smallRoundButtonsActive = ['round', 'round-small', 'round-white-border', 'green-border'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const pairOptions = [10, 20];
 
-  const buttonMap = (options: number[]): JSX.Element[] =>
+  const buttonMap = (
+    options: number[],
+    stateCheck: string | number,
+    panelNum: number,
+    buttonStyle: string[][],
+    buttonText: number[] | string[]
+  ): JSX.Element[] =>
     options.map(
-      (option): JSX.Element => {
-        let buttonModifiers = smallRoundButtons;
-        if (option === baseNum && settingStatus > 2) {
-          buttonModifiers = smallRoundButtonsActive;
-          console.log(`equality at ${option}`);
+      (option, index): JSX.Element => {
+        const [butMod, butModAct] = buttonStyle;
+        let buttonModifiers = butMod;
+        if (option === stateCheck && settingStatus > panelNum) {
+          buttonModifiers = butModAct;
+        }
+        let handle: GenericFunc;
+        switch (panelNum) {
+          case 2:
+            handle = (): void => panel2Handler(option);
+            break;
+          default:
+            handle = (): void => alert('Sorry, that did not work'); // eslint-disable-line no-alert
         }
         return (
-          <Button
-            key={`num-${option}`}
-            type="button"
-            handler={(): void => panel2Handler(option)}
-            modifiers={buttonModifiers}
-          >
-            {option}
+          <Button key={`panel-${panelNum}-${option}`} type="button" handler={handle} modifiers={buttonModifiers}>
+            {buttonText[index]}
           </Button>
         );
       }
     );
 
-  const pairMap = buttonMap(pairOptions);
-  const tableMap = buttonMap(tableOptions);
+  const pairMap = buttonMap(pairOptions, baseNum, 2, [smallRoundButtons, smallRoundButtonsActive], pairOptions);
+  const tableMap = buttonMap(tableOptions, baseNum, 2, [smallRoundButtons, smallRoundButtonsActive], tableOptions);
 
   return (
     <div className="sheet--settings">

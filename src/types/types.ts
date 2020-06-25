@@ -32,3 +32,5 @@ export interface SettingsPayload {
   operator: '+' | 'x';
   difficulty: number;
 }
+
+export type GenericFunc = () => void;
