@@ -36,13 +36,17 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
 
   // RENDERING LOGIC
   const pairs = operator === '+';
-  const horizButtons = 'horizontal';
-  // const horizButtonsActive = ['horizontal', 'green-border'];
+
+  const horizButtons = ['horizontal'];
+  const horizButtonsActive = ['horizontal', 'green-border'];
   const horizGreenButtons = ['horizontal', 'horizontal-green'];
   const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
   const smallRoundButtonsActive = ['round', 'round-small', 'round-white-border', 'green-border'];
+
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const pairOptions = [10, 20];
+  const difficultyOptions = [7, 5, 3];
+  const difficultyText = ['Medium: 7', 'Hard: 5', ' Very hard: 3'];
 
   const buttonMap = (
     options: number[],
@@ -63,6 +67,9 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
           case 2:
             handle = (): void => panel2Handler(option);
             break;
+          case 3:
+            handle = (): void => panel3Handler(option);
+            break;
           default:
             handle = (): void => alert('Sorry, that did not work'); // eslint-disable-line no-alert
         }
@@ -76,6 +83,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
 
   const pairMap = buttonMap(pairOptions, baseNum, 2, [smallRoundButtons, smallRoundButtonsActive], pairOptions);
   const tableMap = buttonMap(tableOptions, baseNum, 2, [smallRoundButtons, smallRoundButtonsActive], tableOptions);
+  const difficultyMap = buttonMap(difficultyOptions, difficulty, 3, [horizButtons, horizButtonsActive], difficultyText);
 
   return (
     <div className="sheet--settings">
@@ -106,17 +114,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
       </div>
       <div className={`settings__panel settings__panel--3 settings__panel--${panel3viz}`}>
         <h3>How many lives do you want to have?</h3>
-        <div className="settings__button-container">
-          <Button type="button" handler={(): void => panel3Handler(7)} modifiers={horizButtons}>
-            Medium: 7
-          </Button>
-          <Button type="button" handler={(): void => panel3Handler(5)} modifiers={horizButtons}>
-            Hard: 5
-          </Button>
-          <Button type="button" handler={(): void => panel3Handler(3)} modifiers={horizButtons}>
-            Very hard: 3
-          </Button>
-        </div>
+        <div className="settings__button-container">{difficultyMap}</div>
       </div>
       <div className={`settings__panel settings__panel--2 settings__panel--${panel4viz}`}>
         <Button
