@@ -11,9 +11,12 @@
   &__panel {
     width: 100%;
     text-align: center;
-    border-bottom: 1px solid $dark;
-    margin-bottom: 3vh;
     transition: opacity 0.8s ease-in;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $dark;
+      margin-bottom: 3vh;
+    }
 
     &--hide {
       opacity: 0;

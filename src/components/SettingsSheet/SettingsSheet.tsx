@@ -37,6 +37,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   // RENDERING LOGIC
   const pairs = operator === '+';
   const horizButtons = 'horizontal';
+  const horizGreenButtons = ['horizontal', 'horizontal-green'];
   const smallRoundButtons = ['round', 'round-small'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const pairOptions = [10, 20];
@@ -100,7 +101,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
         <Button
           type="button"
           handler={(): void => handleSettings({ baseNum, operator, difficulty })}
-          modifiers={horizButtons}
+          modifiers={horizGreenButtons}
         >
           Start the sums!
         </Button>
