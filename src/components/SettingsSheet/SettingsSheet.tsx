@@ -38,6 +38,8 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     setOperator(chosenOperator);
   };
 
+  const panel3Handler = (lives: number): void => alert(lives);
+
   // PANEL VISIBILITY OPTIONS
   const panel2viz = settingStatus > 1 ? 'show' : 'hide';
 
@@ -67,6 +69,20 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
             <div className="settings__button-container">{tableMap}</div>
           </>
         )}
+      </div>
+      <div className="settings__panel settings__panel--3">
+        <h3>How many lives do you want to have?</h3>
+        <div className="settings__button-container">
+          <Button type="button" handler={(): void => panel3Handler(7)} modifiers={horizButtons}>
+            Medium: 7
+          </Button>
+          <Button type="button" handler={(): void => panel3Handler(5)} modifiers={horizButtons}>
+            Hard: 5
+          </Button>
+          <Button type="button" handler={(): void => panel3Handler(3)} modifiers={horizButtons}>
+            Very hard: 3
+          </Button>
+        </div>
       </div>
       <div className="settings__panel settings__panel--4">
         <Button type="button" handler={(): void => handleSettings({ baseNum, operator })} modifiers={horizButtons}>
