@@ -21,13 +21,15 @@ const Sum: React.FC<SumProps> = ({ num1, num2, op1, op2, baseNum, rightWrong }) 
   }
   const circle2 = op1 === '+' ? num2 : baseNum;
   const circle3 = op1 === '+' ? baseNum : num2;
+  const circle2Styles = op1 === '+' ? `btn--round btn--round-large ${borderColour}` : 'btn--round btn--round-large';
+  const circle3Styles = op1 === '+' ? 'btn--round btn--round-large' : `btn--round btn--round-large ${borderColour}`;
   return (
     <div className="container sum-container">
       <div className="btn--round btn--round-large">{num1}</div>
       <div className="btn--round btn--round-small">{op1}</div>
-      <div className={`btn--round btn--round-large ${borderColour}`}>{circle2}</div>
+      <div className={circle2Styles}>{circle2}</div>
       <div className="btn--round btn--round-small">{op2}</div>
-      <div className="btn--round btn--round-large">{circle3}</div>
+      <div className={circle3Styles}>{circle3}</div>
     </div>
   );
 };

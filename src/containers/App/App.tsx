@@ -121,7 +121,8 @@ class App extends Component<{}, AppState> {
     this.setState(
       {
         possibleNums: [],
-        score: 0
+        score: 0,
+        gotItRight: null
       },
       () => {
         this.startGameHandler();
