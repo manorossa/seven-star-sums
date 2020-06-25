@@ -25,7 +25,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   };
 
   const panel3Handler = (lives: number): void => {
-    setSettingStatus(3);
+    setSettingStatus(4);
     setDifficulty(lives);
   };
 

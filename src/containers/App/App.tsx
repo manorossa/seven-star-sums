@@ -24,8 +24,8 @@ class App extends Component<{}, AppState> {
     correctAns: null,
     gotItRight: null,
     score: 0,
-    totalLives: 0,
-    livesLeft: 0
+    totalLives: 7,
+    livesLeft: 7
   };
 
   // Method to create a random number. Will be used throughout app
@@ -99,9 +99,7 @@ class App extends Component<{}, AppState> {
 
     this.setState(
       {
-        possibleNums: [...possibleNums].concat(newNums),
-        totalLives: 5,
-        livesLeft: 5
+        possibleNums: [...possibleNums].concat(newNums)
       },
       () => {
         this.defineSum();
@@ -210,7 +208,9 @@ class App extends Component<{}, AppState> {
     this.setState(
       {
         baseNum: payload.baseNum,
-        op1: payload.operator
+        op1: payload.operator,
+        totalLives: payload.difficulty,
+        livesLeft: payload.difficulty
       },
       () => {
         this.resetGameHandler();
