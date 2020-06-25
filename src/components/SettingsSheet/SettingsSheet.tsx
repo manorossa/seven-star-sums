@@ -38,15 +38,26 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   const pairs = operator === '+';
   const horizButtons = 'horizontal';
   const horizGreenButtons = ['horizontal', 'horizontal-green'];
-  const smallRoundButtons = ['round', 'round-small'];
+  const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
+  const smallRoundButtonsActive = ['round', 'round-small', 'round-white-border', 'green-border'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const pairOptions = [10, 20];
 
   const buttonMap = (options: number[]): JSX.Element[] =>
     options.map(
       (option): JSX.Element => {
+        let buttonModifiers = smallRoundButtons;
+        if (option === baseNum && settingStatus > 2) {
+          buttonModifiers = smallRoundButtonsActive;
+          console.log(`equality at ${option}`);
+        }
         return (
-          <Button type="button" handler={(): void => panel2Handler(option)} modifiers={smallRoundButtons}>
+          <Button
+            key={`num-${option}`}
+            type="button"
+            handler={(): void => panel2Handler(option)}
+            modifiers={buttonModifiers}
+          >
             {option}
           </Button>
         );

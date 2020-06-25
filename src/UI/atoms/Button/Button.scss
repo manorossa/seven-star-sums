@@ -61,5 +61,13 @@
       background-color: $dark;
       color: $white;
     }
+
+    &-white-border {
+      border-color: $white;
+    }
+  }
+
+  &--green-border {
+    border-color: $green;
   }
 }
