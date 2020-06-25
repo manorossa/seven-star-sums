@@ -1,7 +1,7 @@
 @import 'base-styles/_variables.scss';
 
 .sheet--settings {
-  padding: 5vw;
+  padding: 3vw 5vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,14 +12,23 @@
     width: 100%;
     text-align: center;
     border-bottom: 1px solid $dark;
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
+    transition: opacity 0.8s ease-in;
+
+    &--hide {
+      opacity: 0;
+    }
+
+    &--show {
+      opacity: 1;
+    }
   }
 
   &__button-container {
     display: flex;
     justify-content: space-between;
     width: 80%;
-    margin: 3vh auto;
+    margin: 2vh auto;
 
     &--small {
       width: 40%;

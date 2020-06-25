@@ -38,6 +38,9 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     setOperator(chosenOperator);
   };
 
+  // PANEL VISIBILITY OPTIONS
+  const panel2viz = settingStatus > 1 ? 'show' : 'hide';
+
   return (
     <div className="sheet--settings">
       <div className="settings__panel settings__panel--1">
@@ -51,26 +54,20 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
           </Button>
         </div>
       </div>
-      {settingStatus > 1 && (
-        <div className="settings__panel settings__panel--2">
-          {!!pairs && (
-            <>
-              <h3>Choose your number pair:</h3>
-              <div className="settings__button-container settings__button-container--small">{pairMap}</div>
-            </>
-          )}
-          {!pairs && (
-            <>
-              <h3>Choose your times tables:</h3>
-              <div className="settings__button-container">{tableMap}</div>
-              <p>
-                Base number is:
-                {baseNum}
-              </p>
-            </>
-          )}
-        </div>
-      )}
+      <div className={`settings__panel settings__panel--2 settings__panel--${panel2viz}`}>
+        {!!pairs && (
+          <>
+            <h3>Choose your number pair:</h3>
+            <div className="settings__button-container settings__button-container--small">{pairMap}</div>
+          </>
+        )}
+        {!pairs && (
+          <>
+            <h3>Choose your times tables:</h3>
+            <div className="settings__button-container">{tableMap}</div>
+          </>
+        )}
+      </div>
       <div className="settings__panel settings__panel--4">
         <Button type="button" handler={(): void => handleSettings({ baseNum, operator })} modifiers={horizButtons}>
           Start the sums!
