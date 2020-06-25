@@ -30,4 +30,5 @@ export interface AnswerMethodsObj {
 export interface SettingsPayload {
   baseNum: number;
   operator: '+' | 'x';
+  difficulty: number;
 }

@@ -11,7 +11,30 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   const [settingStatus, setSettingStatus] = useState(1);
   const [operator, setOperator] = useState('+' as SettingsPayload['operator']);
   const [baseNum, setBaseNum] = useState(2);
+  const [difficulty, setDifficulty] = useState(7);
 
+  // PANEL HANDLERS START
+  const panel1Handler = (chosenOperator: SettingsPayload['operator']): void => {
+    setSettingStatus(2);
+    setOperator(chosenOperator);
+  };
+
+  const panel2Handler = (chosenBaseNum: number): void => {
+    setSettingStatus(3);
+    setBaseNum(chosenBaseNum);
+  };
+
+  const panel3Handler = (lives: number): void => {
+    setSettingStatus(3);
+    setDifficulty(lives);
+  };
+
+  // PANEL VISIBILITY OPTIONS
+  const panel2viz = settingStatus > 1 ? 'show' : 'hide';
+  const panel3viz = settingStatus > 2 ? 'show' : 'hide';
+  const panel4viz = settingStatus > 3 ? 'show' : 'hide';
+
+  // RENDERING LOGIC
   const pairs = operator === '+';
   const horizButtons = 'horizontal';
   const smallRoundButtons = ['round', 'round-small'];
@@ -22,7 +45,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     options.map(
       (option): JSX.Element => {
         return (
-          <Button type="button" handler={(): void => setBaseNum(option)} modifiers={smallRoundButtons}>
+          <Button type="button" handler={(): void => panel2Handler(option)} modifiers={smallRoundButtons}>
             {option}
           </Button>
         );
@@ -31,17 +54,6 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
 
   const pairMap = buttonMap(pairOptions);
   const tableMap = buttonMap(tableOptions);
-
-  // PANEL HANDLERS START
-  const panel1Handler = (chosenOperator: SettingsPayload['operator']): void => {
-    setSettingStatus(2);
-    setOperator(chosenOperator);
-  };
-
-  const panel3Handler = (lives: number): void => alert(lives);
-
-  // PANEL VISIBILITY OPTIONS
-  const panel2viz = settingStatus > 1 ? 'show' : 'hide';
 
   return (
     <div className="sheet--settings">
@@ -70,7 +82,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
           </>
         )}
       </div>
-      <div className="settings__panel settings__panel--3">
+      <div className={`settings__panel settings__panel--3 settings__panel--${panel3viz}`}>
         <h3>How many lives do you want to have?</h3>
         <div className="settings__button-container">
           <Button type="button" handler={(): void => panel3Handler(7)} modifiers={horizButtons}>
@@ -84,8 +96,12 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
           </Button>
         </div>
       </div>
-      <div className="settings__panel settings__panel--4">
-        <Button type="button" handler={(): void => handleSettings({ baseNum, operator })} modifiers={horizButtons}>
+      <div className={`settings__panel settings__panel--2 settings__panel--${panel4viz}`}>
+        <Button
+          type="button"
+          handler={(): void => handleSettings({ baseNum, operator, difficulty })}
+          modifiers={horizButtons}
+        >
           Start the sums!
         </Button>
       </div>
