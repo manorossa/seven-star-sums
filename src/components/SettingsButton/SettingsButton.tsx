@@ -9,7 +9,7 @@ const SettingsButton: React.FC<SettingsButtonProps> = ({ showSettings }) => {
   const modifiers = ['horizontal', 'horizontal-small'];
   return (
     <Button type="button" handler={showSettings} modifiers={modifiers}>
-      Settings
+      Change settings
     </Button>
   );
 };
