@@ -4,6 +4,7 @@
 .btn {
   font-family: $font-family;
   cursor: pointer;
+  transition: opacity 0.5s ease-in, border-color 0.5s ease-in;
 
   &:focus {
     outline: none;

@@ -32,6 +32,13 @@
       }
     }
 
+    &--2 {
+      h3,
+      .settings__button-container {
+        animation: fadeIn 1s ease-in forwards;
+      }
+    }
+
     &--3 {
       .btn--horizontal {
         flex: 0 1 28%;
@@ -48,5 +55,14 @@
     &--small {
       width: 40%;
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
