@@ -114,7 +114,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   );
 
   return (
-    <div className="sheet--settings">
+    <div className="settings__sheet">
       <div className="settings__panel settings__panel--1">
         <h3>What type of sums do you want to play today?</h3>
         <div className="settings__button-container">{operatorMap}</div>

@@ -245,7 +245,7 @@ class App extends Component<{}, AppState> {
         <div className="stage">
           {gameStatus === 'showSettings' && <SettingsSheet handleSettings={this.settingsHandler} />}
           {gameStatus !== 'showSettings' && (
-            <div className="sheet--game">
+            <div className="game__sheet">
               <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
               <div className="answer-strip">
                 <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
