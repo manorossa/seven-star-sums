@@ -12,8 +12,8 @@ import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
-    showSplash: true,
-    gameStatus: 'startGame', // Possible values: 'startGame', 'showSum', 'confirmAnswer', 'showResult', 'endWin', 'endLose'
+    showSplash: false,
+    gameStatus: 'showSettings',
     possibleNums: [],
     baseNum: 20,
     num1: null,
@@ -24,8 +24,8 @@ class App extends Component<{}, AppState> {
     correctAns: null,
     gotItRight: null,
     score: 0,
-    totalLives: 0,
-    livesLeft: 0
+    totalLives: 7,
+    livesLeft: 7
   };
 
   // Method to create a random number. Will be used throughout app
@@ -99,9 +99,7 @@ class App extends Component<{}, AppState> {
 
     this.setState(
       {
-        possibleNums: [...possibleNums].concat(newNums),
-        totalLives: 5,
-        livesLeft: 5
+        possibleNums: [...possibleNums].concat(newNums)
       },
       () => {
         this.defineSum();
@@ -123,7 +121,8 @@ class App extends Component<{}, AppState> {
     this.setState(
       {
         possibleNums: [],
-        score: 0
+        score: 0,
+        gotItRight: null
       },
       () => {
         this.startGameHandler();
@@ -210,7 +209,9 @@ class App extends Component<{}, AppState> {
     this.setState(
       {
         baseNum: payload.baseNum,
-        op1: payload.operator
+        op1: payload.operator,
+        totalLives: payload.difficulty,
+        livesLeft: payload.difficulty
       },
       () => {
         this.resetGameHandler();
@@ -240,11 +241,11 @@ class App extends Component<{}, AppState> {
         {!!showSplash && (
           <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} status={gameStatus} />
         )}
-        <Header showSettings={this.showSettingsHandler} />
+        <Header gameStatus={gameStatus} showSettings={this.showSettingsHandler} />
         <div className="stage">
           {gameStatus === 'showSettings' && <SettingsSheet handleSettings={this.settingsHandler} />}
           {gameStatus !== 'showSettings' && (
-            <div className="sheet--game">
+            <div className="game__sheet">
               <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
               <div className="answer-strip">
                 <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
