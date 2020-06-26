@@ -37,12 +37,20 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   // RENDERING LOGIC
   const pairs = operator === '+';
 
+  // BUTTON STYLING
   const horizButtons = ['horizontal'];
-  const horizButtonsActive = ['horizontal', 'green-border'];
+  // const horizButtonsActive = ['horizontal', 'green-border'];
   const horizGreenButtons = ['horizontal', 'horizontal-green'];
   const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
-  const smallRoundButtonsActive = ['round', 'round-small', 'round-white-border', 'green-border'];
+  // const smallRoundButtonsActive = ['round', 'round-small', 'round-white-border', 'green-border'];
 
+  const makeButtonStyles = (array1: string[]): string[][] => {
+    const array2 = [...array1];
+    array2.push('green-border');
+    return [array1, array2];
+  };
+
+  // BUTTON CONTENT
   const operatorOptions = ['+', 'x'];
   const operatorText = ['Number pairs', 'Times tables'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
@@ -50,6 +58,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   const difficultyOptions = [7, 5, 3];
   const difficultyText = ['Medium: 7', 'Hard: 5', ' Very hard: 3'];
 
+  // CREATE BUTTON MAPS
   const buttonMap = (
     options: any[],
     stateCheck: string | number,
@@ -83,23 +92,16 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     operator,
     1,
     panel1Handler,
-    [horizButtons, horizButtonsActive],
+    makeButtonStyles(horizButtons),
     operatorText
   );
-  const pairMap = buttonMap(
-    pairOptions,
-    baseNum,
-    2,
-    panel2Handler,
-    [smallRoundButtons, smallRoundButtonsActive],
-    pairOptions
-  );
+  const pairMap = buttonMap(pairOptions, baseNum, 2, panel2Handler, makeButtonStyles(smallRoundButtons), pairOptions);
   const tableMap = buttonMap(
     tableOptions,
     baseNum,
     2,
     panel2Handler,
-    [smallRoundButtons, smallRoundButtonsActive],
+    makeButtonStyles(smallRoundButtons),
     tableOptions
   );
   const difficultyMap = buttonMap(
@@ -107,7 +109,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     difficulty,
     3,
     panel3Handler,
-    [horizButtons, horizButtonsActive],
+    makeButtonStyles(horizButtons),
     difficultyText
   );
 
