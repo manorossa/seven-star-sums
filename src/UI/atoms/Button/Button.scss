@@ -67,7 +67,11 @@
     }
   }
 
-  &--green-border {
+  &--active {
     border-color: $green;
+  }
+
+  &--inactive {
+    opacity: 0.35;
   }
 }

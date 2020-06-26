@@ -39,15 +39,15 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
 
   // BUTTON STYLING
   const horizButtons = ['horizontal'];
-  // const horizButtonsActive = ['horizontal', 'green-border'];
   const horizGreenButtons = ['horizontal', 'horizontal-green'];
   const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
-  // const smallRoundButtonsActive = ['round', 'round-small', 'round-white-border', 'green-border'];
 
   const makeButtonStyles = (array1: string[]): string[][] => {
     const array2 = [...array1];
-    array2.push('green-border');
-    return [array1, array2];
+    array2.push('active');
+    const array3 = [...array1];
+    array3.push('inactive');
+    return [array1, array2, array3];
   };
 
   // BUTTON CONTENT
@@ -69,10 +69,10 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
   ): JSX.Element[] =>
     options.map(
       (option, index): JSX.Element => {
-        const [butMod, butModAct] = buttonStyle;
+        const [butMod, butModAct, butModInact] = buttonStyle;
         let buttonModifiers = butMod;
-        if (option === stateCheck && settingStatus > panelNum) {
-          buttonModifiers = butModAct;
+        if (settingStatus > panelNum) {
+          buttonModifiers = option === stateCheck ? butModAct : butModInact;
         }
         return (
           <Button
