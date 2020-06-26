@@ -33,4 +33,4 @@ export interface SettingsPayload {
   difficulty: number;
 }
 
-export type GenericFunc = () => void;
+export type GenericFunc = (arg0: any) => void;

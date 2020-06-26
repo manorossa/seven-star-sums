@@ -54,6 +54,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     options: any[],
     stateCheck: string | number,
     panelNum: number,
+    clickHandler: GenericFunc,
     buttonStyle: string[][],
     buttonText: number[] | string[]
   ): JSX.Element[] =>
@@ -64,32 +65,51 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
         if (option === stateCheck && settingStatus > panelNum) {
           buttonModifiers = butModAct;
         }
-        let handle: GenericFunc;
-        switch (panelNum) {
-          case 1:
-            handle = (): void => panel1Handler(option);
-            break;
-          case 2:
-            handle = (): void => panel2Handler(option);
-            break;
-          case 3:
-            handle = (): void => panel3Handler(option);
-            break;
-          default:
-            handle = (): void => alert('Sorry, that did not work'); // eslint-disable-line no-alert
-        }
         return (
-          <Button key={`panel-${panelNum}-${option}`} type="button" handler={handle} modifiers={buttonModifiers}>
+          <Button
+            key={`panel-${panelNum}-${option}`}
+            type="button"
+            handler={() => clickHandler(option)}
+            modifiers={buttonModifiers}
+          >
             {buttonText[index]}
           </Button>
         );
       }
     );
 
-  const operatorMap = buttonMap(operatorOptions, operator, 1, [horizButtons, horizButtonsActive], operatorText);
-  const pairMap = buttonMap(pairOptions, baseNum, 2, [smallRoundButtons, smallRoundButtonsActive], pairOptions);
-  const tableMap = buttonMap(tableOptions, baseNum, 2, [smallRoundButtons, smallRoundButtonsActive], tableOptions);
-  const difficultyMap = buttonMap(difficultyOptions, difficulty, 3, [horizButtons, horizButtonsActive], difficultyText);
+  const operatorMap = buttonMap(
+    operatorOptions,
+    operator,
+    1,
+    panel1Handler,
+    [horizButtons, horizButtonsActive],
+    operatorText
+  );
+  const pairMap = buttonMap(
+    pairOptions,
+    baseNum,
+    2,
+    panel2Handler,
+    [smallRoundButtons, smallRoundButtonsActive],
+    pairOptions
+  );
+  const tableMap = buttonMap(
+    tableOptions,
+    baseNum,
+    2,
+    panel2Handler,
+    [smallRoundButtons, smallRoundButtonsActive],
+    tableOptions
+  );
+  const difficultyMap = buttonMap(
+    difficultyOptions,
+    difficulty,
+    3,
+    panel3Handler,
+    [horizButtons, horizButtonsActive],
+    difficultyText
+  );
 
   return (
     <div className="sheet--settings">
