@@ -12,8 +12,8 @@ import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
-    showSplash: true,
-    gameStatus: 'startGame', // Possible values: 'startGame', 'showSum', 'confirmAnswer', 'showResult', 'endWin', 'endLose'
+    showSplash: false,
+    gameStatus: 'showSettings',
     possibleNums: [],
     baseNum: 20,
     num1: null,
@@ -241,7 +241,7 @@ class App extends Component<{}, AppState> {
         {!!showSplash && (
           <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} status={gameStatus} />
         )}
-        <Header showSettings={this.showSettingsHandler} />
+        <Header gameStatus={gameStatus} showSettings={this.showSettingsHandler} />
         <div className="stage">
           {gameStatus === 'showSettings' && <SettingsSheet handleSettings={this.settingsHandler} />}
           {gameStatus !== 'showSettings' && (
