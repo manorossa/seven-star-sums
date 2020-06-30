@@ -121,13 +121,12 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
         <div className="settings__button-container">{operatorMap}</div>
       </div>
       <div className={`settings__panel settings__panel--2 settings__panel--${panel2viz}`}>
-        {!!bonds && (
+        {bonds ? (
           <>
             <h3>Choose your bond number:</h3>
             <div className="settings__button-container settings__button-container--small">{pairMap}</div>
           </>
-        )}
-        {!bonds && (
+        ) : (
           <>
             <h3>Choose your times table:</h3>
             <div className="settings__button-container">{tableMap}</div>
