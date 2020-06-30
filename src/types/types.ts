@@ -40,5 +40,5 @@ export interface SettingsPayload {
   difficulty: number;
 }
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 export type GenericFunc = (arg0: any) => void;

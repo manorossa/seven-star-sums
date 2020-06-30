@@ -60,7 +60,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
 
   // CREATE BUTTON MAPS
   const buttonMap = (
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
+    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
     options: any,
     stateCheck: string | number,
     panelNum: number,
