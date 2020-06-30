@@ -9,6 +9,7 @@ import Score from '../../components/Score/Score';
 import SettingsSheet from '../../components/SettingsSheet/SettingsSheet';
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
 import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
+import StatusContext from '../../context/StatusContext';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
@@ -237,32 +238,34 @@ class App extends Component<{}, AppState> {
       livesLeft
     } = this.state;
     return (
-      <div className="App">
-        {!!showSplash && (
-          <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} status={gameStatus} />
-        )}
-        <Header gameStatus={gameStatus} showSettings={this.showSettingsHandler} />
-        <div className="stage">
-          {gameStatus === 'showSettings' && <SettingsSheet handleSettings={this.settingsHandler} />}
-          {gameStatus !== 'showSettings' && (
-            <div className="game__sheet">
-              <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
-              <div className="answer-strip">
-                <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
-                <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={gameStatus} />
-                <Result
-                  nextQ={this.nextQuestionHandler}
-                  rightWrong={gotItRight}
-                  score={score}
-                  correctAns={correctAns}
-                  gameStatus={gameStatus}
-                />
-              </div>
-              <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
-            </div>
+      <StatusContext.Provider value={{ gameStatus }}>
+        <div className="App">
+          {!!showSplash && (
+            <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} status={gameStatus} />
           )}
+          <Header gameStatus={gameStatus} showSettings={this.showSettingsHandler} />
+          <div className="stage">
+            {gameStatus === 'showSettings' && <SettingsSheet handleSettings={this.settingsHandler} />}
+            {gameStatus !== 'showSettings' && (
+              <div className="game__sheet">
+                <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
+                <div className="answer-strip">
+                  <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
+                  <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={gameStatus} />
+                  <Result
+                    nextQ={this.nextQuestionHandler}
+                    rightWrong={gotItRight}
+                    score={score}
+                    correctAns={correctAns}
+                    gameStatus={gameStatus}
+                  />
+                </div>
+                <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </StatusContext.Provider>
     );
   }
 }
