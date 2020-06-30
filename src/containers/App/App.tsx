@@ -240,10 +240,8 @@ class App extends Component<{}, AppState> {
     return (
       <StatusContext.Provider value={{ gameStatus }}>
         <div className="App">
-          {showSplash && (
-            <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} status={gameStatus} />
-          )}
-          <Header gameStatus={gameStatus} showSettings={this.showSettingsHandler} />
+          {showSplash && <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} />}
+          <Header showSettings={this.showSettingsHandler} />
           <div className="stage">
             {gameStatus === 'showSettings' ? (
               <SettingsSheet handleSettings={this.settingsHandler} />
@@ -251,14 +249,13 @@ class App extends Component<{}, AppState> {
               <div className="game__sheet">
                 <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
                 <div className="answer-strip">
-                  <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
-                  <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={gameStatus} />
+                  <Answers answers={possibleAns} clicked={this.answerClickHandler} />
+                  <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
                   <Result
                     nextQ={this.nextQuestionHandler}
                     rightWrong={gotItRight}
                     score={score}
                     correctAns={correctAns}
-                    gameStatus={gameStatus}
                   />
                 </div>
                 <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
