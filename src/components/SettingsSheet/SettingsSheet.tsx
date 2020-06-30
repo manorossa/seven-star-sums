@@ -60,7 +60,8 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
 
   // CREATE BUTTON MAPS
   const buttonMap = (
-    options: any[],
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
+    options: any,
     stateCheck: string | number,
     panelNum: number,
     clickHandler: GenericFunc,
@@ -68,7 +69,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     buttonText: number[] | string[]
   ): JSX.Element[] =>
     options.map(
-      (option, index): JSX.Element => {
+      (option: string | number, index: number): JSX.Element => {
         const [butMod, butModAct, butModInact] = buttonStyle;
         let buttonModifiers = butMod;
         if (settingStatus > panelNum) {
@@ -78,7 +79,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
           <Button
             key={`panel-${panelNum}-${option}`}
             type="button"
-            handler={() => clickHandler(option)}
+            handler={(): void => clickHandler(option)}
             modifiers={buttonModifiers}
           >
             {buttonText[index]}
