@@ -34,7 +34,7 @@ class App extends Component<{}, AppState> {
     return Math.floor(Math.random() * Math.floor(base));
   };
 
-  // Method to define the sum to be solved. For addition and subtraction
+  // Method to define the sum to be solved. For addition and multiplication
   // Runs at the beginning of the game, and every time the next question button is pressed
   defineSum = (): void => {
     // First check to see if the game has ended
@@ -52,7 +52,7 @@ class App extends Component<{}, AppState> {
       '+': (a, b) => a - b,
       x: (a, b) => a * b
     };
-    // Define correct answer, and two other possibles
+    // Define correct answer, and two incorrect other possibles, +/- up to 3 to the correct answer
     const answer1 = answerMethod[op1](baseNum, randomNum);
     let answer2 = answer1 + (this.getRandomNumber(3) + 1);
     if (op1 === '+') {

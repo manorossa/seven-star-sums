@@ -40,5 +40,6 @@ export interface SettingsPayload {
   difficulty: number;
 }
 
+// @to-do: look into generics to get round use of any here
 /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 export type GenericFunc = (arg0: any) => void;

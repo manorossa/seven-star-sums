@@ -60,6 +60,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
 
   // CREATE BUTTON MAPS
   const buttonMap = (
+    // @to-do: look into generics to get round use of any here
     /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
     options: any,
     stateCheck: string | number,
