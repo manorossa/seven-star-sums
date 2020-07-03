@@ -249,7 +249,7 @@ class App extends Component<{}, AppState> {
             ) : (
               <div className="game__sheet">
                 <SumContext.Provider value={{ num1, num2, baseNum, op1, op2, rightWrong }}>
-                  <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={rightWrong} />
+                  <Sum />
                   <div className="answer-strip">
                     <Answers answers={possibleAns} clicked={this.answerClickHandler} />
                     <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
