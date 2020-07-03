@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
-import { AppState } from '../../types/types';
 import '../Answers/Answers.css';
 import './Result.css';
+import SumContext from '../../context/SumContext';
+import AnswerContext from '../../context/AnswerContext';
 
-interface ResultProps extends React.HTMLAttributes<HTMLDivElement> {
-  nextQ(): void;
-  rightWrong: AppState['rightWrong'];
-  score: AppState['score'];
-  correctAns: AppState['correctAns'];
-}
-
-const Result: React.FC<ResultProps> = ({ nextQ, rightWrong, score, correctAns }) => {
+const Result: React.FC = () => {
+  const { rightWrong } = useContext(SumContext);
+  const { nextQuestionHandler, score, correctAns } = useContext(AnswerContext);
   const borderStyle = rightWrong ? 'green-border' : 'red-border';
   const starNum = score === 1 ? 'a' : 'another';
   const modifiers = 'horizontal';
+
+  if (nextQuestionHandler === undefined) {
+    throw new Error('No handlers are defined');
+  }
 
   return (
     <div className={`container answer-container flex-order--2 ${borderStyle}`}>
@@ -26,7 +26,7 @@ const Result: React.FC<ResultProps> = ({ nextQ, rightWrong, score, correctAns })
             : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.`}
         </h4>
       </div>
-      <Button type="button" handler={nextQ} modifiers={modifiers}>
+      <Button type="button" handler={nextQuestionHandler} modifiers={modifiers}>
         Next question
       </Button>
     </div>

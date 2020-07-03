@@ -265,12 +265,7 @@ class App extends Component<{}, AppState> {
                     <div className="answer-strip">
                       <Answers />
                       <Check />
-                      <Result
-                        nextQ={this.nextQuestionHandler}
-                        rightWrong={rightWrong}
-                        score={score}
-                        correctAns={correctAns}
-                      />
+                      <Result />
                     </div>
                     <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
                   </AnswerContext.Provider>
