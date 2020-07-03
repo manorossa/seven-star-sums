@@ -10,6 +10,7 @@ import SettingsSheet from '../../components/SettingsSheet/SettingsSheet';
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
 import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 import StatusContext from '../../context/StatusContext';
+import SumContext from '../../context/SumContext';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
@@ -247,17 +248,19 @@ class App extends Component<{}, AppState> {
               <SettingsSheet handleSettings={this.settingsHandler} />
             ) : (
               <div className="game__sheet">
-                <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={rightWrong} />
-                <div className="answer-strip">
-                  <Answers answers={possibleAns} clicked={this.answerClickHandler} />
-                  <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
-                  <Result
-                    nextQ={this.nextQuestionHandler}
-                    rightWrong={rightWrong}
-                    score={score}
-                    correctAns={correctAns}
-                  />
-                </div>
+                <SumContext.Provider value={{ num1, num2, baseNum, op1, op2, rightWrong }}>
+                  <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={rightWrong} />
+                  <div className="answer-strip">
+                    <Answers answers={possibleAns} clicked={this.answerClickHandler} />
+                    <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
+                    <Result
+                      nextQ={this.nextQuestionHandler}
+                      rightWrong={rightWrong}
+                      score={score}
+                      correctAns={correctAns}
+                    />
+                  </div>
+                </SumContext.Provider>
                 <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
               </div>
             )}
