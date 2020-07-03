@@ -268,7 +268,9 @@ class App extends Component<{}, AppState> {
                       <Check />
                       <Result />
                     </div>
-                    <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
+                    <ScoreContext.Provider value={{ totalLives, livesLeft }}>
+                      <Score />
+                    </ScoreContext.Provider>
                   </AnswerContext.Provider>
                 </SumContext.Provider>
               </div>
