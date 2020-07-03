@@ -12,6 +12,7 @@ import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 import StatusContext from '../../context/StatusContext';
 import SumContext from '../../context/SumContext';
 import AnswerContext from '../../context/AnswerContext';
+import ScoreContext from '../../context/ScoreContext';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
