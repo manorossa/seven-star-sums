@@ -264,7 +264,7 @@ class App extends Component<{}, AppState> {
                   >
                     <div className="answer-strip">
                       <Answers />
-                      <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
+                      <Check />
                       <Result
                         nextQ={this.nextQuestionHandler}
                         rightWrong={rightWrong}
