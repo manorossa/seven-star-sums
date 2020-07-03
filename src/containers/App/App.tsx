@@ -23,7 +23,7 @@ class App extends Component<{}, AppState> {
     op2: '=',
     possibleAns: [],
     correctAns: null,
-    gotItRight: null,
+    rightWrong: null,
     score: 0,
     totalLives: 7,
     livesLeft: 7
@@ -123,7 +123,7 @@ class App extends Component<{}, AppState> {
       {
         possibleNums: [],
         score: 0,
-        gotItRight: null
+        rightWrong: null
       },
       () => {
         this.startGameHandler();
@@ -177,14 +177,14 @@ class App extends Component<{}, AppState> {
     if (num2 === correctAns) {
       this.setState((prevState) => ({
         gameStatus: 'showResult',
-        gotItRight: true,
+        rightWrong: true,
         score: prevState.score + 1
       }));
       return;
     }
     this.setState((prevState) => ({
       gameStatus: 'showResult',
-      gotItRight: false,
+      rightWrong: false,
       livesLeft: prevState.livesLeft - 1
     }));
   };
@@ -195,7 +195,7 @@ class App extends Component<{}, AppState> {
     this.defineSum();
     setTimeout(() => {
       this.setState({
-        gotItRight: null
+        rightWrong: null
       });
     }, 800);
   };
@@ -230,7 +230,7 @@ class App extends Component<{}, AppState> {
       baseNum,
       op1,
       op2,
-      gotItRight,
+      rightWrong,
       possibleAns,
       score,
       correctAns,
@@ -247,13 +247,13 @@ class App extends Component<{}, AppState> {
               <SettingsSheet handleSettings={this.settingsHandler} />
             ) : (
               <div className="game__sheet">
-                <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
+                <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={rightWrong} />
                 <div className="answer-strip">
                   <Answers answers={possibleAns} clicked={this.answerClickHandler} />
                   <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
                   <Result
                     nextQ={this.nextQuestionHandler}
-                    rightWrong={gotItRight}
+                    rightWrong={rightWrong}
                     score={score}
                     correctAns={correctAns}
                   />

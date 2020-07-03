@@ -7,7 +7,7 @@ import './Result.css';
 
 interface ResultProps extends React.HTMLAttributes<HTMLDivElement> {
   nextQ(): void;
-  rightWrong: AppState['gotItRight'];
+  rightWrong: AppState['rightWrong'];
   score: AppState['score'];
   correctAns: AppState['correctAns'];
 }

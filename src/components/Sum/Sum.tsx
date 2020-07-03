@@ -9,7 +9,7 @@ interface SumProps extends React.HTMLAttributes<HTMLDivElement> {
   op1: AppState['op1'];
   op2: AppState['op2'];
   baseNum: AppState['baseNum'];
-  rightWrong: AppState['gotItRight'];
+  rightWrong: AppState['rightWrong'];
 }
 
 const Sum: React.FC<SumProps> = ({ num1, num2, op1, op2, baseNum, rightWrong }) => {

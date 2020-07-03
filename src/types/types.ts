@@ -20,7 +20,7 @@ export interface AppState {
   op2: string;
   possibleAns: number[];
   correctAns: number | null;
-  gotItRight: boolean | null;
+  rightWrong: boolean | null;
   score: number;
   totalLives: number;
   livesLeft: number;
