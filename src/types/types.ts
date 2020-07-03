@@ -1,4 +1,11 @@
-type GameStates = 'startGame' | 'showSettings' | 'showSum' | 'confirmAnswer' | 'showResult' | 'endWin' | 'endLose';
+export type GameStates =
+  | 'startGame'
+  | 'showSettings'
+  | 'showSum'
+  | 'confirmAnswer'
+  | 'showResult'
+  | 'endWin'
+  | 'endLose';
 
 type AnswerButton = number | '?';
 
@@ -33,4 +40,6 @@ export interface SettingsPayload {
   difficulty: number;
 }
 
+// @to-do: look into generics to get round use of any here
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 export type GenericFunc = (arg0: any) => void;

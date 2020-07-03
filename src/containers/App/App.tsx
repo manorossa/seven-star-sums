@@ -9,6 +9,7 @@ import Score from '../../components/Score/Score';
 import SettingsSheet from '../../components/SettingsSheet/SettingsSheet';
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
 import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
+import StatusContext from '../../context/StatusContext';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
@@ -33,7 +34,7 @@ class App extends Component<{}, AppState> {
     return Math.floor(Math.random() * Math.floor(base));
   };
 
-  // Method to define the sum to be solved. For addition and subtraction
+  // Method to define the sum to be solved. For addition and multiplication
   // Runs at the beginning of the game, and every time the next question button is pressed
   defineSum = (): void => {
     // First check to see if the game has ended
@@ -51,7 +52,7 @@ class App extends Component<{}, AppState> {
       '+': (a, b) => a - b,
       x: (a, b) => a * b
     };
-    // Define correct answer, and two other possibles
+    // Define correct answer, and two incorrect other possibles, +/- up to 3 to the correct answer
     const answer1 = answerMethod[op1](baseNum, randomNum);
     let answer2 = answer1 + (this.getRandomNumber(3) + 1);
     if (op1 === '+') {
@@ -237,32 +238,32 @@ class App extends Component<{}, AppState> {
       livesLeft
     } = this.state;
     return (
-      <div className="App">
-        {!!showSplash && (
-          <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} status={gameStatus} />
-        )}
-        <Header gameStatus={gameStatus} showSettings={this.showSettingsHandler} />
-        <div className="stage">
-          {gameStatus === 'showSettings' && <SettingsSheet handleSettings={this.settingsHandler} />}
-          {gameStatus !== 'showSettings' && (
-            <div className="game__sheet">
-              <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
-              <div className="answer-strip">
-                <Answers answers={possibleAns} clicked={this.answerClickHandler} gameStatus={gameStatus} />
-                <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} gameStatus={gameStatus} />
-                <Result
-                  nextQ={this.nextQuestionHandler}
-                  rightWrong={gotItRight}
-                  score={score}
-                  correctAns={correctAns}
-                  gameStatus={gameStatus}
-                />
+      <StatusContext.Provider value={{ gameStatus }}>
+        <div className="App">
+          {showSplash && <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} />}
+          <Header showSettings={this.showSettingsHandler} />
+          <div className="stage">
+            {gameStatus === 'showSettings' ? (
+              <SettingsSheet handleSettings={this.settingsHandler} />
+            ) : (
+              <div className="game__sheet">
+                <Sum num1={num1} num2={num2} baseNum={baseNum} op1={op1} op2={op2} rightWrong={gotItRight} />
+                <div className="answer-strip">
+                  <Answers answers={possibleAns} clicked={this.answerClickHandler} />
+                  <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
+                  <Result
+                    nextQ={this.nextQuestionHandler}
+                    rightWrong={gotItRight}
+                    score={score}
+                    correctAns={correctAns}
+                  />
+                </div>
+                <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
               </div>
-              <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
+      </StatusContext.Provider>
     );
   }
 }

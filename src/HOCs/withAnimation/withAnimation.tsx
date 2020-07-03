@@ -1,17 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import { AppState } from '../../types/types';
+import StatusContext from '../../context/StatusContext';
 
-interface WrappedProps {
-  gameStatus: AppState['gameStatus'];
-}
-
-/* eslint-disable  @typescript-eslint/explicit-function-return-type */
 const withAnimation = <P extends object>(
   WrappedComponent: React.ComponentType<P>,
   showStatus: AppState['gameStatus']
-) => (props: P & WrappedProps) => {
-  const show = props.gameStatus === showStatus;
+) => (props: P): JSX.Element => {
+  const { gameStatus } = useContext(StatusContext);
+  const show = gameStatus === showStatus;
 
   return (
     <CSSTransition mountOnEnter unmountOnExit in={show} timeout={1200} classNames="slide-anim">

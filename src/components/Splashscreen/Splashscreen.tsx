@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './Splashscreen.css';
-import { AppState } from '../../types/types';
+import StatusContext from '../../context/StatusContext';
 
 interface SplashscreenProps extends React.HTMLAttributes<HTMLDivElement> {
   startgame(): void;
   resetgame(): void;
-  status: AppState['gameStatus'];
 }
 
-const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame, status }) => {
+const Splashscreen: React.FC<SplashscreenProps> = ({ startgame, resetgame }) => {
   let splash: JSX.Element = <div />;
   const modifiers = 'horizontal';
+  const { gameStatus } = useContext(StatusContext);
 
-  switch (status) {
+  switch (gameStatus) {
     case 'startGame':
       splash = (
         <Button type="button" handler={startgame} modifiers={modifiers}>

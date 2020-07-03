@@ -60,7 +60,9 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
 
   // CREATE BUTTON MAPS
   const buttonMap = (
-    options: any[],
+    // @to-do: look into generics to get round use of any here
+    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+    options: any,
     stateCheck: string | number,
     panelNum: number,
     clickHandler: GenericFunc,
@@ -68,7 +70,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     buttonText: number[] | string[]
   ): JSX.Element[] =>
     options.map(
-      (option, index): JSX.Element => {
+      (option: string | number, index: number): JSX.Element => {
         const [butMod, butModAct, butModInact] = buttonStyle;
         let buttonModifiers = butMod;
         if (settingStatus > panelNum) {
@@ -78,7 +80,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
           <Button
             key={`panel-${panelNum}-${option}`}
             type="button"
-            handler={() => clickHandler(option)}
+            handler={(): void => clickHandler(option)}
             modifiers={buttonModifiers}
           >
             {buttonText[index]}
@@ -120,13 +122,12 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
         <div className="settings__button-container">{operatorMap}</div>
       </div>
       <div className={`settings__panel settings__panel--2 settings__panel--${panel2viz}`}>
-        {!!bonds && (
+        {bonds ? (
           <>
             <h3>Choose your bond number:</h3>
             <div className="settings__button-container settings__button-container--small">{pairMap}</div>
           </>
-        )}
-        {!bonds && (
+        ) : (
           <>
             <h3>Choose your times table:</h3>
             <div className="settings__button-container">{tableMap}</div>
