@@ -11,6 +11,7 @@ import Splashscreen from '../../components/Splashscreen/Splashscreen';
 import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 import StatusContext from '../../context/StatusContext';
 import SumContext from '../../context/SumContext';
+import AnswerContext from '../../context/AnswerContext';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
@@ -250,18 +251,30 @@ class App extends Component<{}, AppState> {
               <div className="game__sheet">
                 <SumContext.Provider value={{ num1, num2, baseNum, op1, op2, rightWrong }}>
                   <Sum />
-                  <div className="answer-strip">
-                    <Answers answers={possibleAns} clicked={this.answerClickHandler} />
-                    <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
-                    <Result
-                      nextQ={this.nextQuestionHandler}
-                      rightWrong={rightWrong}
-                      score={score}
-                      correctAns={correctAns}
-                    />
-                  </div>
+                  <AnswerContext.Provider
+                    value={{
+                      possibleAns,
+                      answerClickHandler: this.answerClickHandler,
+                      noCheckHandler: this.noCheckHandler,
+                      yesCheckHandler: this.yesCheckHandler,
+                      nextQuestionHandler: this.nextQuestionHandler,
+                      score,
+                      correctAns
+                    }}
+                  >
+                    <div className="answer-strip">
+                      <Answers />
+                      <Check yesClicked={this.yesCheckHandler} noClicked={this.noCheckHandler} />
+                      <Result
+                        nextQ={this.nextQuestionHandler}
+                        rightWrong={rightWrong}
+                        score={score}
+                        correctAns={correctAns}
+                      />
+                    </div>
+                    <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
+                  </AnswerContext.Provider>
                 </SumContext.Provider>
-                <Score displayScore={score} totalLives={totalLives} livesLeft={livesLeft} />
               </div>
             )}
           </div>
