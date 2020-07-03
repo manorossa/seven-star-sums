@@ -9,7 +9,7 @@ const Score: React.FC = () => {
   const { score } = useContext(AnswerContext);
   const { totalLives, livesLeft } = useContext(ScoreContext);
   const stars = [];
-  if (score) {
+  if (score !== undefined) {
     for (let i = 1; i <= 7; i++) {
       stars.push(
         <Star key={`star-${i}`} fill={i <= score ? '#fff100' : '#ccc'} stroke={i <= score ? '#ff9b00' : '#888'} />
