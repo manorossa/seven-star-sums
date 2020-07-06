@@ -253,12 +253,14 @@ class App extends Component<{}, AppState> {
         <div className="App">
           {showSplash && <Splashscreen />}
           <Header />
-          <div className="stage">
-            {gameStatus === 'showSettings' ? (
-              <SettingsSheet handleSettings={this.settingsHandler} />
-            ) : (
-              <div className="game__sheet">
-                <SumContext.Provider value={{ num1, num2, baseNum, op1, op2, rightWrong }}>
+          <SumContext.Provider
+            value={{ num1, num2, baseNum, op1, op2, rightWrong, settingsHandler: this.settingsHandler }}
+          >
+            <div className="stage">
+              {gameStatus === 'showSettings' ? (
+                <SettingsSheet />
+              ) : (
+                <div className="game__sheet">
                   <Sum />
                   <AnswerContext.Provider
                     value={{
@@ -280,10 +282,10 @@ class App extends Component<{}, AppState> {
                       <Score />
                     </ScoreContext.Provider>
                   </AnswerContext.Provider>
-                </SumContext.Provider>
-              </div>
-            )}
-          </div>
+                </div>
+              )}
+            </div>
+          </SumContext.Provider>
         </div>
       </StatusContext.Provider>
     );
