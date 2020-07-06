@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '../../UI/atoms/Button/Button';
+import StatusContext from '../../context/StatusContext';
 
-interface SettingsButtonProps {
-  showSettings(): void;
-}
-
-const SettingsButton: React.FC<SettingsButtonProps> = ({ showSettings }) => {
+const SettingsButton: React.FC = () => {
+  const { showSettingsHandler } = useContext(StatusContext);
   const modifiers = ['horizontal', 'horizontal-small'];
+
+  if (showSettingsHandler === undefined) {
+    throw new Error('No handler is defined');
+  }
+
   return (
-    <Button type="button" handler={showSettings} modifiers={modifiers}>
+    <Button type="button" handler={showSettingsHandler} modifiers={modifiers}>
       Change settings
     </Button>
   );

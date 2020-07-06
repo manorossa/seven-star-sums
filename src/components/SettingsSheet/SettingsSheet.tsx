@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { SettingsPayload, GenericFunc } from '../../types/types';
+import SumContext from '../../context/SumContext';
 
-interface SettingsSheetProps {
-  handleSettings(payload: SettingsPayload): void;
-}
-
-const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
+const SettingsSheet: React.FC = () => {
+  const { settingsHandler } = useContext(SumContext);
   const [settingStatus, setSettingStatus] = useState(1);
   const [operator, setOperator] = useState('+' as SettingsPayload['operator']);
   const [baseNum, setBaseNum] = useState(2);
@@ -115,6 +113,10 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
     difficultyText
   );
 
+  if (settingsHandler === undefined) {
+    throw new Error('No handler is defined');
+  }
+
   return (
     <div className="settings__sheet">
       <div className="settings__panel settings__panel--1">
@@ -141,7 +143,7 @@ const SettingsSheet: React.FC<SettingsSheetProps> = ({ handleSettings }) => {
       <div className={`settings__panel settings__panel--2 settings__panel--${panel4viz}`}>
         <Button
           type="button"
-          handler={(): void => handleSettings({ baseNum, operator, difficulty })}
+          handler={(): void => settingsHandler({ baseNum, operator, difficulty })}
           modifiers={horizGreenButtons}
         >
           Start the sums!

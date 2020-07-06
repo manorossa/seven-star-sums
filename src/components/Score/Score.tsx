@@ -1,30 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Star from '../../UI/atoms/Icons/Star';
 import Heart from '../../UI/atoms/Icons/Heart';
 import './Score.css';
-import { AppState } from '../../types/types';
+import AnswerContext from '../../context/AnswerContext';
+import ScoreContext from '../../context/ScoreContext';
 
-interface ScoreProps extends React.HTMLAttributes<HTMLDivElement> {
-  displayScore: AppState['score'];
-  totalLives: AppState['totalLives'];
-  livesLeft: AppState['livesLeft'];
-}
-
-const Score: React.FC<ScoreProps> = ({ displayScore, totalLives, livesLeft }) => {
+const Score: React.FC = () => {
+  const { score } = useContext(AnswerContext);
+  const { totalLives, livesLeft } = useContext(ScoreContext);
   const stars = [];
-  for (let i = 1; i <= 7; i++) {
-    stars.push(
-      <Star
-        key={`star-${i}`}
-        fill={i <= displayScore ? '#fff100' : '#ccc'}
-        stroke={i <= displayScore ? '#ff9b00' : '#888'}
-      />
-    );
+  if (score !== undefined) {
+    for (let i = 1; i <= 7; i++) {
+      stars.push(
+        <Star key={`star-${i}`} fill={i <= score ? '#fff100' : '#ccc'} stroke={i <= score ? '#ff9b00' : '#888'} />
+      );
+    }
   }
 
   const hearts = [];
-  for (let j = 1; j <= totalLives; j++) {
-    hearts.push(<Heart key={`heart-${j}`} fill={j <= livesLeft ? '#e74c3c' : '#220277'} />);
+  if (totalLives && livesLeft) {
+    for (let j = 1; j <= totalLives; j++) {
+      hearts.push(<Heart key={`heart-${j}`} fill={j <= livesLeft ? '#e74c3c' : '#220277'} />);
+    }
   }
 
   return (
