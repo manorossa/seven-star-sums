@@ -242,10 +242,17 @@ class App extends Component<{}, AppState> {
       livesLeft
     } = this.state;
     return (
-      <StatusContext.Provider value={{ gameStatus }}>
+      <StatusContext.Provider
+        value={{
+          gameStatus,
+          startGameHandler: this.startGameHandler,
+          resetGameHandler: this.resetGameHandler,
+          showSettingsHandler: this.showSettingsHandler
+        }}
+      >
         <div className="App">
-          {showSplash && <Splashscreen startgame={this.startGameHandler} resetgame={this.resetGameHandler} />}
-          <Header showSettings={this.showSettingsHandler} />
+          {showSplash && <Splashscreen />}
+          <Header />
           <div className="stage">
             {gameStatus === 'showSettings' ? (
               <SettingsSheet handleSettings={this.settingsHandler} />
