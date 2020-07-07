@@ -8,14 +8,14 @@ import Result from '../../components/Result/Result';
 import Score from '../../components/Score/Score';
 import SettingsSheet from '../../components/SettingsSheet/SettingsSheet';
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
-import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
+import { OldAppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 import StatusContext from '../../context/StatusContext';
 import SumContext from '../../context/SumContext';
 import AnswerContext from '../../context/AnswerContext';
 import { ScoreProvider } from '../../context/ScoreContext';
 
-class App extends Component<{}, AppState> {
-  state: AppState = {
+class App extends Component<{}, OldAppState> {
+  state: OldAppState = {
     showSplash: false,
     gameStatus: 'showSettings',
     possibleNums: [],
