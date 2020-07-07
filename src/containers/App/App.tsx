@@ -12,7 +12,7 @@ import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 import StatusContext from '../../context/StatusContext';
 import SumContext from '../../context/SumContext';
 import AnswerContext from '../../context/AnswerContext';
-import ScoreContext from '../../context/ScoreContext';
+import { ScoreProvider } from '../../context/ScoreContext';
 
 class App extends Component<{}, AppState> {
   state: AppState = {
@@ -28,7 +28,6 @@ class App extends Component<{}, AppState> {
     correctAns: null,
     rightWrong: null,
     score: 0,
-    totalLives: 7,
     livesLeft: 7
   };
 
@@ -215,7 +214,7 @@ class App extends Component<{}, AppState> {
       {
         baseNum: payload.baseNum,
         op1: payload.operator,
-        totalLives: payload.difficulty,
+        // totalLives: payload.difficulty,
         livesLeft: payload.difficulty
       },
       () => {
@@ -237,9 +236,7 @@ class App extends Component<{}, AppState> {
       rightWrong,
       possibleAns,
       score,
-      correctAns,
-      totalLives,
-      livesLeft
+      correctAns
     } = this.state;
     return (
       <StatusContext.Provider
@@ -278,9 +275,9 @@ class App extends Component<{}, AppState> {
                       <Check />
                       <Result />
                     </div>
-                    <ScoreContext.Provider value={{ totalLives, livesLeft }}>
+                    <ScoreProvider>
                       <Score />
-                    </ScoreContext.Provider>
+                    </ScoreProvider>
                   </AnswerContext.Provider>
                 </div>
               )}
