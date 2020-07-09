@@ -10,7 +10,7 @@ import { useScore } from '../../context/ScoreContext';
 const Result: React.FC = () => {
   const { rightWrong } = useContext(SumContext);
   const { nextQuestionHandler, correctAns } = useContext(AnswerContext);
-  const { score } = useScore();
+  const { score, livesLeft } = useScore();
   const borderStyle = rightWrong ? 'green-border' : 'red-border';
   const starNum = score === 1 ? 'a' : 'another';
   const modifiers = 'horizontal';
@@ -18,6 +18,11 @@ const Result: React.FC = () => {
   if (nextQuestionHandler === undefined) {
     throw new Error('No handlers are defined');
   }
+
+  // This method will replace checkForEndGame in App.tsx
+  const gameEnd = score === 7 || livesLeft === 0;
+  // eslint-disable-next-line no-alert
+  const gameReview = (): void => alert('Game review here');
 
   return (
     <div className={`container answer-container flex-order--2 ${borderStyle}`}>
@@ -28,9 +33,15 @@ const Result: React.FC = () => {
             : `Unlucky! The correct answer was ${correctAns}. You lose a life, but try again with another sum.`}
         </h4>
       </div>
-      <Button type="button" handler={nextQuestionHandler} modifiers={modifiers}>
-        Next question
-      </Button>
+      {gameEnd ? (
+        <Button type="button" handler={gameReview} modifiers={modifiers}>
+          Review game
+        </Button>
+      ) : (
+        <Button type="button" handler={nextQuestionHandler} modifiers={modifiers}>
+          Next question
+        </Button>
+      )}
     </div>
   );
 };

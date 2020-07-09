@@ -38,7 +38,6 @@ export interface OldAppState {
   possibleAns: number[];
   correctAns: number | null;
   rightWrong: boolean | null;
-  score: number;
 }
 
 interface AnswerMethod {

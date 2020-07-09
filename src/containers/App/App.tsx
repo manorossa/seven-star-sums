@@ -26,8 +26,7 @@ class App extends Component<{}, OldAppState> {
     op2: '=',
     possibleAns: [],
     correctAns: null,
-    rightWrong: null,
-    score: 0
+    rightWrong: null
   };
 
   // Method to create a random number. Will be used throughout app
@@ -39,9 +38,9 @@ class App extends Component<{}, OldAppState> {
   // Runs at the beginning of the game, and every time the next question button is pressed
   defineSum = (): void => {
     // First check to see if the game has ended
-    if (this.checkForEndGame()) {
-      return;
-    }
+    // if (this.checkForEndGame()) {
+    //   return;
+    // }
     // Destructure the relevant state elements
     const { possibleNums, baseNum, op1 } = this.state;
     // Choose a random number from the possible numbers array,
@@ -123,7 +122,7 @@ class App extends Component<{}, OldAppState> {
     this.setState(
       {
         possibleNums: [],
-        score: 0,
+        // score: 0,
         rightWrong: null
       },
       () => {
@@ -133,30 +132,30 @@ class App extends Component<{}, OldAppState> {
   };
 
   // Method to check if the player has reached the max score, or has run out of possible answers
-  checkForEndGame = (): boolean => {
-    // Destructure the relevant state elements
-    const { score } = this.state;
-    // Check if score has reached 7
-    if (score === 7) {
-      this.setState({
-        gameStatus: 'endWin',
-        showSplash: true
-      });
-      return true;
-    }
-    // Check if player has run out of lives
-    // THIS IS BROKENT TILL THIS METHOD MOVES TO A COMPONENT
-    // NO WAY OF ACCESSING THE CORRECT VALUE OF LIVESLEFT IN APP
-    // if (livesLeft === 0) {
-    //   this.setState({
-    //     gameStatus: 'endLose',
-    //     showSplash: true
-    //   });
-    //   return true;
-    // }
+  // checkForEndGame = (): boolean => {
+  //   // Destructure the relevant state elements
+  //   const { score } = this.state;
+  //   // Check if score has reached 7
+  //   if (score === 7) {
+  //     this.setState({
+  //       gameStatus: 'endWin',
+  //       showSplash: true
+  //     });
+  //     return true;
+  //   }
+  //   // Check if player has run out of lives
+  //   // THIS IS BROKENT TILL THIS METHOD MOVES TO A COMPONENT
+  //   // NO WAY OF ACCESSING THE CORRECT VALUE OF LIVESLEFT IN APP
+  //   // if (livesLeft === 0) {
+  //   //   this.setState({
+  //   //     gameStatus: 'endLose',
+  //   //     showSplash: true
+  //   //   });
+  //   //   return true;
+  //   // }
 
-    return false;
-  };
+  //   return false;
+  // };
 
   // Method to move the game into the phase where the player checks their answer
   answerClickHandler = (value: number): void => {
@@ -182,12 +181,12 @@ class App extends Component<{}, OldAppState> {
       {
         gameStatus: 'showResult',
         rightWrong: correct
-      },
-      () => {
-        if (correct) {
-          this.setState((prevState) => ({ score: prevState.score + 1 }));
-        }
       }
+      // () => {
+      //   if (correct) {
+      //     this.setState((prevState) => ({ score: prevState.score + 1 }));
+      //   }
+      // }
     );
   };
 
@@ -222,19 +221,7 @@ class App extends Component<{}, OldAppState> {
 
   // React render method here
   render(): JSX.Element {
-    const {
-      showSplash,
-      gameStatus,
-      num1,
-      num2,
-      baseNum,
-      op1,
-      op2,
-      rightWrong,
-      possibleAns,
-      score,
-      correctAns
-    } = this.state;
+    const { showSplash, gameStatus, num1, num2, baseNum, op1, op2, rightWrong, possibleAns, correctAns } = this.state;
     return (
       <StatusContext.Provider
         value={{
@@ -264,7 +251,6 @@ class App extends Component<{}, OldAppState> {
                         noCheckHandler: this.noCheckHandler,
                         yesCheckHandler: this.yesCheckHandler,
                         nextQuestionHandler: this.nextQuestionHandler,
-                        score,
                         correctAns
                       }}
                     >
