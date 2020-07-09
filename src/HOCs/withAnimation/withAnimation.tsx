@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import { AppState } from '../../types/types';
-import StatusContext from '../../context/StatusContext';
+import { useStatus } from '../../context/StatusContext';
 
 const withAnimation = <P extends object>(
   WrappedComponent: React.ComponentType<P>,
   showStatus: AppState['gameStatus']
 ) => (props: P): JSX.Element => {
-  const { gameStatus } = useContext(StatusContext);
+  const { gameStatus } = useStatus();
   const show = gameStatus === showStatus;
 
   return (

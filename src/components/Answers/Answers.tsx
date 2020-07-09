@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Answer from './Answer/Answer';
 import './Answers.css';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
-import StatusContext from '../../context/StatusContext';
+import { useStatus } from '../../context/StatusContext';
 import { useAnswer } from '../../context/AnswerContext';
 
 const Answers: React.FC = () => {
@@ -16,7 +16,7 @@ const Answers: React.FC = () => {
       }
     );
 
-  const { gameStatus } = useContext(StatusContext);
+  const { gameStatus } = useStatus();
   const order = gameStatus === 'showSum' ? '1' : '4';
 
   return (

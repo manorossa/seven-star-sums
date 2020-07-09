@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '../../UI/atoms/Button/Button';
-import StatusContext from '../../context/StatusContext';
+import { useStatus } from '../../context/StatusContext';
 
 const SettingsButton: React.FC = () => {
-  const { showSettingsHandler } = useContext(StatusContext);
+  const { showSettingsHandler } = useStatus();
   const modifiers = ['horizontal', 'horizontal-small'];
 
   if (showSettingsHandler === undefined) {

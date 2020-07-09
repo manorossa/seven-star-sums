@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './Splashscreen.css';
-import StatusContext from '../../context/StatusContext';
+import { useStatus } from '../../context/StatusContext';
 
 const Splashscreen: React.FC = () => {
   let splash: JSX.Element = <div />;
   const modifiers = 'horizontal';
-  const { gameStatus, startGameHandler, resetGameHandler } = useContext(StatusContext);
+  const { gameStatus, startGameHandler, resetGameHandler } = useStatus();
 
   if (startGameHandler && resetGameHandler) {
     switch (gameStatus) {
