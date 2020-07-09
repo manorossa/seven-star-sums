@@ -39,7 +39,6 @@ export interface OldAppState {
   correctAns: number | null;
   rightWrong: boolean | null;
   score: number;
-  livesLeft: number;
 }
 
 interface AnswerMethod {
@@ -51,9 +50,8 @@ export interface AnswerMethodsObj {
 }
 
 export interface SettingsPayload {
-  baseNum: number;
-  operator: '+' | 'x';
-  difficulty: number;
+  finalBaseNum: number;
+  finalOperator: '+' | 'x';
 }
 
 // @to-do: look into generics to get round use of any here
