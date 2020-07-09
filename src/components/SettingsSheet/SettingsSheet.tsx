@@ -3,16 +3,18 @@ import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { SettingsPayload, GenericFunc } from '../../types/types';
 import SumContext from '../../context/SumContext';
+import { useScore } from '../../context/ScoreContext';
 
 const SettingsSheet: React.FC = () => {
   const { settingsHandler } = useContext(SumContext);
+  const { setTotalLives, setLivesLeft } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
-  const [operator, setOperator] = useState('+' as SettingsPayload['operator']);
+  const [operator, setOperator] = useState('+' as SettingsPayload['finalOperator']);
   const [baseNum, setBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
 
   // PANEL HANDLERS START
-  const panel1Handler = (chosenOperator: SettingsPayload['operator']): void => {
+  const panel1Handler = (chosenOperator: SettingsPayload['finalOperator']): void => {
     setSettingStatus(2);
     setOperator(chosenOperator);
   };
@@ -117,6 +119,16 @@ const SettingsSheet: React.FC = () => {
     throw new Error('No handler is defined');
   }
 
+  const finalSettings = (
+    finalBaseNum: number,
+    finalOperator: SettingsPayload['finalOperator'],
+    finalDifficulty: number
+  ): void => {
+    settingsHandler({ finalBaseNum, finalOperator });
+    setTotalLives(finalDifficulty);
+    setLivesLeft(finalDifficulty);
+  };
+
   return (
     <div className="settings__sheet">
       <div className="settings__panel settings__panel--1">
@@ -143,7 +155,7 @@ const SettingsSheet: React.FC = () => {
       <div className={`settings__panel settings__panel--2 settings__panel--${panel4viz}`}>
         <Button
           type="button"
-          handler={(): void => settingsHandler({ baseNum, operator, difficulty })}
+          handler={(): void => finalSettings(baseNum, operator, difficulty)}
           modifiers={horizGreenButtons}
         >
           Start the sums!

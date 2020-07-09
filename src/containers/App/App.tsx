@@ -8,14 +8,14 @@ import Result from '../../components/Result/Result';
 import Score from '../../components/Score/Score';
 import SettingsSheet from '../../components/SettingsSheet/SettingsSheet';
 import Splashscreen from '../../components/Splashscreen/Splashscreen';
-import { AppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
+import { OldAppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 import StatusContext from '../../context/StatusContext';
 import SumContext from '../../context/SumContext';
 import AnswerContext from '../../context/AnswerContext';
-import ScoreContext from '../../context/ScoreContext';
+import { ScoreProvider } from '../../context/ScoreContext';
 
-class App extends Component<{}, AppState> {
-  state: AppState = {
+class App extends Component<{}, OldAppState> {
+  state: OldAppState = {
     showSplash: false,
     gameStatus: 'showSettings',
     possibleNums: [],
@@ -27,9 +27,7 @@ class App extends Component<{}, AppState> {
     possibleAns: [],
     correctAns: null,
     rightWrong: null,
-    score: 0,
-    totalLives: 7,
-    livesLeft: 7
+    score: 0
   };
 
   // Method to create a random number. Will be used throughout app
@@ -137,7 +135,7 @@ class App extends Component<{}, AppState> {
   // Method to check if the player has reached the max score, or has run out of possible answers
   checkForEndGame = (): boolean => {
     // Destructure the relevant state elements
-    const { livesLeft, score } = this.state;
+    const { score } = this.state;
     // Check if score has reached 7
     if (score === 7) {
       this.setState({
@@ -147,13 +145,15 @@ class App extends Component<{}, AppState> {
       return true;
     }
     // Check if player has run out of lives
-    if (livesLeft === 0) {
-      this.setState({
-        gameStatus: 'endLose',
-        showSplash: true
-      });
-      return true;
-    }
+    // THIS IS BROKENT TILL THIS METHOD MOVES TO A COMPONENT
+    // NO WAY OF ACCESSING THE CORRECT VALUE OF LIVESLEFT IN APP
+    // if (livesLeft === 0) {
+    //   this.setState({
+    //     gameStatus: 'endLose',
+    //     showSplash: true
+    //   });
+    //   return true;
+    // }
 
     return false;
   };
@@ -186,9 +186,7 @@ class App extends Component<{}, AppState> {
       () => {
         if (correct) {
           this.setState((prevState) => ({ score: prevState.score + 1 }));
-          return;
         }
-        this.setState((prevState) => ({ livesLeft: prevState.livesLeft - 1 }));
       }
     );
   };
@@ -213,10 +211,8 @@ class App extends Component<{}, AppState> {
   settingsHandler = (payload: SettingsPayload): void => {
     this.setState(
       {
-        baseNum: payload.baseNum,
-        op1: payload.operator,
-        totalLives: payload.difficulty,
-        livesLeft: payload.difficulty
+        baseNum: payload.finalBaseNum,
+        op1: payload.finalOperator
       },
       () => {
         this.resetGameHandler();
@@ -237,9 +233,7 @@ class App extends Component<{}, AppState> {
       rightWrong,
       possibleAns,
       score,
-      correctAns,
-      totalLives,
-      livesLeft
+      correctAns
     } = this.state;
     return (
       <StatusContext.Provider
@@ -257,33 +251,33 @@ class App extends Component<{}, AppState> {
             value={{ num1, num2, baseNum, op1, op2, rightWrong, settingsHandler: this.settingsHandler }}
           >
             <div className="stage">
-              {gameStatus === 'showSettings' ? (
-                <SettingsSheet />
-              ) : (
-                <div className="game__sheet">
-                  <Sum />
-                  <AnswerContext.Provider
-                    value={{
-                      possibleAns,
-                      answerClickHandler: this.answerClickHandler,
-                      noCheckHandler: this.noCheckHandler,
-                      yesCheckHandler: this.yesCheckHandler,
-                      nextQuestionHandler: this.nextQuestionHandler,
-                      score,
-                      correctAns
-                    }}
-                  >
-                    <div className="answer-strip">
-                      <Answers />
-                      <Check />
-                      <Result />
-                    </div>
-                    <ScoreContext.Provider value={{ totalLives, livesLeft }}>
+              <ScoreProvider>
+                {gameStatus === 'showSettings' ? (
+                  <SettingsSheet />
+                ) : (
+                  <div className="game__sheet">
+                    <Sum />
+                    <AnswerContext.Provider
+                      value={{
+                        possibleAns,
+                        answerClickHandler: this.answerClickHandler,
+                        noCheckHandler: this.noCheckHandler,
+                        yesCheckHandler: this.yesCheckHandler,
+                        nextQuestionHandler: this.nextQuestionHandler,
+                        score,
+                        correctAns
+                      }}
+                    >
+                      <div className="answer-strip">
+                        <Answers />
+                        <Check />
+                        <Result />
+                      </div>
                       <Score />
-                    </ScoreContext.Provider>
-                  </AnswerContext.Provider>
-                </div>
-              )}
+                    </AnswerContext.Provider>
+                  </div>
+                )}
+              </ScoreProvider>
             </div>
           </SumContext.Provider>
         </div>

@@ -26,6 +26,21 @@ export interface AppState {
   livesLeft: number;
 }
 
+export interface OldAppState {
+  showSplash: boolean;
+  gameStatus: GameStates;
+  possibleNums: number[];
+  baseNum: number;
+  num1: number | null;
+  num2: AnswerButton;
+  op1: string;
+  op2: string;
+  possibleAns: number[];
+  correctAns: number | null;
+  rightWrong: boolean | null;
+  score: number;
+}
+
 interface AnswerMethod {
   (a: number, b: number): number;
 }
@@ -35,9 +50,8 @@ export interface AnswerMethodsObj {
 }
 
 export interface SettingsPayload {
-  baseNum: number;
-  operator: '+' | 'x';
-  difficulty: number;
+  finalBaseNum: number;
+  finalOperator: '+' | 'x';
 }
 
 // @to-do: look into generics to get round use of any here
