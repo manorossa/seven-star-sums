@@ -4,12 +4,12 @@ import withAnimation from '../../HOCs/withAnimation/withAnimation';
 import '../Answers/Answers.css';
 import './Result.css';
 import SumContext from '../../context/SumContext';
-import AnswerContext from '../../context/AnswerContext';
+import { useAnswer } from '../../context/AnswerContext';
 import { useScore } from '../../context/ScoreContext';
 
 const Result: React.FC = () => {
   const { rightWrong } = useContext(SumContext);
-  const { nextQuestionHandler, correctAns } = useContext(AnswerContext);
+  const { nextQuestionHandler, correctAns } = useAnswer();
   const { score, livesLeft } = useScore();
   const borderStyle = rightWrong ? 'green-border' : 'red-border';
   const starNum = score === 1 ? 'a' : 'another';

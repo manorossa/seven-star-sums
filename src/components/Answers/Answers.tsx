@@ -3,10 +3,10 @@ import Answer from './Answer/Answer';
 import './Answers.css';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
 import StatusContext from '../../context/StatusContext';
-import AnswerContext from '../../context/AnswerContext';
+import { useAnswer } from '../../context/AnswerContext';
 
 const Answers: React.FC = () => {
-  const { possibleAns, answerClickHandler } = useContext(AnswerContext);
+  const { possibleAns, answerClickHandler } = useAnswer();
   const answerMap =
     possibleAns &&
     answerClickHandler &&

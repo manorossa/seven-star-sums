@@ -11,7 +11,7 @@ import Splashscreen from '../../components/Splashscreen/Splashscreen';
 import { OldAppState, AnswerMethodsObj, SettingsPayload } from '../../types/types';
 import StatusContext from '../../context/StatusContext';
 import SumContext from '../../context/SumContext';
-import AnswerContext from '../../context/AnswerContext';
+import { AnswerProvider } from '../../context/AnswerContext';
 import { ScoreProvider } from '../../context/ScoreContext';
 
 class App extends Component<{}, OldAppState> {
@@ -24,7 +24,7 @@ class App extends Component<{}, OldAppState> {
     num2: '?',
     op1: '+',
     op2: '=',
-    possibleAns: [],
+    // possibleAns: [],
     correctAns: null,
     rightWrong: null
   };
@@ -80,7 +80,7 @@ class App extends Component<{}, OldAppState> {
       num2: '?',
       // remove the chosen random number from the array of possible numbers and update the state
       possibleNums: [...possibleNums].filter((val) => val !== randomNum),
-      possibleAns,
+      // possibleAns,
       correctAns: answer1
     });
   };
@@ -221,7 +221,7 @@ class App extends Component<{}, OldAppState> {
 
   // React render method here
   render(): JSX.Element {
-    const { showSplash, gameStatus, num1, num2, baseNum, op1, op2, rightWrong, possibleAns, correctAns } = this.state;
+    const { showSplash, gameStatus, num1, num2, baseNum, op1, op2, rightWrong } = this.state;
     return (
       <StatusContext.Provider
         value={{
@@ -244,23 +244,14 @@ class App extends Component<{}, OldAppState> {
                 ) : (
                   <div className="game__sheet">
                     <Sum />
-                    <AnswerContext.Provider
-                      value={{
-                        possibleAns,
-                        answerClickHandler: this.answerClickHandler,
-                        noCheckHandler: this.noCheckHandler,
-                        yesCheckHandler: this.yesCheckHandler,
-                        nextQuestionHandler: this.nextQuestionHandler,
-                        correctAns
-                      }}
-                    >
+                    <AnswerProvider>
                       <div className="answer-strip">
                         <Answers />
                         <Check />
                         <Result />
                       </div>
                       <Score />
-                    </AnswerContext.Provider>
+                    </AnswerProvider>
                   </div>
                 )}
               </ScoreProvider>

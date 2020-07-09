@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import '../Answers/Answers.css';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
-import AnswerContext from '../../context/AnswerContext';
+import { useAnswer } from '../../context/AnswerContext';
 import SumContext from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
 
 const Check: React.FC = (): JSX.Element => {
-  const { noCheckHandler, yesCheckHandler, correctAns } = useContext(AnswerContext);
+  const { noCheckHandler, yesCheckHandler, correctAns } = useAnswer();
   const { num2 } = useContext(SumContext);
   const modifiers = 'horizontal';
   if (noCheckHandler === undefined || yesCheckHandler === undefined) {

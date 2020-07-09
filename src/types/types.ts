@@ -35,7 +35,6 @@ export interface OldAppState {
   num2: AnswerButton;
   op1: string;
   op2: string;
-  possibleAns: number[];
   correctAns: number | null;
   rightWrong: boolean | null;
 }
