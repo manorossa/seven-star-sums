@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
 import '../Answers/Answers.css';
 import './Result.css';
-import SumContext from '../../context/SumContext';
+import { useSum } from '../../context/SumContext';
 import { useAnswer } from '../../context/AnswerContext';
 import { useScore } from '../../context/ScoreContext';
 
 const Result: React.FC = () => {
-  const { rightWrong } = useContext(SumContext);
+  const { rightWrong } = useSum();
   const { nextQuestionHandler, correctAns } = useAnswer();
   const { score, livesLeft } = useScore();
   const borderStyle = rightWrong ? 'green-border' : 'red-border';

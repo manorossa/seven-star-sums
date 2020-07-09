@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './Sum.css';
 import '../../UI/atoms/Button/Button.css';
-import SumContext from '../../context/SumContext';
+import { useSum } from '../../context/SumContext';
 
 const Sum: React.FC = () => {
-  const { num1, num2, op1, op2, baseNum, rightWrong } = useContext(SumContext);
+  const { num1, num2, op1, op2, baseNum, rightWrong } = useSum();
   let borderColour: string;
   if (rightWrong === null || num2 === '?') {
     borderColour = '';

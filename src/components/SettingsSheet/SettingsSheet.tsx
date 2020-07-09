@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { SettingsPayload, GenericFunc } from '../../types/types';
-import SumContext from '../../context/SumContext';
+import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
 
 const SettingsSheet: React.FC = () => {
-  const { settingsHandler } = useContext(SumContext);
+  const { settingsHandler } = useSum();
   const { setTotalLives, setLivesLeft } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
   const [operator, setOperator] = useState('+' as SettingsPayload['finalOperator']);
