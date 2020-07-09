@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState, ReactNode, useContext, useMemo } from 'react';
 import { AppState } from '../types/types';
 
 type ScoreContextProps = {
@@ -9,21 +9,45 @@ type ScoreContextProps = {
 };
 
 type Props = { children: ReactNode };
-const [totalLives, setTotalLives] = useState(7);
-const [livesLeft, setLivesLeft] = useState(7);
 
-const scoreContextValues = {
-  totalLives,
-  livesLeft,
-  setTotalLives,
-  setLivesLeft
-};
-
-const ScoreContext = React.createContext<ScoreContextProps>(scoreContextValues);
+const ScoreContext = React.createContext<Partial<ScoreContextProps>>({});
 const { Provider } = ScoreContext;
 
 const ScoreProvider = ({ children }: Props): JSX.Element => {
+  const [totalLives, setTotalLives] = useState(7);
+  const [livesLeft, setLivesLeft] = useState(7);
+
+  const scoreContextValues = useMemo(
+    () => ({
+      totalLives,
+      livesLeft,
+      setTotalLives,
+      setLivesLeft
+    }),
+    [totalLives, livesLeft]
+  );
   return <Provider value={scoreContextValues}>{children}</Provider>;
 };
 
-export { ScoreProvider, ScoreContext };
+const useScore = (): ScoreContextProps => {
+  const context = useContext(ScoreContext);
+  const { totalLives, livesLeft, setTotalLives, setLivesLeft } = context;
+
+  if (
+    totalLives === undefined ||
+    livesLeft === undefined ||
+    setTotalLives === undefined ||
+    setLivesLeft === undefined
+  ) {
+    throw new Error('useScore must be used within a ScoreProvider');
+  }
+
+  return {
+    totalLives,
+    livesLeft,
+    setTotalLives,
+    setLivesLeft
+  };
+};
+
+export { ScoreProvider, useScore, ScoreContext };
