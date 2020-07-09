@@ -3,11 +3,11 @@ import Star from '../../UI/atoms/Icons/Star';
 import Heart from '../../UI/atoms/Icons/Heart';
 import './Score.css';
 import AnswerContext from '../../context/AnswerContext';
-import { ScoreContext } from '../../context/ScoreContext';
+import { useScore } from '../../context/ScoreContext';
 
 const Score: React.FC = () => {
   const { score } = useContext(AnswerContext);
-  const { totalLives, livesLeft } = useContext(ScoreContext);
+  const { totalLives, livesLeft } = useScore();
   const stars = [];
   if (score !== undefined) {
     for (let i = 1; i <= 7; i++) {
