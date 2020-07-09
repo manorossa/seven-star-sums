@@ -13,12 +13,14 @@ const Check: React.FC = (): JSX.Element => {
   if (noCheckHandler === undefined || yesCheckHandler === undefined) {
     throw new Error('No handlers are defined');
   }
-  const { setLivesLeft } = useScore();
+  const { setLivesLeft, setScore } = useScore();
   const yesButtonHandler = (): void => {
     yesCheckHandler();
     if (num2 !== correctAns) {
       setLivesLeft((prevLives) => prevLives - 1);
+      return;
     }
+    setScore((prevScore) => prevScore + 1);
   };
   return (
     <div className="container answer-container flex-order--3">

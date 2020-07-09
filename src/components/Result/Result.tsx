@@ -5,10 +5,12 @@ import '../Answers/Answers.css';
 import './Result.css';
 import SumContext from '../../context/SumContext';
 import AnswerContext from '../../context/AnswerContext';
+import { useScore } from '../../context/ScoreContext';
 
 const Result: React.FC = () => {
   const { rightWrong } = useContext(SumContext);
-  const { nextQuestionHandler, score, correctAns } = useContext(AnswerContext);
+  const { nextQuestionHandler, correctAns } = useContext(AnswerContext);
+  const { score } = useScore();
   const borderStyle = rightWrong ? 'green-border' : 'red-border';
   const starNum = score === 1 ? 'a' : 'another';
   const modifiers = 'horizontal';
