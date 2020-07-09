@@ -1,5 +1,5 @@
 import React, { ReactNode, useState, useMemo, useContext } from 'react';
-import { AppState, SettingsPayload } from '../types/types';
+import { AppState } from '../types/types';
 
 type SumContextProps = {
   num1: AppState['num1'];
@@ -8,7 +8,6 @@ type SumContextProps = {
   op1: AppState['op1'];
   op2: AppState['op2'];
   rightWrong: AppState['rightWrong'];
-  settingsHandler?(payload: SettingsPayload): void;
   setNum1: React.Dispatch<React.SetStateAction<AppState['num1']>>;
   setNum2: React.Dispatch<React.SetStateAction<AppState['num2']>>;
   setBaseNum: React.Dispatch<React.SetStateAction<AppState['baseNum']>>;
