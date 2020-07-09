@@ -35,8 +35,7 @@ const ScoreProvider = ({ children }: Props): JSX.Element => {
 };
 
 const useScore = (): ScoreContextProps => {
-  const context = useContext(ScoreContext);
-  const { totalLives, livesLeft, score, setTotalLives, setLivesLeft, setScore } = context;
+  const { totalLives, livesLeft, score, setTotalLives, setLivesLeft, setScore } = useContext(ScoreContext);
 
   if (
     totalLives === undefined ||
@@ -59,4 +58,4 @@ const useScore = (): ScoreContextProps => {
   };
 };
 
-export { ScoreProvider, useScore, ScoreContext };
+export { ScoreProvider, useScore };
