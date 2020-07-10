@@ -1,6 +1,8 @@
 export type GameStates =
   | 'startGame'
   | 'showSettings'
+  | 'defineSum'
+  | 'resetGame'
   | 'showSum'
   | 'confirmAnswer'
   | 'showResult'
