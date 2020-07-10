@@ -28,7 +28,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
   const [num1, setNum1] = useState(null as AppState['num1']);
   const [num2, setNum2] = useState('?' as AppState['num2']);
   const [baseNum, setBaseNum] = useState(20);
-  const [op1, setOp1] = useState('+');
+  const [op1, setOp1] = useState('+' as AppState['op1']);
   const [op2, setOp2] = useState('=');
   const [rightWrong, setRightWrong] = useState(null as AppState['rightWrong']);
 

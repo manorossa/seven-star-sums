@@ -10,6 +10,7 @@ export type GameStates =
   | 'endLose';
 
 type AnswerButton = number | '?';
+type Operator1 = '+' | 'x';
 
 export interface AppState {
   showSplash: boolean;
@@ -18,7 +19,7 @@ export interface AppState {
   baseNum: number;
   num1: number | null;
   num2: AnswerButton;
-  op1: string;
+  op1: Operator1;
   op2: string;
   possibleAns: number[];
   correctAns: number | null;
@@ -38,7 +39,7 @@ export interface AnswerMethodsObj {
 
 export interface SettingsPayload {
   finalBaseNum: number;
-  finalOperator: '+' | 'x';
+  finalOperator: Operator1;
 }
 
 // @to-do: look into generics to get round use of any here
