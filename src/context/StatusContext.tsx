@@ -1,16 +1,7 @@
-import React, { ReactNode, useState, useMemo, useContext } from 'react';
-import { GameStates, AppState } from '../types/types';
+import React, { useState, useMemo, useContext } from 'react';
+import { GameStates, Props, StatusContextValues } from '../types/types';
 
-type StatusContextProps = {
-  gameStatus: GameStates;
-  showSplash: AppState['showSplash'];
-  setGameStatus: React.Dispatch<React.SetStateAction<GameStates>>;
-  setShowSplash: React.Dispatch<React.SetStateAction<AppState['showSplash']>>;
-};
-
-type Props = { children: ReactNode };
-
-const StatusContext = React.createContext<Partial<StatusContextProps>>({ gameStatus: 'showSettings' });
+const StatusContext = React.createContext<Partial<StatusContextValues>>({ gameStatus: 'showSettings' });
 const { Provider } = StatusContext;
 
 const StatusProvider = ({ children }: Props): JSX.Element => {
@@ -25,7 +16,7 @@ const StatusProvider = ({ children }: Props): JSX.Element => {
   return <Provider value={statusContextValues}>{children}</Provider>;
 };
 
-const useStatus = (): StatusContextProps => {
+const useStatus = (): StatusContextValues => {
   const { gameStatus, showSplash, setGameStatus, setShowSplash } = useContext(StatusContext);
 
   if (

@@ -1,26 +1,7 @@
-import React, { ReactNode, useState, useMemo, useContext } from 'react';
-import { AppState } from '../types/types';
+import React, { useState, useMemo, useContext } from 'react';
+import { AppState, SumContextValues, Props } from '../types/types';
 
-type SumContextProps = {
-  possibleNums: AppState['possibleNums'];
-  num1: AppState['num1'];
-  num2: AppState['num2'];
-  baseNum: AppState['baseNum'];
-  op1: AppState['op1'];
-  op2: AppState['op2'];
-  rightWrong: AppState['rightWrong'];
-  setPossibleNums: React.Dispatch<React.SetStateAction<AppState['possibleNums']>>;
-  setNum1: React.Dispatch<React.SetStateAction<AppState['num1']>>;
-  setNum2: React.Dispatch<React.SetStateAction<AppState['num2']>>;
-  setBaseNum: React.Dispatch<React.SetStateAction<AppState['baseNum']>>;
-  setOp1: React.Dispatch<React.SetStateAction<AppState['op1']>>;
-  setOp2: React.Dispatch<React.SetStateAction<AppState['op2']>>;
-  setRightWrong: React.Dispatch<React.SetStateAction<AppState['rightWrong']>>;
-};
-
-type Props = { children: ReactNode };
-
-const SumContext = React.createContext<Partial<SumContextProps>>({});
+const SumContext = React.createContext<Partial<SumContextValues>>({});
 const { Provider } = SumContext;
 
 const SumProvider = ({ children }: Props): JSX.Element => {
@@ -55,7 +36,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
   return <Provider value={sumContextValues}>{children}</Provider>;
 };
 
-const useSum = (): SumContextProps => {
+const useSum = (): SumContextValues => {
   const {
     possibleNums,
     num1,

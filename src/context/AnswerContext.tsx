@@ -1,16 +1,7 @@
-import React, { ReactNode, useState, useMemo, useContext } from 'react';
-import { AppState } from '../types/types';
+import React, { useState, useMemo, useContext } from 'react';
+import { AppState, AnswerContextValues, Props } from '../types/types';
 
-type AnswerContextProps = {
-  possibleAns: AppState['possibleAns'];
-  correctAns: AppState['correctAns'];
-  setPossibleAns: React.Dispatch<React.SetStateAction<AppState['possibleAns']>>;
-  setCorrectAns: React.Dispatch<React.SetStateAction<AppState['correctAns']>>;
-};
-
-type Props = { children: ReactNode };
-
-const AnswerContext = React.createContext<Partial<AnswerContextProps>>({});
+const AnswerContext = React.createContext<Partial<AnswerContextValues>>({});
 const { Provider } = AnswerContext;
 
 const AnswerProvider = ({ children }: Props): JSX.Element => {
@@ -24,7 +15,7 @@ const AnswerProvider = ({ children }: Props): JSX.Element => {
   return <Provider value={answerContextValues}>{children}</Provider>;
 };
 
-const useAnswer = (): AnswerContextProps => {
+const useAnswer = (): AnswerContextValues => {
   const { possibleAns, correctAns, setPossibleAns, setCorrectAns } = useContext(AnswerContext);
 
   if (

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export type GameStates =
   | 'startGame'
   | 'showSettings'
@@ -51,3 +53,46 @@ export interface DefineSumResult {
   possibleAns: AppState['possibleAns'];
   answer1: AppState['correctAns'];
 }
+
+// CONTEXT TYPES
+export type Props = { children: ReactNode };
+
+export type AnswerContextValues = {
+  possibleAns: AppState['possibleAns'];
+  correctAns: AppState['correctAns'];
+  setPossibleAns: React.Dispatch<React.SetStateAction<AppState['possibleAns']>>;
+  setCorrectAns: React.Dispatch<React.SetStateAction<AppState['correctAns']>>;
+};
+
+export type StatusContextValues = {
+  gameStatus: GameStates;
+  showSplash: AppState['showSplash'];
+  setGameStatus: React.Dispatch<React.SetStateAction<GameStates>>;
+  setShowSplash: React.Dispatch<React.SetStateAction<AppState['showSplash']>>;
+};
+
+export type SumContextValues = {
+  possibleNums: AppState['possibleNums'];
+  num1: AppState['num1'];
+  num2: AppState['num2'];
+  baseNum: AppState['baseNum'];
+  op1: AppState['op1'];
+  op2: AppState['op2'];
+  rightWrong: AppState['rightWrong'];
+  setPossibleNums: React.Dispatch<React.SetStateAction<AppState['possibleNums']>>;
+  setNum1: React.Dispatch<React.SetStateAction<AppState['num1']>>;
+  setNum2: React.Dispatch<React.SetStateAction<AppState['num2']>>;
+  setBaseNum: React.Dispatch<React.SetStateAction<AppState['baseNum']>>;
+  setOp1: React.Dispatch<React.SetStateAction<AppState['op1']>>;
+  setOp2: React.Dispatch<React.SetStateAction<AppState['op2']>>;
+  setRightWrong: React.Dispatch<React.SetStateAction<AppState['rightWrong']>>;
+};
+
+export type ScoreContextValues = {
+  totalLives: AppState['totalLives'];
+  livesLeft: AppState['livesLeft'];
+  score: AppState['score'];
+  setTotalLives: React.Dispatch<React.SetStateAction<number>>;
+  setLivesLeft: React.Dispatch<React.SetStateAction<number>>;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
+};
