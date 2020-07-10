@@ -3,10 +3,6 @@ import { AppState } from '../types/types';
 
 type AnswerContextProps = {
   possibleAns: AppState['possibleAns'];
-  answerClickHandler?(value: number): void;
-  noCheckHandler?(): void;
-  yesCheckHandler?(): void;
-  nextQuestionHandler?(): void;
   correctAns: AppState['correctAns'];
   setPossibleAns: React.Dispatch<React.SetStateAction<AppState['possibleAns']>>;
   setCorrectAns: React.Dispatch<React.SetStateAction<AppState['correctAns']>>;
