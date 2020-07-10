@@ -32,9 +32,11 @@ const Result: React.FC = () => {
   const borderStyle = rightWrong ? 'green-border' : 'red-border';
   let starText = score === 1 && !endWin ? 'Have a star!' : 'Have another star!';
   if (endWin) {
-    starText = 'You have got your seventh star, and won the game!';
+    starText = 'You just got your seventh star, and won the game!';
   }
-  const loseText = endLose ? 'You just lost your last life' : 'You lose a life, but try again with another sum.';
+  const loseText = endLose
+    ? 'You just lost your last life... Game over.'
+    : 'You lose a life, but try again with another sum.';
   const modifiers = 'horizontal';
 
   return (
