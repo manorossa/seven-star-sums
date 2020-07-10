@@ -2,12 +2,14 @@ import React, { ReactNode, useState, useMemo, useContext } from 'react';
 import { AppState } from '../types/types';
 
 type SumContextProps = {
+  possibleNums: AppState['possibleNums'];
   num1: AppState['num1'];
   num2: AppState['num2'];
   baseNum: AppState['baseNum'];
   op1: AppState['op1'];
   op2: AppState['op2'];
   rightWrong: AppState['rightWrong'];
+  setPossibleNums: React.Dispatch<React.SetStateAction<AppState['possibleNums']>>;
   setNum1: React.Dispatch<React.SetStateAction<AppState['num1']>>;
   setNum2: React.Dispatch<React.SetStateAction<AppState['num2']>>;
   setBaseNum: React.Dispatch<React.SetStateAction<AppState['baseNum']>>;
@@ -22,6 +24,7 @@ const SumContext = React.createContext<Partial<SumContextProps>>({});
 const { Provider } = SumContext;
 
 const SumProvider = ({ children }: Props): JSX.Element => {
+  const [possibleNums, setPossibleNums] = useState([] as AppState['possibleNums']);
   const [num1, setNum1] = useState(null as AppState['num1']);
   const [num2, setNum2] = useState('?' as AppState['num2']);
   const [baseNum, setBaseNum] = useState(20);
@@ -31,12 +34,14 @@ const SumProvider = ({ children }: Props): JSX.Element => {
 
   const sumContextValues = useMemo(
     () => ({
+      possibleNums,
       num1,
       num2,
       baseNum,
       op1,
       op2,
       rightWrong,
+      setPossibleNums,
       setNum1,
       setNum2,
       setBaseNum,
@@ -44,7 +49,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       setOp2,
       setRightWrong
     }),
-    [num1, num2, baseNum, op1, op2, rightWrong]
+    [possibleNums, num1, num2, baseNum, op1, op2, rightWrong]
   );
 
   return <Provider value={sumContextValues}>{children}</Provider>;
@@ -52,12 +57,14 @@ const SumProvider = ({ children }: Props): JSX.Element => {
 
 const useSum = (): SumContextProps => {
   const {
+    possibleNums,
     num1,
     num2,
     baseNum,
     op1,
     op2,
     rightWrong,
+    setPossibleNums,
     setNum1,
     setNum2,
     setBaseNum,
@@ -67,12 +74,14 @@ const useSum = (): SumContextProps => {
   } = useContext(SumContext);
 
   if (
+    possibleNums === undefined ||
     num1 === undefined ||
     num2 === undefined ||
     baseNum === undefined ||
     op1 === undefined ||
     op2 === undefined ||
     rightWrong === undefined ||
+    setPossibleNums === undefined ||
     setNum1 === undefined ||
     setNum2 === undefined ||
     setBaseNum === undefined ||
@@ -84,12 +93,14 @@ const useSum = (): SumContextProps => {
   }
 
   return {
+    possibleNums,
     num1,
     num2,
     baseNum,
     op1,
     op2,
     rightWrong,
+    setPossibleNums,
     setNum1,
     setNum2,
     setBaseNum,
