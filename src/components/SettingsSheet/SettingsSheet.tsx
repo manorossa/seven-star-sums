@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { SettingsPayload, GenericFunc } from '../../types/types';
+import { useStatus } from '../../context/StatusContext';
 import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
 
 const SettingsSheet: React.FC = () => {
+  const { setGameStatus } = useStatus();
   const { setBaseNum, setOp1 } = useSum();
   const { setTotalLives, setLivesLeft } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
@@ -131,6 +133,7 @@ const SettingsSheet: React.FC = () => {
     setOp1(finalOperator);
     setTotalLives(finalDifficulty);
     setLivesLeft(finalDifficulty);
+    setGameStatus('resetGame');
   };
 
   return (
