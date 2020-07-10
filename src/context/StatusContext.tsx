@@ -8,7 +8,6 @@ type StatusContextProps = {
   setShowSplash: React.Dispatch<React.SetStateAction<AppState['showSplash']>>;
   startGameHandler?(): void;
   resetGameHandler?(): void;
-  showSettingsHandler?(): void;
 };
 
 type Props = { children: ReactNode };
