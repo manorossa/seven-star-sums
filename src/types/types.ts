@@ -28,19 +28,6 @@ export interface AppState {
   livesLeft: number;
 }
 
-export interface OldAppState {
-  showSplash: boolean;
-  gameStatus: GameStates;
-  possibleNums: number[];
-  baseNum: number;
-  num1: number | null;
-  num2: AnswerButton;
-  op1: string;
-  op2: string;
-  correctAns: number | null;
-  rightWrong: boolean | null;
-}
-
 interface AnswerMethod {
   (a: number, b: number): number;
 }
