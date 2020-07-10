@@ -7,6 +7,7 @@ import Splashscreen from '../../components/Splashscreen/Splashscreen';
 import { useStatus } from '../../context/StatusContext';
 import { SumProvider } from '../../context/SumContext';
 import { ScoreProvider } from '../../context/ScoreContext';
+import { AnswerProvider } from '../../context/AnswerContext';
 
 const App: React.FC = () => {
   const { gameStatus, showSplash } = useStatus();
@@ -17,7 +18,15 @@ const App: React.FC = () => {
       <Header />
       <SumProvider>
         <div className="stage">
-          <ScoreProvider>{gameStatus === 'showSettings' ? <SettingsSheet /> : <GameSheet />}</ScoreProvider>
+          <ScoreProvider>
+            {gameStatus === 'showSettings' ? (
+              <SettingsSheet />
+            ) : (
+              <AnswerProvider>
+                <GameSheet />
+              </AnswerProvider>
+            )}
+          </ScoreProvider>
         </div>
       </SumProvider>
     </div>
