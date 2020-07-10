@@ -57,3 +57,9 @@ export interface SettingsPayload {
 // @to-do: look into generics to get round use of any here
 /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 export type GenericFunc = (arg0: any) => void;
+
+export interface DefineSumResult {
+  randomNum: AppState['num1'];
+  possibleAns: AppState['possibleAns'];
+  answer1: AppState['correctAns'];
+}
