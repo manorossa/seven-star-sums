@@ -9,7 +9,7 @@ import { useScore } from '../../context/ScoreContext';
 const SettingsSheet: React.FC = () => {
   const { setGameStatus } = useStatus();
   const { setBaseNum, setOp1 } = useSum();
-  const { setTotalLives, setLivesLeft } = useScore();
+  const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
   const [operator, setOperator] = useState('+' as SettingsPayload['finalOperator']);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
@@ -132,7 +132,6 @@ const SettingsSheet: React.FC = () => {
     setBaseNum(finalBaseNum);
     setOp1(finalOperator);
     setTotalLives(finalDifficulty);
-    setLivesLeft(finalDifficulty);
     setGameStatus('resetGame');
   };
 

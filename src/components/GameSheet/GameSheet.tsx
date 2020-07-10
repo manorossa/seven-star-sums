@@ -14,7 +14,7 @@ const GameSheet: React.FC = () => {
   const { gameStatus, setGameStatus } = useStatus();
   const { baseNum, op1, possibleNums, setNum1, setNum2, setPossibleNums, setRightWrong } = useSum();
   const { setPossibleAns, setCorrectAns } = useAnswer();
-  const { setScore } = useScore();
+  const { totalLives, setLivesLeft, setScore } = useScore();
 
   const resetGameStatus = gameStatus === 'resetGame';
   const startGameStatus = gameStatus === 'startGame';
@@ -25,9 +25,10 @@ const GameSheet: React.FC = () => {
       setPossibleNums([]);
       setRightWrong(null);
       setScore(0);
+      setLivesLeft(totalLives);
       setGameStatus('startGame');
     }
-  }, [resetGameStatus, setPossibleNums, setRightWrong, setScore, setGameStatus]);
+  }, [resetGameStatus, setPossibleNums, setRightWrong, setScore, setLivesLeft, totalLives, setGameStatus]);
 
   useEffect(() => {
     if (startGameStatus) {
