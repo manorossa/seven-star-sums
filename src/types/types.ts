@@ -19,30 +19,30 @@ type Operator1 = '+' | 'x';
 export type Props = { children: ReactNode };
 type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
-export type AnswerContextValues = {
+export type AnswerState = {
   possibleAns: number[];
   correctAns: number | null;
-  setPossibleAns: StateSetter<AnswerContextValues['possibleAns']>;
-  setCorrectAns: StateSetter<AnswerContextValues['correctAns']>;
+  setPossibleAns: StateSetter<AnswerState['possibleAns']>;
+  setCorrectAns: StateSetter<AnswerState['correctAns']>;
 };
 
-export type ScoreContextValues = {
+export type ScoreState = {
   totalLives: number;
   livesLeft: number;
   score: number;
-  setTotalLives: StateSetter<ScoreContextValues['totalLives']>;
-  setLivesLeft: StateSetter<ScoreContextValues['livesLeft']>;
-  setScore: StateSetter<ScoreContextValues['score']>;
+  setTotalLives: StateSetter<ScoreState['totalLives']>;
+  setLivesLeft: StateSetter<ScoreState['livesLeft']>;
+  setScore: StateSetter<ScoreState['score']>;
 };
 
-export type StatusContextValues = {
+export type StatusState = {
   gameStatus: GameStates;
   showSplash: boolean;
-  setGameStatus: StateSetter<StatusContextValues['gameStatus']>;
-  setShowSplash: StateSetter<StatusContextValues['showSplash']>;
+  setGameStatus: StateSetter<StatusState['gameStatus']>;
+  setShowSplash: StateSetter<StatusState['showSplash']>;
 };
 
-export type SumContextValues = {
+export type SumState = {
   possibleNums: number[];
   num1: number | null;
   num2: AnswerButton;
@@ -50,13 +50,13 @@ export type SumContextValues = {
   op1: Operator1;
   op2: string;
   rightWrong: boolean | null;
-  setPossibleNums: StateSetter<SumContextValues['possibleNums']>;
-  setNum1: StateSetter<SumContextValues['num1']>;
-  setNum2: StateSetter<SumContextValues['num2']>;
-  setBaseNum: StateSetter<SumContextValues['baseNum']>;
-  setOp1: StateSetter<SumContextValues['op1']>;
-  setOp2: StateSetter<SumContextValues['op2']>;
-  setRightWrong: StateSetter<SumContextValues['rightWrong']>;
+  setPossibleNums: StateSetter<SumState['possibleNums']>;
+  setNum1: StateSetter<SumState['num1']>;
+  setNum2: StateSetter<SumState['num2']>;
+  setBaseNum: StateSetter<SumState['baseNum']>;
+  setOp1: StateSetter<SumState['op1']>;
+  setOp2: StateSetter<SumState['op2']>;
+  setRightWrong: StateSetter<SumState['rightWrong']>;
 };
 
 export interface AppState {
