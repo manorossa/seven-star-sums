@@ -1,22 +1,22 @@
 import React, { useState, useMemo, useContext } from 'react';
-import { GameStates, Props, StatusContextValues } from '../types/types';
+import { GameStates, Props, StatusState } from '../types/types';
 
-const StatusContext = React.createContext<Partial<StatusContextValues>>({ gameStatus: 'showSettings' });
+const StatusContext = React.createContext<Partial<StatusState>>({ gameStatus: 'showSettings' });
 const { Provider } = StatusContext;
 
 const StatusProvider = ({ children }: Props): JSX.Element => {
   const [gameStatus, setGameStatus] = useState('showSettings' as GameStates);
   const [showSplash, setShowSplash] = useState(false);
 
-  const statusContextValues = useMemo(() => ({ gameStatus, showSplash, setGameStatus, setShowSplash }), [
+  const statusState = useMemo(() => ({ gameStatus, showSplash, setGameStatus, setShowSplash }), [
     gameStatus,
     showSplash
   ]);
 
-  return <Provider value={statusContextValues}>{children}</Provider>;
+  return <Provider value={statusState}>{children}</Provider>;
 };
 
-const useStatus = (): StatusContextValues => {
+const useStatus = (): StatusState => {
   const { gameStatus, showSplash, setGameStatus, setShowSplash } = useContext(StatusContext);
 
   if (

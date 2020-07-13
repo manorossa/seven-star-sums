@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useContext } from 'react';
-import { AppState, SumContextValues, Props } from '../types/types';
+import { AppState, SumState, Props } from '../types/types';
 
-const SumContext = React.createContext<Partial<SumContextValues>>({});
+const SumContext = React.createContext<Partial<SumState>>({});
 const { Provider } = SumContext;
 
 const SumProvider = ({ children }: Props): JSX.Element => {
@@ -13,7 +13,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
   const [op2, setOp2] = useState('=');
   const [rightWrong, setRightWrong] = useState(null as AppState['rightWrong']);
 
-  const sumContextValues = useMemo(
+  const sumState = useMemo(
     () => ({
       possibleNums,
       num1,
@@ -33,10 +33,10 @@ const SumProvider = ({ children }: Props): JSX.Element => {
     [possibleNums, num1, num2, baseNum, op1, op2, rightWrong]
   );
 
-  return <Provider value={sumContextValues}>{children}</Provider>;
+  return <Provider value={sumState}>{children}</Provider>;
 };
 
-const useSum = (): SumContextValues => {
+const useSum = (): SumState => {
   const {
     possibleNums,
     num1,

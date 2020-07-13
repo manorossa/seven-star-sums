@@ -1,21 +1,21 @@
 import React, { useState, useMemo, useContext } from 'react';
-import { AppState, AnswerContextValues, Props } from '../types/types';
+import { AppState, AnswerState, Props } from '../types/types';
 
-const AnswerContext = React.createContext<Partial<AnswerContextValues>>({});
+const AnswerContext = React.createContext<Partial<AnswerState>>({});
 const { Provider } = AnswerContext;
 
 const AnswerProvider = ({ children }: Props): JSX.Element => {
   const [possibleAns, setPossibleAns] = useState([] as number[]);
   const [correctAns, setCorrectAns] = useState(null as AppState['correctAns']);
 
-  const answerContextValues = useMemo(() => ({ possibleAns, correctAns, setPossibleAns, setCorrectAns }), [
+  const answerState = useMemo(() => ({ possibleAns, correctAns, setPossibleAns, setCorrectAns }), [
     possibleAns,
     correctAns
   ]);
-  return <Provider value={answerContextValues}>{children}</Provider>;
+  return <Provider value={answerState}>{children}</Provider>;
 };
 
-const useAnswer = (): AnswerContextValues => {
+const useAnswer = (): AnswerState => {
   const { possibleAns, correctAns, setPossibleAns, setCorrectAns } = useContext(AnswerContext);
 
   if (
