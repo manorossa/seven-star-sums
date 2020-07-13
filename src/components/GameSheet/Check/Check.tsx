@@ -25,8 +25,8 @@ const Check: React.FC = (): JSX.Element => {
   };
 
   const noButtonHandler = (): void => {
-    setGameStatus('confirmAnswer');
     setNum2('?');
+    setGameStatus('showSum');
   };
 
   const modifiers = 'horizontal';
