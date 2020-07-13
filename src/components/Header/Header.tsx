@@ -1,5 +1,5 @@
 import React from 'react';
-import SettingsButton from '../SettingsButton/SettingsButton';
+import SettingsButton from './SettingsButton/SettingsButton';
 import './Header.css';
 import { useStatus } from '../../context/StatusContext';
 

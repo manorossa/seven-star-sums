@@ -1,11 +1,11 @@
 import React from 'react';
-import Button from '../../UI/atoms/Button/Button';
+import Button from '../../../UI/atoms/Button/Button';
 import '../Answers/Answers.css';
-import withAnimation from '../../HOCs/withAnimation/withAnimation';
-import { useStatus } from '../../context/StatusContext';
-import { useAnswer } from '../../context/AnswerContext';
-import { useSum } from '../../context/SumContext';
-import { useScore } from '../../context/ScoreContext';
+import withAnimation from '../../../HOCs/withAnimation/withAnimation';
+import { useStatus } from '../../../context/StatusContext';
+import { useAnswer } from '../../../context/AnswerContext';
+import { useSum } from '../../../context/SumContext';
+import { useScore } from '../../../context/ScoreContext';
 
 const Check: React.FC = (): JSX.Element => {
   const { setGameStatus } = useStatus();
@@ -25,8 +25,8 @@ const Check: React.FC = (): JSX.Element => {
   };
 
   const noButtonHandler = (): void => {
-    setGameStatus('confirmAnswer');
     setNum2('?');
+    setGameStatus('showSum');
   };
 
   const modifiers = 'horizontal';

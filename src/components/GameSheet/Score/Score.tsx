@@ -1,8 +1,8 @@
 import React from 'react';
-import Star from '../../UI/atoms/Icons/Star';
-import Heart from '../../UI/atoms/Icons/Heart';
+import Star from '../../../UI/atoms/Icons/Star';
+import Heart from '../../../UI/atoms/Icons/Heart';
 import './Score.css';
-import { useScore } from '../../context/ScoreContext';
+import { useScore } from '../../../context/ScoreContext';
 
 const Score: React.FC = () => {
   const { totalLives, livesLeft, score } = useScore();

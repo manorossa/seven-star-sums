@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import Header from '../../components/Header/Header';
-import GameSheet from '../../components/GameSheet/GameSheet';
-import SettingsSheet from '../../components/SettingsSheet/SettingsSheet';
-import Splashscreen from '../../components/Splashscreen/Splashscreen';
+import Header from '../Header/Header';
+import GameSheet from '../GameSheet/GameSheet';
+import SettingsSheet from '../SettingsSheet/SettingsSheet';
+import Splashscreen from '../Splashscreen/Splashscreen';
 import { useStatus } from '../../context/StatusContext';
 import { SumProvider } from '../../context/SumContext';
 import { ScoreProvider } from '../../context/ScoreContext';
