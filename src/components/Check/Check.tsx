@@ -1,25 +1,36 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import '../Answers/Answers.css';
 import withAnimation from '../../HOCs/withAnimation/withAnimation';
-import AnswerContext from '../../context/AnswerContext';
-import SumContext from '../../context/SumContext';
+import { useStatus } from '../../context/StatusContext';
+import { useAnswer } from '../../context/AnswerContext';
+import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
 
 const Check: React.FC = (): JSX.Element => {
-  const { noCheckHandler, yesCheckHandler, correctAns } = useContext(AnswerContext);
-  const { num2 } = useContext(SumContext);
-  const modifiers = 'horizontal';
-  if (noCheckHandler === undefined || yesCheckHandler === undefined) {
-    throw new Error('No handlers are defined');
-  }
-  const { setLivesLeft } = useScore();
+  const { setGameStatus } = useStatus();
+  const { correctAns } = useAnswer();
+  const { num2, setNum2, setRightWrong } = useSum();
+  const { setLivesLeft, setScore } = useScore();
+
   const yesButtonHandler = (): void => {
-    yesCheckHandler();
-    if (num2 !== correctAns) {
+    const correct = num2 === correctAns;
+    setRightWrong(correct);
+    setGameStatus('showResult');
+    if (!correct) {
       setLivesLeft((prevLives) => prevLives - 1);
+      return;
     }
+    setScore((prevScore) => prevScore + 1);
   };
+
+  const noButtonHandler = (): void => {
+    setGameStatus('confirmAnswer');
+    setNum2('?');
+  };
+
+  const modifiers = 'horizontal';
+
   return (
     <div className="container answer-container flex-order--3">
       <div>
@@ -28,7 +39,7 @@ const Check: React.FC = (): JSX.Element => {
       <Button type="button" handler={yesButtonHandler} modifiers={modifiers}>
         Yes
       </Button>
-      <Button type="button" handler={noCheckHandler} modifiers={modifiers}>
+      <Button type="button" handler={noButtonHandler} modifiers={modifiers}>
         No
       </Button>
     </div>

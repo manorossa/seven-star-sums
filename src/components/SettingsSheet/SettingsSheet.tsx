@@ -1,16 +1,18 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { SettingsPayload, GenericFunc } from '../../types/types';
-import SumContext from '../../context/SumContext';
+import { useStatus } from '../../context/StatusContext';
+import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
 
 const SettingsSheet: React.FC = () => {
-  const { settingsHandler } = useContext(SumContext);
-  const { setTotalLives, setLivesLeft } = useScore();
+  const { setGameStatus } = useStatus();
+  const { setBaseNum, setOp1 } = useSum();
+  const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
   const [operator, setOperator] = useState('+' as SettingsPayload['finalOperator']);
-  const [baseNum, setBaseNum] = useState(2);
+  const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
 
   // PANEL HANDLERS START
@@ -21,7 +23,7 @@ const SettingsSheet: React.FC = () => {
 
   const panel2Handler = (chosenBaseNum: number): void => {
     setSettingStatus(3);
-    setBaseNum(chosenBaseNum);
+    setPanelBaseNum(chosenBaseNum);
   };
 
   const panel3Handler = (lives: number): void => {
@@ -97,10 +99,17 @@ const SettingsSheet: React.FC = () => {
     makeButtonStyles(horizButtons),
     operatorText
   );
-  const pairMap = buttonMap(pairOptions, baseNum, 2, panel2Handler, makeButtonStyles(smallRoundButtons), pairOptions);
+  const pairMap = buttonMap(
+    pairOptions,
+    panelBaseNum,
+    2,
+    panel2Handler,
+    makeButtonStyles(smallRoundButtons),
+    pairOptions
+  );
   const tableMap = buttonMap(
     tableOptions,
-    baseNum,
+    panelBaseNum,
     2,
     panel2Handler,
     makeButtonStyles(smallRoundButtons),
@@ -115,18 +124,15 @@ const SettingsSheet: React.FC = () => {
     difficultyText
   );
 
-  if (settingsHandler === undefined) {
-    throw new Error('No handler is defined');
-  }
-
   const finalSettings = (
     finalBaseNum: number,
     finalOperator: SettingsPayload['finalOperator'],
     finalDifficulty: number
   ): void => {
-    settingsHandler({ finalBaseNum, finalOperator });
+    setBaseNum(finalBaseNum);
+    setOp1(finalOperator);
     setTotalLives(finalDifficulty);
-    setLivesLeft(finalDifficulty);
+    setGameStatus('resetGame');
   };
 
   return (
@@ -155,7 +161,7 @@ const SettingsSheet: React.FC = () => {
       <div className={`settings__panel settings__panel--2 settings__panel--${panel4viz}`}>
         <Button
           type="button"
-          handler={(): void => finalSettings(baseNum, operator, difficulty)}
+          handler={(): void => finalSettings(panelBaseNum, operator, difficulty)}
           modifiers={horizGreenButtons}
         >
           Start the sums!

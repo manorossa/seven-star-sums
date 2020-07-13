@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '../../UI/atoms/Button/Button';
-import StatusContext from '../../context/StatusContext';
+import { useStatus } from '../../context/StatusContext';
 
 const SettingsButton: React.FC = () => {
-  const { showSettingsHandler } = useContext(StatusContext);
-  const modifiers = ['horizontal', 'horizontal-small'];
+  const { setGameStatus } = useStatus();
 
-  if (showSettingsHandler === undefined) {
-    throw new Error('No handler is defined');
-  }
+  const showSettingsHandler = (): void => {
+    setGameStatus('showSettings');
+  };
+
+  const modifiers = ['horizontal', 'horizontal-small'];
 
   return (
     <Button type="button" handler={showSettingsHandler} modifiers={modifiers}>

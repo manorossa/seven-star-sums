@@ -1,43 +1,38 @@
-import React, { useState, ReactNode, useContext, useMemo } from 'react';
-import { AppState } from '../types/types';
+import React, { useState, useContext, useMemo } from 'react';
+import { ScoreContextValues, Props } from '../types/types';
 
-type ScoreContextProps = {
-  totalLives: AppState['totalLives'];
-  livesLeft: AppState['livesLeft'];
-  setTotalLives: React.Dispatch<React.SetStateAction<number>>;
-  setLivesLeft: React.Dispatch<React.SetStateAction<number>>;
-};
-
-type Props = { children: ReactNode };
-
-const ScoreContext = React.createContext<Partial<ScoreContextProps>>({});
+const ScoreContext = React.createContext<Partial<ScoreContextValues>>({});
 const { Provider } = ScoreContext;
 
 const ScoreProvider = ({ children }: Props): JSX.Element => {
   const [totalLives, setTotalLives] = useState(7);
   const [livesLeft, setLivesLeft] = useState(7);
+  const [score, setScore] = useState(0);
 
   const scoreContextValues = useMemo(
     () => ({
       totalLives,
       livesLeft,
+      score,
       setTotalLives,
-      setLivesLeft
+      setLivesLeft,
+      setScore
     }),
-    [totalLives, livesLeft]
+    [totalLives, livesLeft, score]
   );
   return <Provider value={scoreContextValues}>{children}</Provider>;
 };
 
-const useScore = (): ScoreContextProps => {
-  const context = useContext(ScoreContext);
-  const { totalLives, livesLeft, setTotalLives, setLivesLeft } = context;
+const useScore = (): ScoreContextValues => {
+  const { totalLives, livesLeft, score, setTotalLives, setLivesLeft, setScore } = useContext(ScoreContext);
 
   if (
     totalLives === undefined ||
     livesLeft === undefined ||
+    score === undefined ||
     setTotalLives === undefined ||
-    setLivesLeft === undefined
+    setLivesLeft === undefined ||
+    setScore === undefined
   ) {
     throw new Error('useScore must be used within a ScoreProvider');
   }
@@ -45,9 +40,11 @@ const useScore = (): ScoreContextProps => {
   return {
     totalLives,
     livesLeft,
+    score,
     setTotalLives,
-    setLivesLeft
+    setLivesLeft,
+    setScore
   };
 };
 
-export { ScoreProvider, useScore, ScoreContext };
+export { ScoreProvider, useScore };
