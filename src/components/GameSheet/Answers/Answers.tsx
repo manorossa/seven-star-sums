@@ -1,10 +1,10 @@
 import React from 'react';
 import Answer from './Answer/Answer';
 import './Answers.css';
-import withAnimation from '../../HOCs/withAnimation/withAnimation';
-import { useStatus } from '../../context/StatusContext';
-import { useSum } from '../../context/SumContext';
-import { useAnswer } from '../../context/AnswerContext';
+import withAnimation from '../../../HOCs/withAnimation/withAnimation';
+import { useStatus } from '../../../context/StatusContext';
+import { useSum } from '../../../context/SumContext';
+import { useAnswer } from '../../../context/AnswerContext';
 
 const Answers: React.FC = () => {
   const { gameStatus, setGameStatus } = useStatus();

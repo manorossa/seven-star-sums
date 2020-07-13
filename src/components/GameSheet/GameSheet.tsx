@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import Sum from '../Sum/Sum';
-import Answers from '../Answers/Answers';
-import Check from '../Check/Check';
-import Result from '../Result/Result';
-import Score from '../Score/Score';
+import Sum from './Sum/Sum';
+import Answers from './Answers/Answers';
+import Check from './Check/Check';
+import Result from './Result/Result';
+import Score from './Score/Score';
 import './GameSheet.css';
 import { useStatus } from '../../context/StatusContext';
 import { useSum } from '../../context/SumContext';

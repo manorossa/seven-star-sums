@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from '../../UI/atoms/Button/Button';
-import withAnimation from '../../HOCs/withAnimation/withAnimation';
+import Button from '../../../UI/atoms/Button/Button';
+import withAnimation from '../../../HOCs/withAnimation/withAnimation';
 import '../Answers/Answers.css';
 import './Result.css';
-import { useStatus } from '../../context/StatusContext';
-import { useSum } from '../../context/SumContext';
-import { useAnswer } from '../../context/AnswerContext';
-import { useScore } from '../../context/ScoreContext';
+import { useStatus } from '../../../context/StatusContext';
+import { useSum } from '../../../context/SumContext';
+import { useAnswer } from '../../../context/AnswerContext';
+import { useScore } from '../../../context/ScoreContext';
 
 const Result: React.FC = () => {
   const { setGameStatus, setShowSplash } = useStatus();

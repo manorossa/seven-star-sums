@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sum.css';
-import '../../UI/atoms/Button/Button.css';
-import { useSum } from '../../context/SumContext';
+import '../../../UI/atoms/Button/Button.css';
+import { useSum } from '../../../context/SumContext';
 
 const Sum: React.FC = () => {
   const { num1, num2, op1, op2, baseNum, rightWrong } = useSum();
