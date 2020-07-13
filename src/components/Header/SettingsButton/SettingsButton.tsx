@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../../UI/atoms/Button/Button';
-import { useStatus } from '../../context/StatusContext';
+import Button from '../../../UI/atoms/Button/Button';
+import { useStatus } from '../../../context/StatusContext';
 
 const SettingsButton: React.FC = () => {
   const { setGameStatus } = useStatus();
