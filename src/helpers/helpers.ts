@@ -1,10 +1,10 @@
-import { AppState, AnswerMethodsObj, DefineSumResult } from '../types/types';
+import { SumState, AnswerMethodsObj, DefineSumResult } from '../types/types';
 
 export const getRandomNumber = (base: number): number => {
   return Math.floor(Math.random() * Math.floor(base));
 };
 
-export const definePossibleNums = (baseNum: AppState['baseNum'], op1: AppState['op1']): number[] => {
+export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
   const newNums = [];
   const numLimit = op1 === '+' ? baseNum : 13;
   for (let i = 1; i < numLimit; i++) {
@@ -14,9 +14,9 @@ export const definePossibleNums = (baseNum: AppState['baseNum'], op1: AppState['
 };
 
 export const defineSum = (
-  possibleNums: AppState['possibleNums'],
-  baseNum: AppState['baseNum'],
-  op1: AppState['op2']
+  possibleNums: SumState['possibleNums'],
+  baseNum: SumState['baseNum'],
+  op1: SumState['op2']
 ): DefineSumResult => {
   // Choose a random number from the possible numbers array,
   // based on the length of the possible numbers array

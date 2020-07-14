@@ -59,23 +59,6 @@ export type SumState = {
   setRightWrong: StateSetter<SumState['rightWrong']>;
 };
 
-export interface AppState {
-  showSplash: boolean;
-  gameStatus: GameStates;
-  possibleNums: number[];
-  baseNum: number;
-  num1: number | null;
-  num2: AnswerButton;
-  op1: Operator1;
-  op2: string;
-  possibleAns: number[];
-  correctAns: number | null;
-  rightWrong: boolean | null;
-  score: number;
-  totalLives: number;
-  livesLeft: number;
-}
-
 interface AnswerMethod {
   (a: number, b: number): number;
 }
@@ -94,7 +77,7 @@ export interface SettingsPayload {
 export type GenericFunc = (arg0: any) => void;
 
 export interface DefineSumResult {
-  randomNum: AppState['num1'];
-  possibleAns: AppState['possibleAns'];
-  answer1: AppState['correctAns'];
+  randomNum: SumState['num1'];
+  possibleAns: AnswerState['possibleAns'];
+  answer1: AnswerState['correctAns'];
 }

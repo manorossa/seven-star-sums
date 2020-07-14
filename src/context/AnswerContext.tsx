@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useContext } from 'react';
-import { AppState, AnswerState, Props } from '../types/types';
+import { AnswerState, Props } from '../types/types';
 
 const AnswerContext = React.createContext<Partial<AnswerState>>({});
 const { Provider } = AnswerContext;
 
 const AnswerProvider = ({ children }: Props): JSX.Element => {
   const [possibleAns, setPossibleAns] = useState([] as number[]);
-  const [correctAns, setCorrectAns] = useState(null as AppState['correctAns']);
+  const [correctAns, setCorrectAns] = useState(null as AnswerState['correctAns']);
 
   const answerState = useMemo(() => ({ possibleAns, correctAns, setPossibleAns, setCorrectAns }), [
     possibleAns,

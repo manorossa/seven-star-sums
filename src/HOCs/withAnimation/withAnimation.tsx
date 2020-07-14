@@ -1,11 +1,11 @@
 import React from 'react';
 import CSSTransition from 'react-transition-group/CSSTransition';
-import { AppState } from '../../types/types';
+import { StatusState } from '../../types/types';
 import { useStatus } from '../../context/StatusContext';
 
 const withAnimation = <P extends object>(
   WrappedComponent: React.ComponentType<P>,
-  showStatus: AppState['gameStatus']
+  showStatus: StatusState['gameStatus']
 ) => (props: P): JSX.Element => {
   const { gameStatus } = useStatus();
   const show = gameStatus === showStatus;
