@@ -16,17 +16,17 @@ const SettingsSheet: React.FC = () => {
   const [difficulty, setDifficulty] = useState(7);
 
   // PANEL HANDLERS START
-  const panel1Handler = (chosenOperator: SumState['op1']): void => {
+  const panel1Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
     setSettingStatus(2);
-    setOperator(chosenOperator);
+    setOperator(chosenOperator as SumState['op1']);
   };
 
-  const panel2Handler = (chosenBaseNum: number): void => {
+  const panel2Handler: GenericFunc<number> = (chosenBaseNum) => {
     setSettingStatus(3);
     setPanelBaseNum(chosenBaseNum);
   };
 
-  const panel3Handler = (lives: number): void => {
+  const panel3Handler: GenericFunc<number> = (lives) => {
     setSettingStatus(4);
     setDifficulty(lives);
   };
@@ -62,15 +62,15 @@ const SettingsSheet: React.FC = () => {
 
   // CREATE BUTTON MAPS
   const buttonMap = (
-    options: OptionsMap<string | number>,
+    options: OptionsMap<string | number | SumState['op1']>,
     stateCheck: string | number,
     panelNum: number,
-    clickHandler: GenericFunc,
+    clickHandler: GenericFunc<SumState['op1'] & number>,
     buttonStyle: string[][],
     buttonText: number[] | string[]
   ): JSX.Element[] =>
     options.map(
-      (option: string | number, index: number): JSX.Element => {
+      (option: string | number | SumState['op1'], index: number): JSX.Element => {
         const [butMod, butModAct, butModInact] = buttonStyle;
         let buttonModifiers = butMod;
         if (settingStatus > panelNum) {
@@ -80,7 +80,7 @@ const SettingsSheet: React.FC = () => {
           <Button
             key={`panel-${panelNum}-${option}`}
             type="button"
-            handler={(): void => clickHandler(option)}
+            handler={(): void => clickHandler(option as SumState['op1'] & number)}
             modifiers={buttonModifiers}
           >
             {buttonText[index]}
