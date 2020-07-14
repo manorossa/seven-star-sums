@@ -5,12 +5,8 @@ export const getRandomNumber = (base: number): number => {
 };
 
 export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
-  const newNums = [];
-  const numLimit = op1 === '+' ? baseNum : 13;
-  for (let i = 1; i < numLimit; i++) {
-    newNums.push(i);
-  }
-  return newNums;
+  const numLimit = op1 === '+' ? baseNum : 12;
+  return Array.from(new Array(numLimit), (_, index) => index + 1);
 };
 
 export const defineSum = (
