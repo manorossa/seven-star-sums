@@ -59,17 +59,14 @@ export type SumState = {
   setRightWrong: StateSetter<SumState['rightWrong']>;
 };
 
+// METHOD AND FUNCTION TYPES
+
 interface AnswerMethod {
   (a: number, b: number): number;
 }
 
 export interface AnswerMethodsObj {
   [key: string]: AnswerMethod;
-}
-
-export interface SettingsPayload {
-  finalBaseNum: number;
-  finalOperator: Operator1;
 }
 
 // @to-do: look into generics to get round use of any here

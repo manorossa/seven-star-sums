@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
-import { SettingsPayload, GenericFunc } from '../../types/types';
+import { GenericFunc, SumState } from '../../types/types';
 import { useStatus } from '../../context/StatusContext';
 import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
@@ -11,12 +11,12 @@ const SettingsSheet: React.FC = () => {
   const { setBaseNum, setOp1 } = useSum();
   const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
-  const [operator, setOperator] = useState('+' as SettingsPayload['finalOperator']);
+  const [operator, setOperator] = useState('+' as SumState['op1']);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
 
   // PANEL HANDLERS START
-  const panel1Handler = (chosenOperator: SettingsPayload['finalOperator']): void => {
+  const panel1Handler = (chosenOperator: SumState['op1']): void => {
     setSettingStatus(2);
     setOperator(chosenOperator);
   };
@@ -124,11 +124,7 @@ const SettingsSheet: React.FC = () => {
     difficultyText
   );
 
-  const finalSettings = (
-    finalBaseNum: number,
-    finalOperator: SettingsPayload['finalOperator'],
-    finalDifficulty: number
-  ): void => {
+  const finalSettings = (finalBaseNum: number, finalOperator: SumState['op1'], finalDifficulty: number): void => {
     setBaseNum(finalBaseNum);
     setOp1(finalOperator);
     setTotalLives(finalDifficulty);
