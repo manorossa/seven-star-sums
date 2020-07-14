@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
-import { GenericFunc, SumState } from '../../types/types';
+import { GenericFunc, OptionsMap, SumState } from '../../types/types';
 import { useStatus } from '../../context/StatusContext';
 import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
@@ -62,9 +62,7 @@ const SettingsSheet: React.FC = () => {
 
   // CREATE BUTTON MAPS
   const buttonMap = (
-    // @to-do: look into generics to get round use of any here
-    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-    options: any,
+    options: OptionsMap<string | number>,
     stateCheck: string | number,
     panelNum: number,
     clickHandler: GenericFunc,

@@ -72,6 +72,7 @@ export interface AnswerMethodsObj {
 // @to-do: look into generics to get round use of any here
 /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 export type GenericFunc = (arg0: any) => void;
+export type OptionsMap<T extends string | number> = T[];
 
 export interface DefineSumResult {
   randomNum: SumState['num1'];
