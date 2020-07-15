@@ -8,6 +8,18 @@ export const getNumberRange = (endNum: number): number[] => {
   return Array.from(new Array(endNum), (_, index) => index + 1);
 };
 
+const getRandomIndexSet = (setSize: number): Set<number> => {
+  const randomSet = new Set<number>();
+  let i = 0;
+  let a;
+  while (i < 3) {
+    a = getRandomNumber(setSize);
+    randomSet.add(a);
+    i = randomSet.size;
+  }
+  return randomSet;
+};
+
 export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
   const numLimit = op1 === '+' ? baseNum : 12;
   return getNumberRange(numLimit);
@@ -38,14 +50,8 @@ export const defineSum = (
   // Put the possible answers into an array, ready to be shuffled
   const answerArray = [answer1, answer2, answer3];
   // Create a random order of indices of 0, 1 and 2
-  const answerSet: Set<number> = new Set();
-  let i = 0;
-  let a;
-  while (i < 3) {
-    a = getRandomNumber(3);
-    answerSet.add(a);
-    i = answerSet.size;
-  }
+  const answerSet: Set<number> = getRandomIndexSet(3);
+
   // shuffle the possible answer array according to the random order of indices
   const possibleAns = [...answerSet].map((x) => answerArray[x]);
 
