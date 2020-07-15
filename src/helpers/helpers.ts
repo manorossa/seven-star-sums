@@ -1,13 +1,16 @@
 import { SumState, AnswerMethodsObj, DefineSumResult } from '../types/types';
 
+// fn retuns a random integer with a ceiling based on the number given
 export const getRandomNumber = (base: number): number => {
   return Math.floor(Math.random() * Math.floor(base));
 };
 
+// fn returns an array of numbers in order from 1 to endNum
 export const getNumberRange = (endNum: number): number[] => {
   return Array.from(new Array(endNum), (_, index) => index + 1);
 };
 
+// fn returns a set of numbers in random order from 0 to setSize
 const getRandomIndexSet = (setSize: number): Set<number> => {
   const randomSet = new Set<number>();
   let i = 0;
@@ -20,11 +23,14 @@ const getRandomIndexSet = (setSize: number): Set<number> => {
   return randomSet;
 };
 
+// fn returns an array of numbers in order based on the type of sum chosen in settings
 export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
   const numLimit = op1 === '+' ? baseNum : 12;
   return getNumberRange(numLimit);
 };
 
+// fn pulls out a random number from possible number, returns an array of randomised possible
+// answers of the correct one, and two others, also returns the correct answer by itself
 export const defineSum = (
   possibleNums: SumState['possibleNums'],
   baseNum: SumState['baseNum'],
