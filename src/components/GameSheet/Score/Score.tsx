@@ -3,22 +3,18 @@ import Star from '../../../UI/atoms/Icons/Star';
 import Heart from '../../../UI/atoms/Icons/Heart';
 import './Score.css';
 import { useScore } from '../../../context/ScoreContext';
+import { getNumberRange } from '../../../helpers/helpers';
 
 const Score: React.FC = () => {
   const { totalLives, livesLeft, score } = useScore();
-  const stars = [];
-  if (score !== undefined) {
-    for (let i = 1; i <= 7; i++) {
-      stars.push(
-        <Star key={`star-${i}`} fill={i <= score ? '#fff100' : '#ccc'} stroke={i <= score ? '#ff9b00' : '#888'} />
-      );
-    }
-  }
 
-  const hearts = [];
-  for (let j = 1; j <= totalLives; j++) {
-    hearts.push(<Heart key={`heart-${j}`} fill={j <= livesLeft ? '#e74c3c' : '#220277'} />);
-  }
+  const stars = Array.from(getNumberRange(7), (i) => {
+    return <Star key={`star-${i}`} fill={i <= score ? '#fff100' : '#ccc'} stroke={i <= score ? '#ff9b00' : '#888'} />;
+  });
+
+  const hearts = Array.from(getNumberRange(totalLives), (j) => {
+    return <Heart key={`heart-${j}`} fill={j <= livesLeft ? '#e74c3c' : '#220277'} />;
+  });
 
   return (
     <div className="score-strip">
