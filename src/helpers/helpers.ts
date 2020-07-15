@@ -4,9 +4,13 @@ export const getRandomNumber = (base: number): number => {
   return Math.floor(Math.random() * Math.floor(base));
 };
 
+export const getNumberRange = (endNum: number): number[] => {
+  return Array.from(new Array(endNum), (_, index) => index + 1);
+};
+
 export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
   const numLimit = op1 === '+' ? baseNum : 12;
-  return Array.from(new Array(numLimit), (_, index) => index + 1);
+  return getNumberRange(numLimit);
 };
 
 export const defineSum = (
