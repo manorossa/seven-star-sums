@@ -7,28 +7,33 @@ const { Provider } = StatusContext;
 const StatusProvider = ({ children }: Props): JSX.Element => {
   const [gameStatus, setGameStatus] = useState('showSettings' as GameStates);
   const [showSplash, setShowSplash] = useState(false);
+  const [savedSettings, setSavedSettings] = useState(false);
 
-  const statusState = useMemo(() => ({ gameStatus, showSplash, setGameStatus, setShowSplash }), [
-    gameStatus,
-    showSplash
-  ]);
+  const statusState = useMemo(
+    () => ({ gameStatus, showSplash, savedSettings, setGameStatus, setShowSplash, setSavedSettings }),
+    [gameStatus, showSplash, savedSettings]
+  );
 
   return <Provider value={statusState}>{children}</Provider>;
 };
 
 const useStatus = (): StatusState => {
-  const { gameStatus, showSplash, setGameStatus, setShowSplash } = useContext(StatusContext);
+  const { gameStatus, showSplash, savedSettings, setGameStatus, setShowSplash, setSavedSettings } = useContext(
+    StatusContext
+  );
 
   if (
     gameStatus === undefined ||
     showSplash === undefined ||
+    savedSettings === undefined ||
     setGameStatus === undefined ||
-    setShowSplash === undefined
+    setShowSplash === undefined ||
+    setSavedSettings === undefined
   ) {
     throw new Error('useStatus must be used within a StatusProvider');
   }
 
-  return { gameStatus, showSplash, setGameStatus, setShowSplash };
+  return { gameStatus, showSplash, savedSettings, setGameStatus, setShowSplash, setSavedSettings };
 };
 
 export { StatusProvider, useStatus };

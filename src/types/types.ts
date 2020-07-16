@@ -38,8 +38,10 @@ export type ScoreState = {
 export type StatusState = {
   gameStatus: GameStates;
   showSplash: boolean;
+  savedSettings: boolean;
   setGameStatus: StateSetter<StatusState['gameStatus']>;
   setShowSplash: StateSetter<StatusState['showSplash']>;
+  setSavedSettings: StateSetter<StatusState['savedSettings']>;
 };
 
 export type SumState = {
