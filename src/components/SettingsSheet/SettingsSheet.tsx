@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
-import { SettingsPayload, GenericFunc } from '../../types/types';
+import { GenericFunc, OptionsMap, SumState } from '../../types/types';
 import { useStatus } from '../../context/StatusContext';
 import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
@@ -11,22 +11,22 @@ const SettingsSheet: React.FC = () => {
   const { setBaseNum, setOp1 } = useSum();
   const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
-  const [operator, setOperator] = useState('+' as SettingsPayload['finalOperator']);
+  const [operator, setOperator] = useState('+' as SumState['op1']);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
 
   // PANEL HANDLERS START
-  const panel1Handler = (chosenOperator: SettingsPayload['finalOperator']): void => {
+  const panel1Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
     setSettingStatus(2);
-    setOperator(chosenOperator);
+    setOperator(chosenOperator as SumState['op1']);
   };
 
-  const panel2Handler = (chosenBaseNum: number): void => {
+  const panel2Handler: GenericFunc<number> = (chosenBaseNum) => {
     setSettingStatus(3);
     setPanelBaseNum(chosenBaseNum);
   };
 
-  const panel3Handler = (lives: number): void => {
+  const panel3Handler: GenericFunc<number> = (lives) => {
     setSettingStatus(4);
     setDifficulty(lives);
   };
@@ -62,17 +62,15 @@ const SettingsSheet: React.FC = () => {
 
   // CREATE BUTTON MAPS
   const buttonMap = (
-    // @to-do: look into generics to get round use of any here
-    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-    options: any,
+    options: OptionsMap<string | number | SumState['op1']>,
     stateCheck: string | number,
     panelNum: number,
-    clickHandler: GenericFunc,
+    clickHandler: GenericFunc<SumState['op1'] & number>,
     buttonStyle: string[][],
     buttonText: number[] | string[]
   ): JSX.Element[] =>
     options.map(
-      (option: string | number, index: number): JSX.Element => {
+      (option: string | number | SumState['op1'], index: number): JSX.Element => {
         const [butMod, butModAct, butModInact] = buttonStyle;
         let buttonModifiers = butMod;
         if (settingStatus > panelNum) {
@@ -82,7 +80,7 @@ const SettingsSheet: React.FC = () => {
           <Button
             key={`panel-${panelNum}-${option}`}
             type="button"
-            handler={(): void => clickHandler(option)}
+            handler={(): void => clickHandler(option as SumState['op1'] & number)}
             modifiers={buttonModifiers}
           >
             {buttonText[index]}
@@ -124,11 +122,7 @@ const SettingsSheet: React.FC = () => {
     difficultyText
   );
 
-  const finalSettings = (
-    finalBaseNum: number,
-    finalOperator: SettingsPayload['finalOperator'],
-    finalDifficulty: number
-  ): void => {
+  const finalSettings = (finalBaseNum: number, finalOperator: SumState['op1'], finalDifficulty: number): void => {
     setBaseNum(finalBaseNum);
     setOp1(finalOperator);
     setTotalLives(finalDifficulty);

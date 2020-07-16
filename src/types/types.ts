@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+// CONTEXT AND STATE TYPES
+
 export type GameStates =
   | 'startGame'
   | 'showSettings'
@@ -14,22 +16,50 @@ export type GameStates =
 type AnswerButton = number | '?';
 type Operator1 = '+' | 'x';
 
-export interface AppState {
-  showSplash: boolean;
-  gameStatus: GameStates;
-  possibleNums: number[];
-  baseNum: number;
-  num1: number | null;
-  num2: AnswerButton;
-  op1: Operator1;
-  op2: string;
+export type Props = { children: ReactNode };
+type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+
+export type AnswerState = {
   possibleAns: number[];
   correctAns: number | null;
-  rightWrong: boolean | null;
-  score: number;
+  setPossibleAns: StateSetter<AnswerState['possibleAns']>;
+  setCorrectAns: StateSetter<AnswerState['correctAns']>;
+};
+
+export type ScoreState = {
   totalLives: number;
   livesLeft: number;
-}
+  score: number;
+  setTotalLives: StateSetter<ScoreState['totalLives']>;
+  setLivesLeft: StateSetter<ScoreState['livesLeft']>;
+  setScore: StateSetter<ScoreState['score']>;
+};
+
+export type StatusState = {
+  gameStatus: GameStates;
+  showSplash: boolean;
+  setGameStatus: StateSetter<StatusState['gameStatus']>;
+  setShowSplash: StateSetter<StatusState['showSplash']>;
+};
+
+export type SumState = {
+  possibleNums: number[];
+  num1: number | null;
+  num2: AnswerButton;
+  baseNum: number;
+  op1: Operator1;
+  op2: string;
+  rightWrong: boolean | null;
+  setPossibleNums: StateSetter<SumState['possibleNums']>;
+  setNum1: StateSetter<SumState['num1']>;
+  setNum2: StateSetter<SumState['num2']>;
+  setBaseNum: StateSetter<SumState['baseNum']>;
+  setOp1: StateSetter<SumState['op1']>;
+  setOp2: StateSetter<SumState['op2']>;
+  setRightWrong: StateSetter<SumState['rightWrong']>;
+};
+
+// METHOD AND FUNCTION TYPES
 
 interface AnswerMethod {
   (a: number, b: number): number;
@@ -39,60 +69,11 @@ export interface AnswerMethodsObj {
   [key: string]: AnswerMethod;
 }
 
-export interface SettingsPayload {
-  finalBaseNum: number;
-  finalOperator: Operator1;
-}
-
-// @to-do: look into generics to get round use of any here
-/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-export type GenericFunc = (arg0: any) => void;
+export type GenericFunc<T> = (arg0: T) => void;
+export type OptionsMap<T> = T[];
 
 export interface DefineSumResult {
-  randomNum: AppState['num1'];
-  possibleAns: AppState['possibleAns'];
-  answer1: AppState['correctAns'];
+  randomNum: SumState['num1'];
+  possibleAns: AnswerState['possibleAns'];
+  answer1: AnswerState['correctAns'];
 }
-
-// CONTEXT TYPES
-export type Props = { children: ReactNode };
-
-export type AnswerContextValues = {
-  possibleAns: AppState['possibleAns'];
-  correctAns: AppState['correctAns'];
-  setPossibleAns: React.Dispatch<React.SetStateAction<AppState['possibleAns']>>;
-  setCorrectAns: React.Dispatch<React.SetStateAction<AppState['correctAns']>>;
-};
-
-export type StatusContextValues = {
-  gameStatus: GameStates;
-  showSplash: AppState['showSplash'];
-  setGameStatus: React.Dispatch<React.SetStateAction<GameStates>>;
-  setShowSplash: React.Dispatch<React.SetStateAction<AppState['showSplash']>>;
-};
-
-export type SumContextValues = {
-  possibleNums: AppState['possibleNums'];
-  num1: AppState['num1'];
-  num2: AppState['num2'];
-  baseNum: AppState['baseNum'];
-  op1: AppState['op1'];
-  op2: AppState['op2'];
-  rightWrong: AppState['rightWrong'];
-  setPossibleNums: React.Dispatch<React.SetStateAction<AppState['possibleNums']>>;
-  setNum1: React.Dispatch<React.SetStateAction<AppState['num1']>>;
-  setNum2: React.Dispatch<React.SetStateAction<AppState['num2']>>;
-  setBaseNum: React.Dispatch<React.SetStateAction<AppState['baseNum']>>;
-  setOp1: React.Dispatch<React.SetStateAction<AppState['op1']>>;
-  setOp2: React.Dispatch<React.SetStateAction<AppState['op2']>>;
-  setRightWrong: React.Dispatch<React.SetStateAction<AppState['rightWrong']>>;
-};
-
-export type ScoreContextValues = {
-  totalLives: AppState['totalLives'];
-  livesLeft: AppState['livesLeft'];
-  score: AppState['score'];
-  setTotalLives: React.Dispatch<React.SetStateAction<number>>;
-  setLivesLeft: React.Dispatch<React.SetStateAction<number>>;
-  setScore: React.Dispatch<React.SetStateAction<number>>;
-};

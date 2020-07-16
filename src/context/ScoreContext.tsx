@@ -1,7 +1,7 @@
 import React, { useState, useContext, useMemo } from 'react';
-import { ScoreContextValues, Props } from '../types/types';
+import { ScoreState, Props } from '../types/types';
 
-const ScoreContext = React.createContext<Partial<ScoreContextValues>>({});
+const ScoreContext = React.createContext<Partial<ScoreState>>({});
 const { Provider } = ScoreContext;
 
 const ScoreProvider = ({ children }: Props): JSX.Element => {
@@ -9,7 +9,7 @@ const ScoreProvider = ({ children }: Props): JSX.Element => {
   const [livesLeft, setLivesLeft] = useState(7);
   const [score, setScore] = useState(0);
 
-  const scoreContextValues = useMemo(
+  const scoreState = useMemo(
     () => ({
       totalLives,
       livesLeft,
@@ -20,10 +20,10 @@ const ScoreProvider = ({ children }: Props): JSX.Element => {
     }),
     [totalLives, livesLeft, score]
   );
-  return <Provider value={scoreContextValues}>{children}</Provider>;
+  return <Provider value={scoreState}>{children}</Provider>;
 };
 
-const useScore = (): ScoreContextValues => {
+const useScore = (): ScoreState => {
   const { totalLives, livesLeft, score, setTotalLives, setLivesLeft, setScore } = useContext(ScoreContext);
 
   if (

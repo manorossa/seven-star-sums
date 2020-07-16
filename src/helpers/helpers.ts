@@ -1,22 +1,40 @@
-import { AppState, AnswerMethodsObj, DefineSumResult } from '../types/types';
+import { SumState, AnswerMethodsObj, DefineSumResult } from '../types/types';
 
+// fn retuns a random integer with a ceiling based on the number given
 export const getRandomNumber = (base: number): number => {
   return Math.floor(Math.random() * Math.floor(base));
 };
 
-export const definePossibleNums = (baseNum: AppState['baseNum'], op1: AppState['op1']): number[] => {
-  const newNums = [];
-  const numLimit = op1 === '+' ? baseNum : 13;
-  for (let i = 1; i < numLimit; i++) {
-    newNums.push(i);
-  }
-  return newNums;
+// fn returns an array of numbers in order from 1 to endNum
+export const getNumberRange = (endNum: number): number[] => {
+  return Array.from(new Array(endNum), (_, index) => index + 1);
 };
 
+// fn returns a set of numbers in random order from 0 to setSize
+const getRandomIndexSet = (setSize: number): Set<number> => {
+  const randomSet = new Set<number>();
+  let i = 0;
+  let a;
+  while (i < 3) {
+    a = getRandomNumber(setSize);
+    randomSet.add(a);
+    i = randomSet.size;
+  }
+  return randomSet;
+};
+
+// fn returns an array of numbers in order based on the type of sum chosen in settings
+export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
+  const numLimit = op1 === '+' ? baseNum : 12;
+  return getNumberRange(numLimit);
+};
+
+// fn pulls out a random number from possible number, returns an array of randomised possible
+// answers of the correct one, and two others, also returns the correct answer by itself
 export const defineSum = (
-  possibleNums: AppState['possibleNums'],
-  baseNum: AppState['baseNum'],
-  op1: AppState['op2']
+  possibleNums: SumState['possibleNums'],
+  baseNum: SumState['baseNum'],
+  op1: SumState['op2']
 ): DefineSumResult => {
   // Choose a random number from the possible numbers array,
   // based on the length of the possible numbers array
@@ -38,14 +56,8 @@ export const defineSum = (
   // Put the possible answers into an array, ready to be shuffled
   const answerArray = [answer1, answer2, answer3];
   // Create a random order of indices of 0, 1 and 2
-  const answerSet: Set<number> = new Set();
-  let i = 0;
-  let a;
-  while (i < 3) {
-    a = getRandomNumber(3);
-    answerSet.add(a);
-    i = answerSet.size;
-  }
+  const answerSet: Set<number> = getRandomIndexSet(3);
+
   // shuffle the possible answer array according to the random order of indices
   const possibleAns = [...answerSet].map((x) => answerArray[x]);
 

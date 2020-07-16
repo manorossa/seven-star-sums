@@ -42,12 +42,6 @@
       {
         "custom": "ignore"
       }
-    ],
-    "no-plusplus": [
-      "error",
-      {
-        "allowForLoopAfterthoughts": true
-      }
     ]
   }
 }
