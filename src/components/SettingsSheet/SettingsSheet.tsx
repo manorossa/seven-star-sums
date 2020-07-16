@@ -127,6 +127,8 @@ const SettingsSheet: React.FC = () => {
     setOp1(finalOperator);
     setTotalLives(finalDifficulty);
     setGameStatus('resetGame');
+    const allSettings = { finalBaseNum, finalOperator, finalDifficulty };
+    window.localStorage.setItem('sevenStarSettings', JSON.stringify(allSettings));
   };
 
   return (
