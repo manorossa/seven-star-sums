@@ -2,20 +2,34 @@ import React from 'react';
 import Button from '../../UI/atoms/Button/Button';
 import './Splashscreen.css';
 import { useStatus } from '../../context/StatusContext';
+import { useSum } from '../../context/SumContext';
+import { useScore } from '../../context/ScoreContext';
 
 const Splashscreen: React.FC = () => {
   let splash: JSX.Element = <div />;
   const modifiers = 'horizontal';
   const { gameStatus, setGameStatus, setShowSplash } = useStatus();
+  const { setBaseNum, setOp1 } = useSum();
+  const { setTotalLives } = useScore();
 
-  const startGameHandler = (): void => {
-    setGameStatus('startGame');
-    setShowSplash(false);
-  };
+  const savedSettings = window.localStorage.getItem('sevenStarSettings');
 
   const startSettingsHandler = (): void => {
     setGameStatus('showSettings');
     setShowSplash(false);
+  };
+
+  const startGameHandler = (): void => {
+    if (savedSettings) {
+      const parsedSettings = JSON.parse(savedSettings);
+      setBaseNum(parsedSettings.finalBaseNum);
+      setOp1(parsedSettings.finalOperator);
+      setTotalLives(parsedSettings.finalDifficulty);
+      setGameStatus('defineNums');
+      setShowSplash(false);
+      return;
+    }
+    startSettingsHandler(); // Should never need this, but is a failsafe
   };
 
   const resetGameHandler = (): void => {

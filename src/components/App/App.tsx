@@ -23,11 +23,12 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {showSplash && <Splashscreen />}
-      <Header />
       <SumProvider>
-        <div className="stage">
-          <ScoreProvider>
+        <ScoreProvider>
+          {showSplash && <Splashscreen />}
+          <Header />
+
+          <div className="stage">
             {gameStatus === 'showSettings' ? (
               <SettingsSheet />
             ) : (
@@ -35,8 +36,8 @@ const App: React.FC = () => {
                 <GameSheet />
               </AnswerProvider>
             )}
-          </ScoreProvider>
-        </div>
+          </div>
+        </ScoreProvider>
       </SumProvider>
     </div>
   );
