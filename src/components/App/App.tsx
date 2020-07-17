@@ -20,7 +20,7 @@ const App: React.FC = () => {
     }
     setShowSplash(false);
     setGameStatus('showSettings');
-  });
+  }, []);
 
   return (
     <div className="App">
@@ -28,7 +28,6 @@ const App: React.FC = () => {
         <ScoreProvider>
           {showSplash && <Splashscreen />}
           <Header />
-
           <div className="stage">
             {gameStatus === 'showSettings' ? (
               <SettingsSheet />
