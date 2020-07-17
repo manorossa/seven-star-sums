@@ -26,6 +26,7 @@ const SettingsSheet: React.FC = () => {
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
     }
+    // eslint-disable-next-line
   }, []);
 
   // PANEL HANDLERS START
