@@ -10,12 +10,15 @@ import { ScoreProvider } from '../../context/ScoreContext';
 import { AnswerProvider } from '../../context/AnswerContext';
 
 const App: React.FC = () => {
-  const { gameStatus, showSplash, setSavedSettings } = useStatus();
+  const { gameStatus, showSplash, setGameStatus, setShowSplash, setSavedSettings } = useStatus();
 
   useEffect(() => {
     if (window.localStorage.getItem('sevenStarSettings') !== null) {
       setSavedSettings(true);
+      return;
     }
+    setShowSplash(false);
+    setGameStatus('showSettings');
   });
 
   return (

@@ -13,6 +13,11 @@ const Splashscreen: React.FC = () => {
     setShowSplash(false);
   };
 
+  const startSettingsHandler = (): void => {
+    setGameStatus('showSettings');
+    setShowSplash(false);
+  };
+
   const resetGameHandler = (): void => {
     setGameStatus('resetGame');
     setShowSplash(false);
@@ -21,9 +26,17 @@ const Splashscreen: React.FC = () => {
   switch (gameStatus) {
     case 'startGame':
       splash = (
-        <Button type="button" handler={startGameHandler} modifiers={modifiers}>
-          Start the sums!
-        </Button>
+        <>
+          <h3>Hello!</h3>
+          <h4>Do you want to...</h4>
+          <Button type="button" handler={startGameHandler} modifiers={modifiers}>
+            Use your previous settings?
+          </Button>
+          <h4>Or...</h4>
+          <Button type="button" handler={startSettingsHandler} modifiers={modifiers}>
+            Choose a new type of sum?
+          </Button>
+        </>
       );
       break;
     case 'endWin':
