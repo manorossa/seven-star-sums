@@ -4,6 +4,7 @@ import './Splashscreen.css';
 import { useStatus } from '../../context/StatusContext';
 import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
+import { getSavedSettings } from '../../helpers/helpers';
 
 const Splashscreen: React.FC = () => {
   let splash: JSX.Element = <div />;
@@ -12,7 +13,7 @@ const Splashscreen: React.FC = () => {
   const { setBaseNum, setOp1 } = useSum();
   const { setTotalLives } = useScore();
 
-  const savedSettings = window.localStorage.getItem('sevenStarSettings');
+  const savedSettings = getSavedSettings();
 
   const startSettingsHandler = (): void => {
     setGameStatus('showSettings');
@@ -21,10 +22,9 @@ const Splashscreen: React.FC = () => {
 
   const startGameHandler = (): void => {
     if (savedSettings) {
-      const parsedSettings = JSON.parse(savedSettings);
-      setBaseNum(parsedSettings.finalBaseNum);
-      setOp1(parsedSettings.finalOperator);
-      setTotalLives(parsedSettings.finalDifficulty);
+      setBaseNum(savedSettings.finalBaseNum);
+      setOp1(savedSettings.finalOperator);
+      setTotalLives(savedSettings.finalDifficulty);
       setGameStatus('defineNums');
       setShowSplash(false);
       return;

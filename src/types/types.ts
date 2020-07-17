@@ -62,6 +62,12 @@ export type SumState = {
   setRightWrong: StateSetter<SumState['rightWrong']>;
 };
 
+export interface SettingsModel {
+  finalBaseNum: number;
+  finalOperator: SumState['op1'];
+  finalDifficulty: number;
+}
+
 // METHOD AND FUNCTION TYPES
 
 interface AnswerMethod {

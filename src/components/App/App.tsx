@@ -8,12 +8,13 @@ import { useStatus } from '../../context/StatusContext';
 import { SumProvider } from '../../context/SumContext';
 import { ScoreProvider } from '../../context/ScoreContext';
 import { AnswerProvider } from '../../context/AnswerContext';
+import { getSavedSettings } from '../../helpers/helpers';
 
 const App: React.FC = () => {
   const { gameStatus, showSplash, setGameStatus, setShowSplash, setSavedSettings } = useStatus();
 
   useEffect(() => {
-    if (window.localStorage.getItem('sevenStarSettings') !== null) {
+    if (getSavedSettings() !== null) {
       setSavedSettings(true);
       return;
     }
