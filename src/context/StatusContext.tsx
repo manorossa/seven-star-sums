@@ -5,8 +5,8 @@ const StatusContext = React.createContext<Partial<StatusState>>({ gameStatus: 's
 const { Provider } = StatusContext;
 
 const StatusProvider = ({ children }: Props): JSX.Element => {
-  const [gameStatus, setGameStatus] = useState('showSettings' as GameStates);
-  const [showSplash, setShowSplash] = useState(false);
+  const [gameStatus, setGameStatus] = useState('startGame' as GameStates);
+  const [showSplash, setShowSplash] = useState(true);
   const [savedSettings, setSavedSettings] = useState(false);
 
   const statusState = useMemo(
