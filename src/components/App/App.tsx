@@ -12,15 +12,16 @@ import { getSavedSettings } from '../../helpers/helpers';
 
 const App: React.FC = () => {
   const { gameStatus, showSplash, setGameStatus, setShowSplash, setSavedSettings } = useStatus();
+  const localSettings = getSavedSettings();
 
   useEffect(() => {
-    if (getSavedSettings() !== null) {
+    if (localSettings) {
       setSavedSettings(true);
       return;
     }
     setShowSplash(false);
     setGameStatus('showSettings');
-  }, []);
+  }, [localSettings, setSavedSettings, setShowSplash, setGameStatus]);
 
   return (
     <div className="App">

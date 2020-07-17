@@ -26,7 +26,7 @@ const SettingsSheet: React.FC = () => {
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
     }
-  }, []);
+  }, [savedSettings, localSettings]);
 
   // PANEL HANDLERS START
   const panel1Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
