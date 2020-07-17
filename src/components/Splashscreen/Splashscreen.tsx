@@ -11,7 +11,7 @@ const Splashscreen: React.FC = () => {
   const modifiers = 'horizontal';
   const { gameStatus, setGameStatus, setShowSplash } = useStatus();
   const { setBaseNum, setOp1 } = useSum();
-  const { setTotalLives } = useScore();
+  const { setTotalLives, setLivesLeft } = useScore();
 
   const savedSettings = getSavedSettings();
 
@@ -25,6 +25,7 @@ const Splashscreen: React.FC = () => {
       setBaseNum(savedSettings.finalBaseNum);
       setOp1(savedSettings.finalOperator);
       setTotalLives(savedSettings.finalDifficulty);
+      setLivesLeft(savedSettings.finalDifficulty);
       setGameStatus('defineNums');
       setShowSplash(false);
       return;
