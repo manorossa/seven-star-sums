@@ -5,10 +5,10 @@ import { GenericFunc, OptionsMap, SumState } from '../../types/types';
 import { useStatus } from '../../context/StatusContext';
 import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
-import { getSavedSettings } from '../../helpers/helpers';
+import { getLocalSettings } from '../../helpers/helpers';
 
 const SettingsSheet: React.FC = () => {
-  const { savedSettings, setGameStatus } = useStatus();
+  const { isLocalSettings, setGameStatus } = useStatus();
   const { setBaseNum, setOp1 } = useSum();
   const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
@@ -16,21 +16,21 @@ const SettingsSheet: React.FC = () => {
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
   const [isResetOperator, setIsResetOperator] = useState(false);
-  const localSettings = getSavedSettings();
+  const localSettings = getLocalSettings();
 
   // IF SETTINGS HAVE ALREADY BEEN SET THEN SHOW ALL OPTIONS FROM START
   useEffect(() => {
-    if (savedSettings && localSettings) {
+    if (isLocalSettings && localSettings) {
       setSettingStatus(4);
       setOperator(localSettings.finalOperator);
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
     }
-  }, [savedSettings, localSettings]);
+  }, []);
 
   // PANEL HANDLERS START
   const panel1Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
-    if (savedSettings) {
+    if (isLocalSettings) {
       setPanelBaseNum(0);
       setIsResetOperator(true);
     }
@@ -39,7 +39,7 @@ const SettingsSheet: React.FC = () => {
   };
 
   const panel2Handler: GenericFunc<number> = (chosenBaseNum) => {
-    if (!savedSettings || isResetOperator) {
+    if (!isLocalSettings || isResetOperator) {
       setSettingStatus(3);
     }
     setPanelBaseNum(chosenBaseNum);

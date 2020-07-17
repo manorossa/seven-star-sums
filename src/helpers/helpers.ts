@@ -64,7 +64,7 @@ export const defineSum = (
   return { randomNum, possibleAns, answer1 };
 };
 
-export const getSavedSettings = (): SettingsModel | null => {
+export const getLocalSettings = (): SettingsModel | null => {
   const localSettings = window.localStorage.getItem('sevenStarSettings');
   if (localSettings) {
     return JSON.parse(localSettings);

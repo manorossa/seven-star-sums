@@ -8,20 +8,20 @@ import { useStatus } from '../../context/StatusContext';
 import { SumProvider } from '../../context/SumContext';
 import { ScoreProvider } from '../../context/ScoreContext';
 import { AnswerProvider } from '../../context/AnswerContext';
-import { getSavedSettings } from '../../helpers/helpers';
+import { getLocalSettings } from '../../helpers/helpers';
 
 const App: React.FC = () => {
-  const { gameStatus, showSplash, setGameStatus, setShowSplash, setSavedSettings } = useStatus();
-  const localSettings = getSavedSettings();
+  const { gameStatus, showSplash, setGameStatus, setShowSplash, setIsLocalSettings } = useStatus();
+  const localSettings = getLocalSettings();
 
   useEffect(() => {
     if (localSettings) {
-      setSavedSettings(true);
+      setIsLocalSettings(true);
       return;
     }
     setShowSplash(false);
     setGameStatus('showSettings');
-  }, [localSettings, setSavedSettings, setShowSplash, setGameStatus]);
+  }, [localSettings, setIsLocalSettings, setShowSplash, setGameStatus]);
 
   return (
     <div className="App">
