@@ -56,22 +56,30 @@ const Splashscreen: React.FC = () => {
       break;
     case 'endWin':
       splash = (
-        <div>
+        <>
           <h3>Well done! You&rsquo;ve got seven stars!</h3>
           <Button type="button" handler={resetGameHandler} modifiers={modifiers}>
             Play again!
           </Button>
-        </div>
+          <h4>Or...</h4>
+          <Button type="button" handler={startSettingsHandler} modifiers={modifiers}>
+            Change your settings
+          </Button>
+        </>
       );
       break;
     case 'endLose':
       splash = (
-        <div>
+        <>
           <h3>Unlucky! You&rsquo;ve run out lives...</h3>
           <Button type="button" handler={resetGameHandler} modifiers={modifiers}>
             Try again!
           </Button>
-        </div>
+          <h4>Or...</h4>
+          <Button type="button" handler={startSettingsHandler} modifiers={modifiers}>
+            Change your settings
+          </Button>
+        </>
       );
       break;
     default:
