@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 export type GameStates =
   | 'startGame'
   | 'showSettings'
+  | 'defineNums'
   | 'defineSum'
   | 'resetGame'
   | 'showSum'
