@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Header from '../Header/Header';
 import GameSheet from '../GameSheet/GameSheet';
@@ -10,7 +10,13 @@ import { ScoreProvider } from '../../context/ScoreContext';
 import { AnswerProvider } from '../../context/AnswerContext';
 
 const App: React.FC = () => {
-  const { gameStatus, showSplash } = useStatus();
+  const { gameStatus, showSplash, setSavedSettings } = useStatus();
+
+  useEffect(() => {
+    if (window.localStorage.getItem('sevenStarSettings') !== null) {
+      setSavedSettings(true);
+    }
+  });
 
   return (
     <div className="App">
