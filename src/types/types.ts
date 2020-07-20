@@ -31,9 +31,11 @@ export type ScoreState = {
   totalLives: number;
   livesLeft: number;
   score: number;
+  wrongAnswers: number[];
   setTotalLives: StateSetter<ScoreState['totalLives']>;
   setLivesLeft: StateSetter<ScoreState['livesLeft']>;
   setScore: StateSetter<ScoreState['score']>;
+  setWrongAnswers: StateSetter<ScoreState['wrongAnswers']>;
 };
 
 export type StatusState = {
