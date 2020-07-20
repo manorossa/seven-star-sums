@@ -34,27 +34,36 @@ const SettingsSheet: React.FC = () => {
     if (isLocalSettings) {
       setPanelBaseNum(0);
       setIsResetOperator(true);
+      setSettingStatus(4);
+      setOperator(chosenOperator as SumState['op1']);
+      return;
     }
     setSettingStatus(2);
     setOperator(chosenOperator as SumState['op1']);
   };
 
   const panel2Handler: GenericFunc<number> = (chosenBaseNum) => {
-    if (!isLocalSettings || isResetOperator) {
+    if (!isLocalSettings) {
       setSettingStatus(3);
+    }
+    if (isResetOperator) {
+      setSettingStatus(5);
     }
     setPanelBaseNum(chosenBaseNum);
   };
 
   const panel3Handler: GenericFunc<number> = (lives) => {
     setSettingStatus(4);
+    if (isResetOperator) {
+      setSettingStatus(5);
+    }
     setDifficulty(lives);
   };
 
   // PANEL VISIBILITY OPTIONS
   const panel2viz = settingStatus > 1 ? 'show' : 'hide';
-  const panel3viz = settingStatus > 2 ? 'show' : 'hide';
-  const panel4viz = settingStatus > 3 ? 'show' : 'hide';
+  const panel3viz = settingStatus > 2 || isResetOperator ? 'show' : 'hide';
+  const panel4viz = (settingStatus > 3 && !isResetOperator) || settingStatus > 4 ? 'show' : 'hide';
 
   // RENDERING LOGIC
   const bonds = operator === '+';
