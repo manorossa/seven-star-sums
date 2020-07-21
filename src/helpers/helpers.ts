@@ -25,7 +25,7 @@ const getRandomIndexSet = (setSize: number): Set<number> => {
 
 // fn returns an array of numbers in order based on the type of sum chosen in settings
 export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
-  const numLimit = op1 === '+' ? baseNum : 12;
+  const numLimit = op1 === '+' ? baseNum - 1 : 12;
   return getNumberRange(numLimit);
 };
 
