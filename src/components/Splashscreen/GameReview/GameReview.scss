@@ -7,17 +7,42 @@
   padding: 2vw;
   border: 1px solid $darkest;
 
-  .review-sum-container {
+  h4 {
+    color: $darkest;
+  }
+
+  .star,
+  .heart {
+    vertical-align: top;
+    & > svg {
+      margin-right: 0.5vw;
+      width: 2vw;
+      height: 2vw;
+      max-width: 20px;
+      max-height: 20px;
+    }
+  }
+
+  &__sum-container {
     border-top: 1px dotted $darkest;
   }
 
-  .wrong-answer {
-    color: $red;
+  &__sum {
+    font-size: 1.7vw;
     font-weight: $bold;
   }
 
-  .right-answer {
-    color: $green;
+  &__answer {
     font-weight: $bold;
+
+    &--wrong {
+      color: $red;
+      font-weight: $bold;
+    }
+
+    &--right {
+      color: $green;
+      font-weight: $bold;
+    }
   }
 }

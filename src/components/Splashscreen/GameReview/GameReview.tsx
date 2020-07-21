@@ -1,5 +1,7 @@
 import React from 'react';
 import './GameReview.css';
+import Heart from '../../../UI/atoms/Icons/Heart';
+import Star from '../../../UI/atoms/Icons/Star';
 import { useScore } from '../../../context/ScoreContext';
 import { useSum } from '../../../context/SumContext';
 import { answerMethod } from '../../../helpers/helpers';
@@ -27,13 +29,13 @@ const GameReview: React.FC = () => {
             : `${missingNum} x ${baseNum} = ${obj.correctAnswer}`;
 
         return (
-          <div className="review-sum-container" key={`sum-${obj.correctAnswer}`}>
+          <div className="game-review__sum-container" key={`sum-${obj.correctAnswer}`}>
             <p>
-              <strong>{sum}</strong>
+              <span className="game-review__sum">{sum}</span>
               &nbsp;&nbsp;&nbsp;You answered&nbsp;
-              <span className="wrong-answer">{obj.playerAnswer}</span>
-              .&nbsp; The correct answer was&nbsp;
-              <span className="right-answer">{obj.correctAnswer}</span>
+              <span className="game-review__answer game-review__answer--wrong">{obj.playerAnswer}</span>
+              ;&nbsp; the correct answer was&nbsp;
+              <span className="game-review__answer game-review__answer--right">{obj.correctAnswer}</span>
             </p>
           </div>
         );
@@ -44,9 +46,11 @@ const GameReview: React.FC = () => {
     <div className="game-review">
       <h4>Let&rsquo;s review your game...</h4>
       <p>
+        <Star fill="#fff100" stroke="#ff9b00" />
         <strong>{finalScore}</strong>
       </p>
       <p>
+        <Heart fill="#e74c3c" />
         <strong>{finalLives}</strong>
       </p>
       {didLoseLives && (
