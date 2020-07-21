@@ -27,11 +27,16 @@ export type AnswerState = {
   setCorrectAns: StateSetter<AnswerState['correctAns']>;
 };
 
+interface WrongAnswer {
+  correctAnswer: AnswerState['correctAns'];
+  playerAnswer: AnswerButton;
+}
+
 export type ScoreState = {
   totalLives: number;
   livesLeft: number;
   score: number;
-  wrongAnswers: number[];
+  wrongAnswers: WrongAnswer[];
   setTotalLives: StateSetter<ScoreState['totalLives']>;
   setLivesLeft: StateSetter<ScoreState['livesLeft']>;
   setScore: StateSetter<ScoreState['score']>;
