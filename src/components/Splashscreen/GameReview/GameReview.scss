@@ -1,10 +1,10 @@
 @import '../../../UI/base-styles/_variables.scss';
 
 .game-review {
-  margin-top: 5vh;
+  margin-top: 3vh;
   text-align: left;
   background-color: $white;
-  padding: 2vw;
+  padding: 1.5vw 2vw 1vw;
   border: 1px solid $darkest;
 
   h4 {
@@ -23,8 +23,18 @@
     }
   }
 
-  &__sum-container {
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &__sum-container:not(:first-of-type) {
     border-top: 1px dotted $darkest;
+  }
+
+  &__sum-container {
+    p:only-of-type {
+      margin: 0.5em 0;
+    }
   }
 
   &__sum {

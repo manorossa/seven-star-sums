@@ -13,6 +13,8 @@
 .splash {
   width: 60vw;
   max-width: 800px;
+  max-height: 94vh;
+  overflow-y: scroll;
   margin: 3vh auto;
   padding: 3vh 3vw;
   background-color: $lightest;
