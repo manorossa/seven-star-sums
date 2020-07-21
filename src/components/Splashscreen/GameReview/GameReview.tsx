@@ -1,4 +1,5 @@
 import React from 'react';
+import './GameReview.css';
 import { useScore } from '../../../context/ScoreContext';
 import { useSum } from '../../../context/SumContext';
 import { answerMethod } from '../../../helpers/helpers';
@@ -26,15 +27,13 @@ const GameReview: React.FC = () => {
             : `${missingNum} x ${baseNum} = ${obj.correctAnswer}`;
 
         return (
-          <div>
+          <div className="review-sum-container" key={`sum-${obj.correctAnswer}`}>
             <p>
               <strong>{sum}</strong>
-            </p>
-            <p>
-              You answered&nbsp;
-              <strong>{obj.playerAnswer}</strong>
+              &nbsp;&nbsp;&nbsp;You answered&nbsp;
+              <span className="wrong-answer">{obj.playerAnswer}</span>
               .&nbsp; The correct answer was&nbsp;
-              <strong>{obj.correctAnswer}</strong>
+              <span className="right-answer">{obj.correctAnswer}</span>
             </p>
           </div>
         );
@@ -42,7 +41,7 @@ const GameReview: React.FC = () => {
     : null;
 
   return (
-    <div>
+    <div className="game-review">
       <h4>Let&rsquo;s review your game...</h4>
       <p>
         <strong>{finalScore}</strong>
@@ -50,7 +49,11 @@ const GameReview: React.FC = () => {
       <p>
         <strong>{finalLives}</strong>
       </p>
-      {didLoseLives && <p>These are the sums you didn&rsquo;t get right:</p>}
+      {didLoseLives && (
+        <p>
+          <strong>These are the sums you didn&rsquo;t get right:</strong>
+        </p>
+      )}
       {wrongSums}
     </div>
   );

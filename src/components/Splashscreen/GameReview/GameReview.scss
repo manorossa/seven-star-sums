@@ -1,0 +1,23 @@
+@import '../../../UI/base-styles/_variables.scss';
+
+.game-review {
+  margin-top: 5vh;
+  text-align: left;
+  background-color: $white;
+  padding: 2vw;
+  border: 1px solid $darkest;
+
+  .review-sum-container {
+    border-top: 1px dotted $darkest;
+  }
+
+  .wrong-answer {
+    color: $red;
+    font-weight: $bold;
+  }
+
+  .right-answer {
+    color: $green;
+    font-weight: $bold;
+  }
+}
