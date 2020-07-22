@@ -41,7 +41,7 @@ export const answerMethod: AnswerMethodsObj = {
 export const defineSum = (
   possibleNums: SumState['possibleNums'],
   baseNum: SumState['baseNum'],
-  op1: SumState['op2']
+  op1: SumState['op1']
 ): DefineSumResult => {
   // Choose a random number from the possible numbers array,
   // based on the length of the possible numbers array
