@@ -36,6 +36,20 @@ export const answerMethod: AnswerMethodsObj = {
   x: (a, b) => a * b
 };
 
+const getWrongAnswer = (baseNum: SumState['baseNum'], op1: SumState['op1'], answer1: number): number => {
+  const lessOrMore = getRandomNumber(6) + 1 > 3;
+  console.log(`lessOrMore is ${lessOrMore}`);
+  const answerVariance = op1 === '+' ? 3 : baseNum;
+  let wrongAnswer = lessOrMore
+    ? answer1 + (getRandomNumber(answerVariance) + 1)
+    : answer1 - (getRandomNumber(answerVariance) + 1);
+  if (op1 === '+') {
+    wrongAnswer = wrongAnswer > baseNum ? baseNum : wrongAnswer; // Don't allow random answer to be higher than the baseNum
+  }
+  wrongAnswer = wrongAnswer < 0 ? 0 : wrongAnswer; // Don't allow random answer to be negative
+  return wrongAnswer;
+};
+
 // fn pulls out a random number from possible number, returns an array of randomised possible
 // answers of the correct one, and two others, also returns the correct answer by itself
 export const defineSum = (
@@ -49,13 +63,15 @@ export const defineSum = (
 
   // Define correct answer, and two incorrect other possibles, +/- up to 3 to the correct answer
   const answer1 = answerMethod[op1](baseNum, randomNum);
-  const answerVariance = op1 === '+' ? 3 : baseNum;
-  let answer2 = answer1 + (getRandomNumber(answerVariance) + 1);
-  if (op1 === '+') {
-    answer2 = answer2 > baseNum ? baseNum : answer2; // Don't allow random answer to be higher than the baseNum
-  }
-  let answer3 = answer1 - (getRandomNumber(answerVariance) + 1);
-  answer3 = answer3 < 0 ? 0 : answer3; // Don't allow random answer to be negative
+  // const answerVariance = op1 === '+' ? 3 : baseNum;
+  // let answer2 = answer1 + (getRandomNumber(answerVariance) + 1);
+  // if (op1 === '+') {
+  //   answer2 = answer2 > baseNum ? baseNum : answer2; // Don't allow random answer to be higher than the baseNum
+  // }
+  // let answer3 = answer1 - (getRandomNumber(answerVariance) + 1);
+  const answer2 = getWrongAnswer(baseNum, op1, answer1);
+  const answer3 = getWrongAnswer(baseNum, op1, answer1);
+  // answer3 = answer3 < 0 ? 0 : answer3; // Don't allow random answer to be negative
   // Put the possible answers into an array, ready to be shuffled
   const answerArray = [answer1, answer2, answer3];
   // Create a random order of indices of 0, 1 and 2
