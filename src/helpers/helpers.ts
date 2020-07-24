@@ -15,7 +15,7 @@ const getRandomIndexSet = (setSize: number): Set<number> => {
   const randomSet = new Set<number>();
   let i = 0;
   let a;
-  while (i < 3) {
+  while (i < setSize) {
     a = getRandomNumber(setSize);
     randomSet.add(a);
     i = randomSet.size;
@@ -50,6 +50,20 @@ const getWrongAnswer = (baseNum: SumState['baseNum'], op1: SumState['op1'], answ
   return wrongAnswer;
 };
 
+const getWrongAnswerSet = (baseNum: SumState['baseNum'], op1: SumState['op1'], answer1: number): number[] => {
+  const wrongAnswerSet = new Set<number>();
+  let j = 0;
+  let b;
+  while (j < 2) {
+    b = getWrongAnswer(baseNum, op1, answer1);
+    wrongAnswerSet.add(b);
+    j = wrongAnswerSet.size;
+  }
+  const wrongAnswerArray = [...wrongAnswerSet];
+  console.log(wrongAnswerArray);
+  return wrongAnswerArray;
+};
+
 // fn pulls out a random number from possible number, returns an array of randomised possible
 // answers of the correct one, and two others, also returns the correct answer by itself
 export const defineSum = (
@@ -69,8 +83,9 @@ export const defineSum = (
   //   answer2 = answer2 > baseNum ? baseNum : answer2; // Don't allow random answer to be higher than the baseNum
   // }
   // let answer3 = answer1 - (getRandomNumber(answerVariance) + 1);
-  const answer2 = getWrongAnswer(baseNum, op1, answer1);
-  const answer3 = getWrongAnswer(baseNum, op1, answer1);
+  const wrongAnswerArray = getWrongAnswerSet(baseNum, op1, answer1);
+  const answer2 = wrongAnswerArray[0];
+  const answer3 = wrongAnswerArray[1];
   // answer3 = answer3 < 0 ? 0 : answer3; // Don't allow random answer to be negative
   // Put the possible answers into an array, ready to be shuffled
   const answerArray = [answer1, answer2, answer3];
