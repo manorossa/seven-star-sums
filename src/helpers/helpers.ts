@@ -37,7 +37,7 @@ export const answerMethod: AnswerMethodsObj = {
 };
 
 const getWrongAnswer = (baseNum: SumState['baseNum'], op1: SumState['op1'], answer1: number): number => {
-  const lessOrMore = getRandomNumber(6) + 1 > 3;
+  const lessOrMore = getRandomNumber(2) > 0;
   console.log(`lessOrMore is ${lessOrMore}`);
   const answerVariance = op1 === '+' ? 3 : baseNum;
   let wrongAnswer = lessOrMore
