@@ -10,19 +10,6 @@ export const getNumberRange = (endNum: number): number[] => {
   return Array.from(new Array(endNum), (_, index) => index + 1);
 };
 
-// fn returns a set of numbers in random order from 0 to setSize
-// const getRandomIndexSet = (setSize: number): Set<number> => {
-//   const randomSet = new Set<number>();
-//   let i = 0;
-//   let a;
-//   while (i < setSize) {
-//     a = getRandomNumber(setSize);
-//     randomSet.add(a);
-//     i = randomSet.size;
-//   }
-//   return randomSet;
-// };
-
 // fn returns an array of numbers in order based on the type of sum chosen in settings
 export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
   const numLimit = op1 === '+' ? baseNum - 1 : 12;
@@ -36,9 +23,10 @@ export const answerMethod: AnswerMethodsObj = {
   x: (a, b) => a * b
 };
 
+// fn returns a single possible WRONG answer. Takes the correct answer and randomly
+// either adds or takes away a variance. Variance depends on the type of sum.
 const getWrongAnswer = (baseNum: SumState['baseNum'], op1: SumState['op1'], answer1: number): number => {
   const lessOrMore = getRandomNumber(2) > 0;
-  console.log(`lessOrMore is ${lessOrMore}`);
   const answerVariance = op1 === '+' ? 3 : baseNum;
   let wrongAnswer = lessOrMore
     ? answer1 + (getRandomNumber(answerVariance) + 1)
@@ -49,20 +37,6 @@ const getWrongAnswer = (baseNum: SumState['baseNum'], op1: SumState['op1'], answ
   wrongAnswer = wrongAnswer < 0 ? 0 : wrongAnswer; // Don't allow random answer to be negative
   return wrongAnswer;
 };
-
-// const getWrongAnswerSet = (baseNum: SumState['baseNum'], op1: SumState['op1'], answer1: number): number[] => {
-//   const wrongAnswerSet = new Set<number>();
-//   let j = 0;
-//   let b;
-//   while (j < 2) {
-//     b = getWrongAnswer(baseNum, op1, answer1);
-//     wrongAnswerSet.add(b);
-//     j = wrongAnswerSet.size;
-//   }
-//   const wrongAnswerArray = [...wrongAnswerSet];
-//   console.log(wrongAnswerArray);
-//   return wrongAnswerArray;
-// };
 
 // fn returns a set of numbers, based on set size, and function to define the numbers
 const getNumberSet: NumberSet<number[] | WrongAnswerArgs> = (targetSetSize, func, args) => {
@@ -88,18 +62,11 @@ export const defineSum = (
   // based on the length of the possible numbers array
   const randomNum = possibleNums[getRandomNumber(possibleNums.length)];
 
-  // Define correct answer, and two incorrect other possibles, +/- up to 3 to the correct answer
+  // fn defines correct answer, and two incorrect other possibles
   const answer1 = answerMethod[op1](baseNum, randomNum);
-  // const answerVariance = op1 === '+' ? 3 : baseNum;
-  // let answer2 = answer1 + (getRandomNumber(answerVariance) + 1);
-  // if (op1 === '+') {
-  //   answer2 = answer2 > baseNum ? baseNum : answer2; // Don't allow random answer to be higher than the baseNum
-  // }
-  // let answer3 = answer1 - (getRandomNumber(answerVariance) + 1);
   const wrongAnswerArray = [...getNumberSet(2, getWrongAnswer, [baseNum, op1, answer1])];
   const answer2 = wrongAnswerArray[0];
   const answer3 = wrongAnswerArray[1];
-  // answer3 = answer3 < 0 ? 0 : answer3; // Don't allow random answer to be negative
   // Put the possible answers into an array, ready to be shuffled
   const answerArray = [answer1, answer2, answer3];
   // Create a random order of indices of 0, 1 and 2
@@ -111,6 +78,7 @@ export const defineSum = (
   return { randomNum, possibleAns, answer1 };
 };
 
+// fn to retrieve settings from local storage. Returns null if they are not saved.
 export const getLocalSettings = (): SettingsModel | null => {
   const localSettings = window.localStorage.getItem('sevenStarSettings');
   if (localSettings) {
