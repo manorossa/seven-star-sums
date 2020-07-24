@@ -65,10 +65,8 @@ export const defineSum = (
   // fn defines correct answer, and two incorrect other possibles
   const answer1 = answerMethod[op1](baseNum, randomNum);
   const wrongAnswerArray = [...getNumberSet(2, getWrongAnswer, [baseNum, op1, answer1])];
-  const answer2 = wrongAnswerArray[0];
-  const answer3 = wrongAnswerArray[1];
   // Put the possible answers into an array, ready to be shuffled
-  const answerArray = [answer1, answer2, answer3];
+  const answerArray = [...wrongAnswerArray, answer1];
   // Create a random order of indices of 0, 1 and 2
   const answerSet: Set<number> = getNumberSet(3, getRandomNumber, [3]);
 
