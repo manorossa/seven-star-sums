@@ -11,17 +11,17 @@ export const getNumberRange = (endNum: number): number[] => {
 };
 
 // fn returns a set of numbers in random order from 0 to setSize
-const getRandomIndexSet = (setSize: number): Set<number> => {
-  const randomSet = new Set<number>();
-  let i = 0;
-  let a;
-  while (i < setSize) {
-    a = getRandomNumber(setSize);
-    randomSet.add(a);
-    i = randomSet.size;
-  }
-  return randomSet;
-};
+// const getRandomIndexSet = (setSize: number): Set<number> => {
+//   const randomSet = new Set<number>();
+//   let i = 0;
+//   let a;
+//   while (i < setSize) {
+//     a = getRandomNumber(setSize);
+//     randomSet.add(a);
+//     i = randomSet.size;
+//   }
+//   return randomSet;
+// };
 
 // fn returns an array of numbers in order based on the type of sum chosen in settings
 export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
@@ -50,18 +50,33 @@ const getWrongAnswer = (baseNum: SumState['baseNum'], op1: SumState['op1'], answ
   return wrongAnswer;
 };
 
-const getWrongAnswerSet = (baseNum: SumState['baseNum'], op1: SumState['op1'], answer1: number): number[] => {
-  const wrongAnswerSet = new Set<number>();
-  let j = 0;
-  let b;
-  while (j < 2) {
-    b = getWrongAnswer(baseNum, op1, answer1);
-    wrongAnswerSet.add(b);
-    j = wrongAnswerSet.size;
+// const getWrongAnswerSet = (baseNum: SumState['baseNum'], op1: SumState['op1'], answer1: number): number[] => {
+//   const wrongAnswerSet = new Set<number>();
+//   let j = 0;
+//   let b;
+//   while (j < 2) {
+//     b = getWrongAnswer(baseNum, op1, answer1);
+//     wrongAnswerSet.add(b);
+//     j = wrongAnswerSet.size;
+//   }
+//   const wrongAnswerArray = [...wrongAnswerSet];
+//   console.log(wrongAnswerArray);
+//   return wrongAnswerArray;
+// };
+
+type NumberSet<T> = (a: number, b: Function, c: T) => Set<number>;
+type WrongAnswerArgs = [SumState['baseNum'], SumState['op1'], number];
+
+const getNumberSet: NumberSet<number[] | WrongAnswerArgs> = (targetSetSize, func, args) => {
+  const numberSet = new Set<number>();
+  let i = 0;
+  let a;
+  while (i < targetSetSize) {
+    a = func(...args);
+    numberSet.add(a);
+    i = numberSet.size;
   }
-  const wrongAnswerArray = [...wrongAnswerSet];
-  console.log(wrongAnswerArray);
-  return wrongAnswerArray;
+  return numberSet;
 };
 
 // fn pulls out a random number from possible number, returns an array of randomised possible
@@ -83,14 +98,14 @@ export const defineSum = (
   //   answer2 = answer2 > baseNum ? baseNum : answer2; // Don't allow random answer to be higher than the baseNum
   // }
   // let answer3 = answer1 - (getRandomNumber(answerVariance) + 1);
-  const wrongAnswerArray = getWrongAnswerSet(baseNum, op1, answer1);
+  const wrongAnswerArray = [...getNumberSet(2, getWrongAnswer, [baseNum, op1, answer1])];
   const answer2 = wrongAnswerArray[0];
   const answer3 = wrongAnswerArray[1];
   // answer3 = answer3 < 0 ? 0 : answer3; // Don't allow random answer to be negative
   // Put the possible answers into an array, ready to be shuffled
   const answerArray = [answer1, answer2, answer3];
   // Create a random order of indices of 0, 1 and 2
-  const answerSet: Set<number> = getRandomIndexSet(3);
+  const answerSet: Set<number> = getNumberSet(3, getRandomNumber, [3]);
 
   // shuffle the possible answer array according to the random order of indices
   const possibleAns = [...answerSet].map((x) => answerArray[x]);
