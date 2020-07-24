@@ -1,4 +1,4 @@
-import { SumState, SettingsModel, AnswerMethodsObj, DefineSumResult } from '../types/types';
+import { SumState, SettingsModel, AnswerMethodsObj, DefineSumResult, NumberSet, WrongAnswerArgs } from '../types/types';
 
 // fn retuns a random integer with a ceiling based on the number given
 export const getRandomNumber = (base: number): number => {
@@ -64,9 +64,7 @@ const getWrongAnswer = (baseNum: SumState['baseNum'], op1: SumState['op1'], answ
 //   return wrongAnswerArray;
 // };
 
-type NumberSet<T> = (a: number, b: Function, c: T) => Set<number>;
-type WrongAnswerArgs = [SumState['baseNum'], SumState['op1'], number];
-
+// fn returns a set of numbers, based on set size, and function to define the numbers
 const getNumberSet: NumberSet<number[] | WrongAnswerArgs> = (targetSetSize, func, args) => {
   const numberSet = new Set<number>();
   let i = 0;
