@@ -11,6 +11,7 @@ export const getNumberRange = (endNum: number): number[] => {
 };
 
 // fn returns an array of numbers in order based on the type of sum chosen in settings
+// Runs when gameStatus is 'defineNums'
 export const definePossibleNums = (baseNum: SumState['baseNum'], op1: SumState['op1']): number[] => {
   const numLimit = op1 === '+' ? baseNum - 1 : 12;
   return getNumberRange(numLimit);
@@ -53,15 +54,14 @@ const getNumberSet: NumberSet<number[] | WrongAnswerArgs> = (targetSetSize, func
 
 // fn pulls out a random number from possible number, returns an array of randomised possible
 // answers of the correct one, and two others, also returns the correct answer by itself
+// Runs when gameStatus is 'defineSum'
 export const defineSum = (
   possibleNums: SumState['possibleNums'],
   baseNum: SumState['baseNum'],
   op1: SumState['op1']
 ): DefineSumResult => {
-  // Choose a random number from the possible numbers array,
-  // based on the length of the possible numbers array
+  // Choose a random number from the possible numbers array
   const randomNum = possibleNums[getRandomNumber(possibleNums.length)];
-
   // fn defines correct answer, and two incorrect other possibles
   const answer1 = answerMethod[op1](baseNum, randomNum);
   const wrongAnswerArray = [...getNumberSet(2, getWrongAnswer, [baseNum, op1, answer1])];
@@ -69,7 +69,6 @@ export const defineSum = (
   const answerArray = [...wrongAnswerArray, answer1];
   // Create a random order of indices of 0, 1 and 2
   const answerSet: Set<number> = getNumberSet(3, getRandomNumber, [3]);
-
   // shuffle the possible answer array according to the random order of indices
   const possibleAns = [...answerSet].map((x) => answerArray[x]);
 
