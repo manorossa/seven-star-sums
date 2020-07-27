@@ -37,7 +37,7 @@ const Result: React.FC = () => {
     starText = 'You just got your seventh star, and won the game!';
   }
   const loseText = endLose
-    ? 'You just lost your last life... Game over.'
+    ? 'You just lost your last life... It&rsquo;s game over.'
     : 'You lose a life, but try again with another sum.';
   const modifiers = 'horizontal';
 
