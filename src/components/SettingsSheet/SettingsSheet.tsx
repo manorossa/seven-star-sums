@@ -85,7 +85,7 @@ const SettingsSheet: React.FC = () => {
   const operatorOptions = ['+', 'x'];
   const operatorText = ['Number bonds', 'Times tables'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
-  const pairOptions = [10, 20];
+  const bondOptions = [10, 20];
   const difficultyOptions = [7, 5, 3];
   const difficultyText = ['Medium: 7', 'Hard: 5', ' Very hard: 3'];
 
@@ -126,13 +126,13 @@ const SettingsSheet: React.FC = () => {
     makeButtonStyles(horizButtons),
     operatorText
   );
-  const pairMap = buttonMap(
-    pairOptions,
+  const bondMap = buttonMap(
+    bondOptions,
     panelBaseNum,
     2,
     panel2Handler,
     makeButtonStyles(smallRoundButtons),
-    pairOptions
+    bondOptions
   );
   const tableMap = buttonMap(
     tableOptions,
@@ -170,7 +170,7 @@ const SettingsSheet: React.FC = () => {
         {bonds ? (
           <>
             <h3>Choose your bond number:</h3>
-            <div className="settings__button-container settings__button-container--small">{pairMap}</div>
+            <div className="settings__button-container settings__button-container--small">{bondMap}</div>
           </>
         ) : (
           <>
