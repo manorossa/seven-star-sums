@@ -22,7 +22,7 @@ const SettingsSheet: React.FC = () => {
   // IF SETTINGS HAVE ALREADY BEEN SET THEN SHOW ALL OPTIONS FROM START
   useEffect(() => {
     if (isLocalSettings && localSettings) {
-      setSettingStatus(4);
+      setSettingStatus(5);
       setOperator(localSettings.finalOperator);
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
@@ -35,36 +35,37 @@ const SettingsSheet: React.FC = () => {
     if (isLocalSettings) {
       setPanelBaseNum(0);
       setIsResetOperator(true);
-      setSettingStatus(4);
+      setSettingStatus(5);
       setOperator(chosenOperator as SumState['op1']);
       return;
     }
-    setSettingStatus(2);
+    setSettingStatus(3);
     setOperator(chosenOperator as SumState['op1']);
   };
 
-  const panel2Handler: GenericFunc<number> = (chosenBaseNum) => {
+  const panel3Handler: GenericFunc<number> = (chosenBaseNum) => {
     if (!isLocalSettings) {
-      setSettingStatus(3);
+      setSettingStatus(4);
     }
     if (isResetOperator) {
-      setSettingStatus(5);
+      setSettingStatus(6);
     }
     setPanelBaseNum(chosenBaseNum);
   };
 
-  const panel3Handler: GenericFunc<number> = (lives) => {
-    setSettingStatus(4);
+  const panel4Handler: GenericFunc<number> = (lives) => {
+    setSettingStatus(5);
     if (isResetOperator) {
-      setSettingStatus(5);
+      setSettingStatus(6);
     }
     setDifficulty(lives);
   };
 
   // PANEL VISIBILITY OPTIONS
   const panel2viz = settingStatus > 1 ? 'show' : 'hide';
-  const panel3viz = settingStatus > 2 || isResetOperator ? 'show' : 'hide';
-  const panel4viz = (settingStatus > 3 && !isResetOperator) || settingStatus > 4 ? 'show' : 'hide';
+  const panel3viz = settingStatus > 2 ? 'show' : 'hide';
+  const panel4viz = settingStatus > 3 || isResetOperator ? 'show' : 'hide';
+  const panel5viz = (settingStatus > 4 && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
 
   // RENDERING LOGIC
   const bonds = operator === '+';
@@ -130,24 +131,24 @@ const SettingsSheet: React.FC = () => {
   const bondMap = buttonMap(
     bondOptions,
     panelBaseNum,
-    2,
-    panel2Handler,
+    3,
+    panel3Handler,
     makeButtonStyles(smallRoundButtons),
     bondOptions
   );
   const tableMap = buttonMap(
     tableOptions,
     panelBaseNum,
-    2,
-    panel2Handler,
+    3,
+    panel3Handler,
     makeButtonStyles(smallRoundButtons),
     tableOptions
   );
   const difficultyMap = buttonMap(
     difficultyOptions,
     difficulty,
-    3,
-    panel3Handler,
+    4,
+    panel4Handler,
     makeButtonStyles(horizButtons),
     difficultyText
   );
@@ -167,7 +168,7 @@ const SettingsSheet: React.FC = () => {
         <h3>What type of sums do you want to play today?</h3>
         <div className="settings__button-container">{operatorMap}</div>
       </div>
-      <div className="settings__panel settings__panel--1">
+      <div className={`settings__panel settings__panel--1 settings__panel--${panel2viz}`}>
         {bonds ? (
           <>
             <h3>Do you want to do adding or taking away?</h3>
@@ -180,7 +181,7 @@ const SettingsSheet: React.FC = () => {
           </>
         )}
       </div>
-      <div className={`settings__panel settings__panel--2 settings__panel--${panel2viz}`}>
+      <div className={`settings__panel settings__panel--2 settings__panel--${panel3viz}`}>
         {bonds ? (
           <>
             <h3>Choose your bond number:</h3>
@@ -193,11 +194,11 @@ const SettingsSheet: React.FC = () => {
           </>
         )}
       </div>
-      <div className={`settings__panel settings__panel--3 settings__panel--${panel3viz}`}>
+      <div className={`settings__panel settings__panel--3 settings__panel--${panel4viz}`}>
         <h3>How many lives do you want to have?</h3>
         <div className="settings__button-container">{difficultyMap}</div>
       </div>
-      <div className={`settings__panel settings__panel--2 settings__panel--${panel4viz}`}>
+      <div className={`settings__panel settings__panel--2 settings__panel--${panel5viz}`}>
         <Button
           type="button"
           handler={(): void => finalSettings(panelBaseNum, operator, difficulty)}
