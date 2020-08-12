@@ -12,7 +12,7 @@ const SettingsSheet: React.FC = () => {
   const { setBaseNum, setOp1 } = useSum();
   const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
-  const [sumType, setSumType] = useState('bond');
+  const [sumType, setSumType] = useState('bonds');
   const [operator, setOperator] = useState('+' as SumState['op1']);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
@@ -26,6 +26,9 @@ const SettingsSheet: React.FC = () => {
       setOperator(localSettings.finalOperator);
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
+      if (localSettings.finalOperator === 'x') {
+        setSumType('tables');
+      }
     }
     // eslint-disable-next-line
   }, []);
@@ -68,7 +71,7 @@ const SettingsSheet: React.FC = () => {
   const panel5viz = (settingStatus > 4 && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
 
   // RENDERING LOGIC
-  const bonds = operator === '+';
+  const bonds = sumType === 'bonds';
 
   // BUTTON STYLING
   const horizButtons = ['horizontal'];
@@ -84,8 +87,9 @@ const SettingsSheet: React.FC = () => {
   };
 
   // BUTTON CONTENT
+  const typeOptions = ['bonds', 'tables'];
+  const typeText = ['Number bonds', 'Times tables'];
   const operatorOptions = ['+', 'x'];
-  const operatorText = ['Number bonds', 'Times tables'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const bondOptions = [10, 20];
   const difficultyOptions = [7, 5, 3];
@@ -120,14 +124,7 @@ const SettingsSheet: React.FC = () => {
       }
     );
 
-  const operatorMap = buttonMap(
-    operatorOptions,
-    operator,
-    1,
-    panel1Handler,
-    makeButtonStyles(horizButtons),
-    operatorText
-  );
+  const operatorMap = buttonMap(typeOptions, sumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
   const bondMap = buttonMap(
     bondOptions,
     panelBaseNum,
