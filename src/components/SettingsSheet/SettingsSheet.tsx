@@ -34,15 +34,22 @@ const SettingsSheet: React.FC = () => {
   }, []);
 
   // PANEL HANDLERS START
-  const panel1Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
+  const panel1Handler: GenericFunc<SumState['op1']> = (chosenType) => {
     if (isLocalSettings) {
       setPanelBaseNum(0);
       setIsResetOperator(true);
       setSettingStatus(5);
-      setOperator(chosenOperator as SumState['op1']);
+      setSumType(chosenType);
       return;
     }
-    setSettingStatus(3);
+    setSettingStatus(2);
+    setSumType(chosenType);
+  };
+
+  const panel2Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
+    if (!isLocalSettings) {
+      setSettingStatus(3);
+    }
     setOperator(chosenOperator as SumState['op1']);
   };
 
@@ -89,7 +96,8 @@ const SettingsSheet: React.FC = () => {
   // BUTTON CONTENT
   const typeOptions = ['bonds', 'tables'];
   const typeText = ['Number bonds', 'Times tables'];
-  const operatorOptions = ['+', 'x'];
+  const bondOperatorOptions = ['+', '-'];
+  const tableOperatorOptions = ['x', '÷'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const bondOptions = [10, 20];
   const difficultyOptions = [7, 5, 3];
@@ -124,7 +132,23 @@ const SettingsSheet: React.FC = () => {
       }
     );
 
-  const operatorMap = buttonMap(typeOptions, sumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
+  const typeMap = buttonMap(typeOptions, sumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
+  const bondOperatorMap = buttonMap(
+    bondOperatorOptions,
+    operator,
+    2,
+    panel2Handler,
+    makeButtonStyles(horizButtons),
+    bondOperatorOptions
+  );
+  const tableOperatorMap = buttonMap(
+    tableOperatorOptions,
+    operator,
+    2,
+    panel2Handler,
+    makeButtonStyles(horizButtons),
+    tableOperatorOptions
+  );
   const bondMap = buttonMap(
     bondOptions,
     panelBaseNum,
@@ -163,18 +187,18 @@ const SettingsSheet: React.FC = () => {
     <div className="settings__sheet">
       <div className="settings__panel settings__panel--1">
         <h3>What type of sums do you want to play today?</h3>
-        <div className="settings__button-container">{operatorMap}</div>
+        <div className="settings__button-container">{typeMap}</div>
       </div>
       <div className={`settings__panel settings__panel--1 settings__panel--${panel2viz}`}>
         {bonds ? (
           <>
             <h3>Do you want to do adding or taking away?</h3>
-            <div className="settings__button-container">{operatorMap}</div>
+            <div className="settings__button-container">{bondOperatorMap}</div>
           </>
         ) : (
           <>
             <h3>Do you want to do multiplication or division?</h3>
-            <div className="settings__button-container">{operatorMap}</div>
+            <div className="settings__button-container">{tableOperatorMap}</div>
           </>
         )}
       </div>
