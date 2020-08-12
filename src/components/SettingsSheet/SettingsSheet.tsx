@@ -12,6 +12,7 @@ const SettingsSheet: React.FC = () => {
   const { setBaseNum, setOp1 } = useSum();
   const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
+  const [sumType, setSumType] = useState('bond');
   const [operator, setOperator] = useState('+' as SumState['op1']);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
@@ -165,6 +166,19 @@ const SettingsSheet: React.FC = () => {
       <div className="settings__panel settings__panel--1">
         <h3>What type of sums do you want to play today?</h3>
         <div className="settings__button-container">{operatorMap}</div>
+      </div>
+      <div className="settings__panel settings__panel--1">
+        {bonds ? (
+          <>
+            <h3>Do you want to do adding or taking away?</h3>
+            <div className="settings__button-container">{operatorMap}</div>
+          </>
+        ) : (
+          <>
+            <h3>Do you want to do multiplication or division?</h3>
+            <div className="settings__button-container">{operatorMap}</div>
+          </>
+        )}
       </div>
       <div className={`settings__panel settings__panel--2 settings__panel--${panel2viz}`}>
         {bonds ? (
