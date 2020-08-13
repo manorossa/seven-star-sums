@@ -15,7 +15,8 @@ export type GameStates =
   | 'endLose';
 
 type AnswerButton = number | '?';
-type Operator1 = '+' | 'x';
+type SumTypes = 'bonds' | 'tables';
+type Operator1 = '+' | '-' | 'x' | '÷';
 
 export type Props = { children: ReactNode };
 type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
@@ -53,6 +54,7 @@ export type StatusState = {
 };
 
 export type SumState = {
+  sumType: SumTypes;
   possibleNums: number[];
   num1: number | null;
   num2: AnswerButton;
@@ -60,6 +62,7 @@ export type SumState = {
   op1: Operator1;
   op2: string;
   rightWrong: boolean | null;
+  setSumType: StateSetter<SumState['sumType']>;
   setPossibleNums: StateSetter<SumState['possibleNums']>;
   setNum1: StateSetter<SumState['num1']>;
   setNum2: StateSetter<SumState['num2']>;
