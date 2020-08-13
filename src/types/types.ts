@@ -100,3 +100,4 @@ export interface DefineSumResult {
 
 export type NumberSet<T> = (a: number, b: Function, c: T) => Set<number>;
 export type WrongAnswerArgs = [SumState['baseNum'], SumState['sumType'], number];
+export type SumNumberOrder = Array<SumState['num1'] | SumState['num2'] | SumState['baseNum']>;

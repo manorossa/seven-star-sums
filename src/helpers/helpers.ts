@@ -1,4 +1,12 @@
-import { SumState, SettingsModel, AnswerMethodsObj, DefineSumResult, NumberSet, WrongAnswerArgs } from '../types/types';
+import {
+  SumState,
+  SettingsModel,
+  AnswerMethodsObj,
+  DefineSumResult,
+  NumberSet,
+  WrongAnswerArgs,
+  SumNumberOrder
+} from '../types/types';
 
 // fn retuns a random integer with a ceiling based on the number given
 export const getRandomNumber = (base: number): number => {
@@ -54,8 +62,6 @@ const getNumberSet: NumberSet<number[] | WrongAnswerArgs> = (targetSetSize, func
   return numberSet;
 };
 
-// fn to construct the sum depending on the operator chosen operator
-
 // fn pulls out a random number from possible number, returns an array of randomised possible
 // answers of the correct one, and two others, also returns the correct answer by itself
 // Runs when gameStatus is 'defineSum'
@@ -87,4 +93,21 @@ export const getLocalSettings = (): SettingsModel | null => {
     return JSON.parse(localSettings);
   }
   return null;
+};
+
+// fn to construct the sum depending on the operator chosen operator
+export const getSumNumberOrder = (
+  operator: SumState['op1'],
+  number1: SumState['num1'],
+  number2: SumState['num2'],
+  baseNumber: SumState['baseNum']
+): SumNumberOrder => {
+  const divTotal = number1 ? number1 * baseNumber : baseNumber;
+  const numOrder = {
+    '+': [number1, number2, baseNumber],
+    '-': [baseNumber, number2, number1],
+    x: [number1, baseNumber, number2],
+    '÷': [divTotal, baseNumber, number2]
+  };
+  return numOrder[operator];
 };
