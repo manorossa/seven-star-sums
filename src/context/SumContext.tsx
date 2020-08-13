@@ -5,6 +5,7 @@ const SumContext = React.createContext<Partial<SumState>>({});
 const { Provider } = SumContext;
 
 const SumProvider = ({ children }: Props): JSX.Element => {
+  const [sumType, setSumType] = useState('bonds' as SumState['sumType']);
   const [possibleNums, setPossibleNums] = useState([] as SumState['possibleNums']);
   const [num1, setNum1] = useState(null as SumState['num1']);
   const [num2, setNum2] = useState('?' as SumState['num2']);
@@ -15,6 +16,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
 
   const sumState = useMemo(
     () => ({
+      sumType,
       possibleNums,
       num1,
       num2,
@@ -22,6 +24,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       op1,
       op2,
       rightWrong,
+      setSumType,
       setPossibleNums,
       setNum1,
       setNum2,
@@ -30,7 +33,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       setOp2,
       setRightWrong
     }),
-    [possibleNums, num1, num2, baseNum, op1, op2, rightWrong]
+    [sumType, possibleNums, num1, num2, baseNum, op1, op2, rightWrong]
   );
 
   return <Provider value={sumState}>{children}</Provider>;
@@ -38,6 +41,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
 
 const useSum = (): SumState => {
   const {
+    sumType,
     possibleNums,
     num1,
     num2,
@@ -45,6 +49,7 @@ const useSum = (): SumState => {
     op1,
     op2,
     rightWrong,
+    setSumType,
     setPossibleNums,
     setNum1,
     setNum2,
@@ -55,6 +60,7 @@ const useSum = (): SumState => {
   } = useContext(SumContext);
 
   if (
+    sumType === undefined ||
     possibleNums === undefined ||
     num1 === undefined ||
     num2 === undefined ||
@@ -62,6 +68,7 @@ const useSum = (): SumState => {
     op1 === undefined ||
     op2 === undefined ||
     rightWrong === undefined ||
+    setSumType === undefined ||
     setPossibleNums === undefined ||
     setNum1 === undefined ||
     setNum2 === undefined ||
@@ -74,6 +81,7 @@ const useSum = (): SumState => {
   }
 
   return {
+    sumType,
     possibleNums,
     num1,
     num2,
@@ -81,6 +89,7 @@ const useSum = (): SumState => {
     op1,
     op2,
     rightWrong,
+    setSumType,
     setPossibleNums,
     setNum1,
     setNum2,

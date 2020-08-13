@@ -12,7 +12,7 @@ const SettingsSheet: React.FC = () => {
   const { setBaseNum, setOp1 } = useSum();
   const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
-  const [sumType, setSumType] = useState('bonds');
+  const [panelSumType, setPanelSumType] = useState('bonds');
   const [operator, setOperator] = useState('+' as SumState['op1']);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
@@ -27,7 +27,7 @@ const SettingsSheet: React.FC = () => {
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
       if (localSettings.finalOperator === 'x') {
-        setSumType('tables');
+        setPanelSumType('tables');
       }
     }
     // eslint-disable-next-line
@@ -39,11 +39,11 @@ const SettingsSheet: React.FC = () => {
       setPanelBaseNum(0);
       setIsResetOperator(true);
       setSettingStatus(5);
-      setSumType(chosenType);
+      setPanelSumType(chosenType);
       return;
     }
     setSettingStatus(2);
-    setSumType(chosenType);
+    setPanelSumType(chosenType);
   };
 
   const panel2Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
@@ -78,7 +78,7 @@ const SettingsSheet: React.FC = () => {
   const panel5viz = (settingStatus > 4 && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
 
   // RENDERING LOGIC
-  const bonds = sumType === 'bonds';
+  const bonds = panelSumType === 'bonds';
 
   // BUTTON STYLING
   const horizButtons = ['horizontal'];
@@ -132,7 +132,7 @@ const SettingsSheet: React.FC = () => {
       }
     );
 
-  const typeMap = buttonMap(typeOptions, sumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
+  const typeMap = buttonMap(typeOptions, panelSumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
   const bondOperatorMap = buttonMap(
     bondOperatorOptions,
     operator,
