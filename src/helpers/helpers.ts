@@ -21,7 +21,9 @@ export const definePossibleNums = (baseNum: SumState['baseNum'], sumType: SumSta
 // @todo add other methods when needed
 export const answerMethod: AnswerMethodsObj = {
   '+': (a, b) => a - b,
-  x: (a, b) => a * b
+  '-': (a, b) => a - b,
+  x: (a, b) => a * b,
+  '÷': (a, b) => (a * b) / a
 };
 
 // fn returns a single possible WRONG answer. Takes the correct answer and randomly
@@ -51,6 +53,8 @@ const getNumberSet: NumberSet<number[] | WrongAnswerArgs> = (targetSetSize, func
   }
   return numberSet;
 };
+
+// fn to construct the sum depending on the operator chosen operator
 
 // fn pulls out a random number from possible number, returns an array of randomised possible
 // answers of the correct one, and two others, also returns the correct answer by itself
