@@ -31,6 +31,7 @@ export type AnswerState = {
 interface WrongAnswer {
   correctAnswer: AnswerState['correctAns'];
   playerAnswer: AnswerButton;
+  completeSum: string;
 }
 
 export type ScoreState = {

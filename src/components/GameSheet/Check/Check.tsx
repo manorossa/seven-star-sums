@@ -6,11 +6,12 @@ import { useStatus } from '../../../context/StatusContext';
 import { useAnswer } from '../../../context/AnswerContext';
 import { useSum } from '../../../context/SumContext';
 import { useScore } from '../../../context/ScoreContext';
+import { getSumNumberOrder } from '../../../helpers/helpers';
 
 const Check: React.FC = (): JSX.Element => {
   const { setGameStatus } = useStatus();
   const { correctAns } = useAnswer();
-  const { num2, setNum2, setRightWrong } = useSum();
+  const { op1, num1, num2, baseNum, setNum2, setRightWrong } = useSum();
   const { wrongAnswers, setLivesLeft, setScore, setWrongAnswers } = useScore();
 
   const yesButtonHandler = (): void => {
@@ -19,11 +20,14 @@ const Check: React.FC = (): JSX.Element => {
     setGameStatus('showResult');
     if (!isCorrect) {
       setLivesLeft((prevLives) => prevLives - 1);
+      const sumOrder = getSumNumberOrder(op1, num1, correctAns as number, baseNum);
+      const sum = `${sumOrder[0]} ${op1} ${sumOrder[1]} = ${sumOrder[2]}`;
       setWrongAnswers([
         ...wrongAnswers,
         {
           correctAnswer: correctAns,
-          playerAnswer: num2
+          playerAnswer: num2,
+          completeSum: sum
         }
       ]);
       return;
