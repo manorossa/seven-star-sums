@@ -26,9 +26,7 @@ const SettingsSheet: React.FC = () => {
       setOperator(localSettings.finalOperator);
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
-      if (localSettings.finalOperator === 'x') {
-        setPanelSumType('tables');
-      }
+      setPanelSumType(localSettings.finalSumType);
     }
     // eslint-disable-next-line
   }, []);

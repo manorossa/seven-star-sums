@@ -73,6 +73,7 @@ export type SumState = {
 };
 
 export interface SettingsModel {
+  finalSumType: SumState['sumType'];
   finalBaseNum: number;
   finalOperator: SumState['op1'];
   finalDifficulty: number;
