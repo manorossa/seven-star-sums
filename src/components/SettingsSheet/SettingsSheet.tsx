@@ -9,10 +9,10 @@ import { getLocalSettings } from '../../helpers/helpers';
 
 const SettingsSheet: React.FC = () => {
   const { isLocalSettings, setGameStatus } = useStatus();
-  const { setBaseNum, setOp1 } = useSum();
+  const { setSumType, setBaseNum, setOp1 } = useSum();
   const { setTotalLives } = useScore();
   const [settingStatus, setSettingStatus] = useState(1);
-  const [panelSumType, setPanelSumType] = useState('bonds');
+  const [panelSumType, setPanelSumType] = useState('bonds' as SumState['sumType']);
   const [operator, setOperator] = useState('+' as SumState['op1']);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
@@ -39,11 +39,11 @@ const SettingsSheet: React.FC = () => {
       setPanelBaseNum(0);
       setIsResetOperator(true);
       setSettingStatus(5);
-      setPanelSumType(chosenType);
+      setPanelSumType(chosenType as SumState['sumType']);
       return;
     }
     setSettingStatus(2);
-    setPanelSumType(chosenType);
+    setPanelSumType(chosenType as SumState['sumType']);
   };
 
   const panel2Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
@@ -105,15 +105,15 @@ const SettingsSheet: React.FC = () => {
 
   // CREATE BUTTON MAPS
   const buttonMap = (
-    options: OptionsMap<string | number | SumState['op1']>,
+    options: OptionsMap<string | number | SumState['op1'] | SumState['sumType']>,
     stateCheck: string | number,
     panelNum: number,
-    clickHandler: GenericFunc<SumState['op1'] & number>,
+    clickHandler: GenericFunc<SumState['sumType'] & SumState['op1'] & number>,
     buttonStyle: string[][],
     buttonText: number[] | string[]
   ): JSX.Element[] =>
     options.map(
-      (option: string | number | SumState['op1'], index: number): JSX.Element => {
+      (option: string | number | SumState['op1'] | SumState['sumType'], index: number): JSX.Element => {
         const [butMod, butModAct, butModInact] = buttonStyle;
         let buttonModifiers = butMod;
         if (settingStatus > panelNum && stateCheck) {
@@ -123,7 +123,7 @@ const SettingsSheet: React.FC = () => {
           <Button
             key={`panel-${panelNum}-${option}`}
             type="button"
-            handler={(): void => clickHandler(option as SumState['op1'] & number)}
+            handler={(): void => clickHandler(option as SumState['sumType'] & SumState['op1'] & number)}
             modifiers={buttonModifiers}
           >
             {buttonText[index]}
@@ -174,12 +174,18 @@ const SettingsSheet: React.FC = () => {
     difficultyText
   );
 
-  const finalSettings = (finalBaseNum: number, finalOperator: SumState['op1'], finalDifficulty: number): void => {
+  const finalSettings = (
+    finalSumType: SumState['sumType'],
+    finalBaseNum: number,
+    finalOperator: SumState['op1'],
+    finalDifficulty: number
+  ): void => {
+    setSumType(finalSumType);
     setBaseNum(finalBaseNum);
     setOp1(finalOperator);
     setTotalLives(finalDifficulty);
     setGameStatus('resetGame');
-    const allSettings = { finalBaseNum, finalOperator, finalDifficulty };
+    const allSettings = { finalSumType, finalBaseNum, finalOperator, finalDifficulty };
     window.localStorage.setItem('sevenStarSettings', JSON.stringify(allSettings));
   };
 
@@ -222,7 +228,7 @@ const SettingsSheet: React.FC = () => {
       <div className={`settings__panel settings__panel--2 settings__panel--${panel5viz}`}>
         <Button
           type="button"
-          handler={(): void => finalSettings(panelBaseNum, operator, difficulty)}
+          handler={(): void => finalSettings(panelSumType, panelBaseNum, operator, difficulty)}
           modifiers={horizGreenButtons}
         >
           Start the sums!
