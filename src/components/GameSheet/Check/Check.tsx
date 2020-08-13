@@ -14,10 +14,10 @@ const Check: React.FC = (): JSX.Element => {
   const { wrongAnswers, setLivesLeft, setScore, setWrongAnswers } = useScore();
 
   const yesButtonHandler = (): void => {
-    const correct = num2 === correctAns;
-    setRightWrong(correct);
+    const isCorrect = num2 === correctAns;
+    setRightWrong(isCorrect);
     setGameStatus('showResult');
-    if (!correct) {
+    if (!isCorrect) {
       setLivesLeft((prevLives) => prevLives - 1);
       setWrongAnswers([
         ...wrongAnswers,
