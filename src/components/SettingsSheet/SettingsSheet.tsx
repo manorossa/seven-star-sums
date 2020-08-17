@@ -44,6 +44,7 @@ const SettingsSheet: React.FC = () => {
     if (isLocalSettings) {
       setPanelBaseNum(0);
       setIsResetType(true);
+      setIsResetOperator(false);
       setSettingStatus(5);
       setPanelSumType(chosenType as SumState['sumType']);
       return;
