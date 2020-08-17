@@ -23,6 +23,7 @@ const SettingsSheet: React.FC = () => {
   const [operator, setOperator] = useState('+' as SumState['op1']);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
+  const [isResetType, setIsResetType] = useState(false);
   const [isResetOperator, setIsResetOperator] = useState(false);
   const localSettings = getLocalSettings();
 
@@ -42,7 +43,7 @@ const SettingsSheet: React.FC = () => {
   const panel1Handler: GenericFunc<SumState['op1']> = (chosenType) => {
     if (isLocalSettings) {
       setPanelBaseNum(0);
-      setIsResetOperator(true);
+      setIsResetType(true);
       setSettingStatus(5);
       setPanelSumType(chosenType as SumState['sumType']);
       return;
@@ -54,6 +55,13 @@ const SettingsSheet: React.FC = () => {
   const panel2Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
     if (!isLocalSettings) {
       setSettingStatus(3);
+    }
+    if (isResetType) {
+      setIsResetOperator(true);
+      setSettingStatus(5);
+    }
+    if (isResetType && panelBaseNum > 0) {
+      setSettingStatus(6);
     }
     setOperator(chosenOperator as SumState['op1']);
   };
@@ -92,7 +100,7 @@ const SettingsSheet: React.FC = () => {
   };
 
   // PANEL VISIBILITY OPTIONS
-  const panel5viz = (settingStatus > 4 && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
+  const panel5viz = (settingStatus > 4 && !isResetType && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
 
   // RENDERING LOGIC
   const bonds = panelSumType === 'bonds';
