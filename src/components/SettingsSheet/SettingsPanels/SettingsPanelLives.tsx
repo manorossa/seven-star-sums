@@ -2,14 +2,14 @@ import React from 'react';
 import { buttonStyles, makeButtonStyles, buttonMap } from './ButtonMapper';
 import { GenericFunc } from '../../../types/types';
 
-interface Panel4Props {
+interface PanelLivesProps {
   stateChecker: number;
   handler: GenericFunc<number>;
   status: number;
   isResetOperator: boolean;
 }
 
-const SettingsPanel1: React.FC<Panel4Props> = ({ stateChecker, handler, status, isResetOperator }) => {
+const SettingsPanelLives: React.FC<PanelLivesProps> = ({ stateChecker, handler, status, isResetOperator }) => {
   // BUTTON CONTENT
   const difficultyOptions = [7, 5, 3];
   const difficultyText = ['Medium: 7', 'Hard: 5', ' Very hard: 3'];
@@ -26,14 +26,14 @@ const SettingsPanel1: React.FC<Panel4Props> = ({ stateChecker, handler, status, 
   );
 
   // PANEL VISIBILITY OPTIONS
-  const panel4viz = status > 3 || isResetOperator ? 'show' : 'hide';
+  const panelLivesviz = status > 3 || isResetOperator ? 'show' : 'hide';
 
   return (
-    <div className={`settings__panel settings__panel--${panel4viz}`}>
+    <div className={`settings__panel settings__panel--${panelLivesviz}`}>
       <h3>How many lives do you want to have?</h3>
       <div className="settings__button-container settings__button-container--med">{difficultyMap}</div>
     </div>
   );
 };
 
-export default SettingsPanel1;
+export default SettingsPanelLives;

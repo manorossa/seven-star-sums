@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import SettingsPanel1 from './SettingsPanels/SettingsPanel1';
-import SettingsPanel2 from './SettingsPanels/SettingsPanel2';
-import SettingsPanel3 from './SettingsPanels/SettingsPanel3';
-import SettingsPanel4 from './SettingsPanels/SettingsPanel4';
+import SettingsPanelType from './SettingsPanels/SettingsPanelType';
+import SettingsPanelOp from './SettingsPanels/SettingsPanelOp';
+import SettingsPanelBase from './SettingsPanels/SettingsPanelBase';
+import SettingsPanelLives from './SettingsPanels/SettingsPanelLives';
 import { buttonStyles } from './SettingsPanels/ButtonMapper';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
@@ -40,7 +40,7 @@ const SettingsSheet: React.FC = () => {
   }, []);
 
   // PANEL HANDLERS
-  const panel1Handler: GenericFunc<SumState['op1']> = (chosenType) => {
+  const panelTypeHandler: GenericFunc<SumState['op1']> = (chosenType) => {
     if (isLocalSettings) {
       setPanelBaseNum(0);
       setIsResetType(true);
@@ -53,7 +53,7 @@ const SettingsSheet: React.FC = () => {
     setPanelSumType(chosenType as SumState['sumType']);
   };
 
-  const panel2Handler: GenericFunc<SumState['op1']> = (chosenOperator) => {
+  const panelOpHandler: GenericFunc<SumState['op1']> = (chosenOperator) => {
     if (!isLocalSettings) {
       setSettingStatus(3);
     }
@@ -67,7 +67,7 @@ const SettingsSheet: React.FC = () => {
     setOperator(chosenOperator as SumState['op1']);
   };
 
-  const panel3Handler: GenericFunc<number> = (chosenBaseNum) => {
+  const panelNumHandler: GenericFunc<number> = (chosenBaseNum) => {
     if (!isLocalSettings) {
       setSettingStatus(4);
     }
@@ -77,7 +77,7 @@ const SettingsSheet: React.FC = () => {
     setPanelBaseNum(chosenBaseNum);
   };
 
-  const panel4Handler: GenericFunc<number> = (lives) => {
+  const panelLivesHandler: GenericFunc<number> = (lives) => {
     setSettingStatus(5);
     if (isResetOperator) {
       setSettingStatus(6);
@@ -108,12 +108,12 @@ const SettingsSheet: React.FC = () => {
 
   return (
     <div className="settings__sheet">
-      <SettingsPanel1 stateChecker={panelSumType} handler={panel1Handler} status={settingStatus} />
-      <SettingsPanel2 stateChecker={operator} handler={panel2Handler} status={settingStatus} isBonds={bonds} />
-      <SettingsPanel3 stateChecker={panelBaseNum} handler={panel3Handler} status={settingStatus} isBonds={bonds} />
-      <SettingsPanel4
+      <SettingsPanelType stateChecker={panelSumType} handler={panelTypeHandler} status={settingStatus} />
+      <SettingsPanelOp stateChecker={operator} handler={panelOpHandler} status={settingStatus} isBonds={bonds} />
+      <SettingsPanelBase stateChecker={panelBaseNum} handler={panelNumHandler} status={settingStatus} isBonds={bonds} />
+      <SettingsPanelLives
         stateChecker={difficulty}
-        handler={panel4Handler}
+        handler={panelLivesHandler}
         status={settingStatus}
         isResetOperator={isResetOperator}
       />

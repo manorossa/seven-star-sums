@@ -2,14 +2,14 @@ import React from 'react';
 import { buttonStyles, makeButtonStyles, buttonMap } from './ButtonMapper';
 import { GenericFunc, SumState } from '../../../types/types';
 
-interface Panel2Props {
+interface PanelOpProps {
   stateChecker: SumState['op1'];
   handler: GenericFunc<SumState['op1']>;
   status: number;
   isBonds: boolean;
 }
 
-const SettingsPanel1: React.FC<Panel2Props> = ({ stateChecker, handler, status, isBonds }) => {
+const SettingsPanelOp: React.FC<PanelOpProps> = ({ stateChecker, handler, status, isBonds }) => {
   // BUTTON CONTENT
   const bondOperatorOptions = ['+', '-'];
   const bondOperatorOptionsText = ['Adding (+)', 'Taking away (-)'];
@@ -56,4 +56,4 @@ const SettingsPanel1: React.FC<Panel2Props> = ({ stateChecker, handler, status, 
   );
 };
 
-export default SettingsPanel1;
+export default SettingsPanelOp;

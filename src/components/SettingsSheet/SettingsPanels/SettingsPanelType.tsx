@@ -2,13 +2,13 @@ import React from 'react';
 import { buttonStyles, makeButtonStyles, buttonMap } from './ButtonMapper';
 import { GenericFunc, SumState } from '../../../types/types';
 
-interface Panel1Props {
+interface PanelTypeProps {
   stateChecker: SumState['sumType'];
   handler: GenericFunc<SumState['op1']>;
   status: number;
 }
 
-const SettingsPanel1: React.FC<Panel1Props> = ({ stateChecker, handler, status }) => {
+const SettingsPanelType: React.FC<PanelTypeProps> = ({ stateChecker, handler, status }) => {
   // BUTTON CONTENT
   const typeOptions = ['bonds', 'tables'];
   const typeText = ['Number bonds', 'Times tables'];
@@ -32,4 +32,4 @@ const SettingsPanel1: React.FC<Panel1Props> = ({ stateChecker, handler, status }
   );
 };
 
-export default SettingsPanel1;
+export default SettingsPanelType;
