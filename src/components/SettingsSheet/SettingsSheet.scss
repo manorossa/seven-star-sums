@@ -33,6 +33,11 @@
     width: 80%;
     margin: 2vh auto;
 
+    &--last {
+      justify-content: center;
+      margin: 0 auto;
+    }
+
     &--lge {
       .btn--horizontal {
         flex: 0 1 40%;

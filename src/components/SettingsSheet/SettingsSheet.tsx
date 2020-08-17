@@ -116,14 +116,16 @@ const SettingsSheet: React.FC = () => {
         status={settingStatus}
         isResetOperator={isResetOperator}
       />
-      <div className={`settings__panel settings__panel--2 settings__panel--${panel5viz}`}>
-        <Button
-          type="button"
-          handler={(): void => finalSettings(panelSumType, panelBaseNum, operator, difficulty)}
-          modifiers={buttonStyles.horizGreen}
-        >
-          Start the sums!
-        </Button>
+      <div className={`settings__panel settings__panel--${panel5viz}`}>
+        <div className="settings__button-container settings__button-container--last settings__button-container--lge">
+          <Button
+            type="button"
+            handler={(): void => finalSettings(panelSumType, panelBaseNum, operator, difficulty)}
+            modifiers={buttonStyles.horizGreen}
+          >
+            Start the sums!
+          </Button>
+        </div>
       </div>
     </div>
   );
