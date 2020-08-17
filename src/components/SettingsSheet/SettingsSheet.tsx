@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SettingsPanel1 from './SettingsPanels/SettingsPanel1';
+import SettingsPanel2 from './SettingsPanels/SettingsPanel2';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { GenericFunc, OptionsMap, SumState } from '../../types/types';
@@ -71,7 +72,7 @@ const SettingsSheet: React.FC = () => {
   };
 
   // PANEL VISIBILITY OPTIONS
-  const panel2viz = settingStatus > 1 ? 'show' : 'hide';
+  // const panel2viz = settingStatus > 1 ? 'show' : 'hide';
   const panel3viz = settingStatus > 2 ? 'show' : 'hide';
   const panel4viz = settingStatus > 3 || isResetOperator ? 'show' : 'hide';
   const panel5viz = (settingStatus > 4 && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
@@ -93,8 +94,8 @@ const SettingsSheet: React.FC = () => {
   // BUTTON CONTENT
   // const typeOptions = ['bonds', 'tables'];
   // const typeText = ['Number bonds', 'Times tables'];
-  const bondOperatorOptions = ['+', '-'];
-  const tableOperatorOptions = ['x', '÷'];
+  // const bondOperatorOptions = ['+', '-'];
+  // const tableOperatorOptions = ['x', '÷'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const bondOptions = [10, 20];
   const difficultyOptions = [7, 5, 3];
@@ -130,22 +131,22 @@ const SettingsSheet: React.FC = () => {
     );
 
   // const typeMap = buttonMap(typeOptions, panelSumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
-  const bondOperatorMap = buttonMap(
-    bondOperatorOptions,
-    operator,
-    2,
-    panel2Handler,
-    makeButtonStyles(horizButtons),
-    bondOperatorOptions
-  );
-  const tableOperatorMap = buttonMap(
-    tableOperatorOptions,
-    operator,
-    2,
-    panel2Handler,
-    makeButtonStyles(horizButtons),
-    tableOperatorOptions
-  );
+  // const bondOperatorMap = buttonMap(
+  //   bondOperatorOptions,
+  //   operator,
+  //   2,
+  //   panel2Handler,
+  //   makeButtonStyles(horizButtons),
+  //   bondOperatorOptions
+  // );
+  // const tableOperatorMap = buttonMap(
+  //   tableOperatorOptions,
+  //   operator,
+  //   2,
+  //   panel2Handler,
+  //   makeButtonStyles(horizButtons),
+  //   tableOperatorOptions
+  // );
   const bondMap = buttonMap(
     bondOptions,
     panelBaseNum,
@@ -193,7 +194,7 @@ const SettingsSheet: React.FC = () => {
         <div className="settings__button-container">{typeMap}</div>
       </div> */}
       <SettingsPanel1 stateChecker={panelSumType} handler={panel1Handler} status={settingStatus} />
-      <div className={`settings__panel settings__panel--1 settings__panel--${panel2viz}`}>
+      {/* <div className={`settings__panel settings__panel--1 settings__panel--${panel2viz}`}>
         {bonds ? (
           <>
             <h3>Do you want to do adding or taking away?</h3>
@@ -205,7 +206,8 @@ const SettingsSheet: React.FC = () => {
             <div className="settings__button-container">{tableOperatorMap}</div>
           </>
         )}
-      </div>
+      </div> */}
+      <SettingsPanel2 stateChecker={operator} handler={panel2Handler} status={settingStatus} isBonds={bonds} />
       <div className={`settings__panel settings__panel--2 settings__panel--${panel3viz}`}>
         {bonds ? (
           <>
