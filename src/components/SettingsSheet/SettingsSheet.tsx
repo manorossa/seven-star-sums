@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SettingsPanel1 from './SettingsPanels/SettingsPanel1';
 import SettingsPanel2 from './SettingsPanels/SettingsPanel2';
+import SettingsPanel3 from './SettingsPanels/SettingsPanel3';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { GenericFunc, OptionsMap, SumState } from '../../types/types';
@@ -73,7 +74,7 @@ const SettingsSheet: React.FC = () => {
 
   // PANEL VISIBILITY OPTIONS
   // const panel2viz = settingStatus > 1 ? 'show' : 'hide';
-  const panel3viz = settingStatus > 2 ? 'show' : 'hide';
+  // const panel3viz = settingStatus > 2 ? 'show' : 'hide';
   const panel4viz = settingStatus > 3 || isResetOperator ? 'show' : 'hide';
   const panel5viz = (settingStatus > 4 && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
 
@@ -83,7 +84,7 @@ const SettingsSheet: React.FC = () => {
   // BUTTON STYLING
   const horizButtons = ['horizontal'];
   const horizGreenButtons = ['horizontal', 'horizontal-green'];
-  const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
+  // const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
 
   const makeButtonStyles = (array1: string[]): string[][] => {
     const array2 = [...array1, 'active'];
@@ -96,8 +97,8 @@ const SettingsSheet: React.FC = () => {
   // const typeText = ['Number bonds', 'Times tables'];
   // const bondOperatorOptions = ['+', '-'];
   // const tableOperatorOptions = ['x', '÷'];
-  const tableOptions = [2, 3, 4, 5, 8, 10];
-  const bondOptions = [10, 20];
+  // const tableOptions = [2, 3, 4, 5, 8, 10];
+  // const bondOptions = [10, 20];
   const difficultyOptions = [7, 5, 3];
   const difficultyText = ['Medium: 7', 'Hard: 5', ' Very hard: 3'];
 
@@ -147,22 +148,22 @@ const SettingsSheet: React.FC = () => {
   //   makeButtonStyles(horizButtons),
   //   tableOperatorOptions
   // );
-  const bondMap = buttonMap(
-    bondOptions,
-    panelBaseNum,
-    3,
-    panel3Handler,
-    makeButtonStyles(smallRoundButtons),
-    bondOptions
-  );
-  const tableMap = buttonMap(
-    tableOptions,
-    panelBaseNum,
-    3,
-    panel3Handler,
-    makeButtonStyles(smallRoundButtons),
-    tableOptions
-  );
+  // const bondMap = buttonMap(
+  //   bondOptions,
+  //   panelBaseNum,
+  //   3,
+  //   panel3Handler,
+  //   makeButtonStyles(smallRoundButtons),
+  //   bondOptions
+  // );
+  // const tableMap = buttonMap(
+  //   tableOptions,
+  //   panelBaseNum,
+  //   3,
+  //   panel3Handler,
+  //   makeButtonStyles(smallRoundButtons),
+  //   tableOptions
+  // );
   const difficultyMap = buttonMap(
     difficultyOptions,
     difficulty,
@@ -208,7 +209,7 @@ const SettingsSheet: React.FC = () => {
         )}
       </div> */}
       <SettingsPanel2 stateChecker={operator} handler={panel2Handler} status={settingStatus} isBonds={bonds} />
-      <div className={`settings__panel settings__panel--2 settings__panel--${panel3viz}`}>
+      {/* <div className={`settings__panel settings__panel--2 settings__panel--${panel3viz}`}>
         {bonds ? (
           <>
             <h3>Choose your bond number:</h3>
@@ -220,7 +221,8 @@ const SettingsSheet: React.FC = () => {
             <div className="settings__button-container">{tableMap}</div>
           </>
         )}
-      </div>
+      </div> */}
+      <SettingsPanel3 stateChecker={panelBaseNum} handler={panel3Handler} status={settingStatus} isBonds={bonds} />
       <div className={`settings__panel settings__panel--3 settings__panel--${panel4viz}`}>
         <h3>How many lives do you want to have?</h3>
         <div className="settings__button-container">{difficultyMap}</div>
