@@ -84,10 +84,8 @@ const SettingsSheet: React.FC = () => {
   const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
 
   const makeButtonStyles = (array1: string[]): string[][] => {
-    const array2 = [...array1];
-    array2.push('active');
-    const array3 = [...array1];
-    array3.push('inactive');
+    const array2 = [...array1, 'active'];
+    const array3 = [...array1, 'inactive'];
     return [array1, array2, array3];
   };
 
