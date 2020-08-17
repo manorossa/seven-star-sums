@@ -5,7 +5,7 @@ import { useSum } from '../../../context/SumContext';
 import { getSumNumberOrder } from '../../../helpers/helpers';
 
 const Sum: React.FC = () => {
-  const { sumType, num1, num2, op1, op2, baseNum, rightWrong } = useSum();
+  const { sumType, num1, num2, op1, baseNum, rightWrong } = useSum();
   let borderColour: string;
   if (rightWrong === null || num2 === '?') {
     borderColour = '';
@@ -21,7 +21,7 @@ const Sum: React.FC = () => {
       <div className="btn--round btn--round-large">{sumOrder[0]}</div>
       <div className="btn--round btn--round-small">{op1}</div>
       <div className={circle2Styles}>{sumOrder[1]}</div>
-      <div className="btn--round btn--round-small">{op2}</div>
+      <div className="btn--round btn--round-small">=</div>
       <div className={circle3Styles}>{sumOrder[2]}</div>
     </div>
   );

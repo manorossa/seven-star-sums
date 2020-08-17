@@ -11,7 +11,6 @@ const SumProvider = ({ children }: Props): JSX.Element => {
   const [num2, setNum2] = useState('?' as SumState['num2']);
   const [baseNum, setBaseNum] = useState(20);
   const [op1, setOp1] = useState('+' as SumState['op1']);
-  const [op2, setOp2] = useState('=');
   const [rightWrong, setRightWrong] = useState(null as SumState['rightWrong']);
 
   const sumState = useMemo(
@@ -22,7 +21,6 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       num2,
       baseNum,
       op1,
-      op2,
       rightWrong,
       setSumType,
       setPossibleNums,
@@ -30,10 +28,9 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       setNum2,
       setBaseNum,
       setOp1,
-      setOp2,
       setRightWrong
     }),
-    [sumType, possibleNums, num1, num2, baseNum, op1, op2, rightWrong]
+    [sumType, possibleNums, num1, num2, baseNum, op1, rightWrong]
   );
 
   return <Provider value={sumState}>{children}</Provider>;
@@ -47,7 +44,6 @@ const useSum = (): SumState => {
     num2,
     baseNum,
     op1,
-    op2,
     rightWrong,
     setSumType,
     setPossibleNums,
@@ -55,7 +51,6 @@ const useSum = (): SumState => {
     setNum2,
     setBaseNum,
     setOp1,
-    setOp2,
     setRightWrong
   } = useContext(SumContext);
 
@@ -66,7 +61,6 @@ const useSum = (): SumState => {
     num2 === undefined ||
     baseNum === undefined ||
     op1 === undefined ||
-    op2 === undefined ||
     rightWrong === undefined ||
     setSumType === undefined ||
     setPossibleNums === undefined ||
@@ -74,7 +68,6 @@ const useSum = (): SumState => {
     setNum2 === undefined ||
     setBaseNum === undefined ||
     setOp1 === undefined ||
-    setOp2 === undefined ||
     setRightWrong === undefined
   ) {
     throw new Error('useSum must be used within a SumProvider');
@@ -87,7 +80,6 @@ const useSum = (): SumState => {
     num2,
     baseNum,
     op1,
-    op2,
     rightWrong,
     setSumType,
     setPossibleNums,
@@ -95,7 +87,6 @@ const useSum = (): SumState => {
     setNum2,
     setBaseNum,
     setOp1,
-    setOp2,
     setRightWrong
   };
 };
