@@ -31,7 +31,7 @@ export const answerMethod: AnswerMethodsObj = {
   '+': (a, b) => a - b,
   '-': (a, b) => a - b,
   x: (a, b) => a * b,
-  '÷': (a, b) => (a * b) / a
+  '÷': (_, b) => b
 };
 
 // fn returns a single possible WRONG answer. Takes the correct answer and randomly
