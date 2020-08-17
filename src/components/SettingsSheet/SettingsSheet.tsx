@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SettingsPanel1 from './SettingsPanels/SettingsPanel1';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
 import { GenericFunc, OptionsMap, SumState } from '../../types/types';
@@ -90,8 +91,8 @@ const SettingsSheet: React.FC = () => {
   };
 
   // BUTTON CONTENT
-  const typeOptions = ['bonds', 'tables'];
-  const typeText = ['Number bonds', 'Times tables'];
+  // const typeOptions = ['bonds', 'tables'];
+  // const typeText = ['Number bonds', 'Times tables'];
   const bondOperatorOptions = ['+', '-'];
   const tableOperatorOptions = ['x', '÷'];
   const tableOptions = [2, 3, 4, 5, 8, 10];
@@ -128,7 +129,7 @@ const SettingsSheet: React.FC = () => {
       }
     );
 
-  const typeMap = buttonMap(typeOptions, panelSumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
+  // const typeMap = buttonMap(typeOptions, panelSumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
   const bondOperatorMap = buttonMap(
     bondOperatorOptions,
     operator,
@@ -187,10 +188,11 @@ const SettingsSheet: React.FC = () => {
 
   return (
     <div className="settings__sheet">
-      <div className="settings__panel settings__panel--1">
+      {/* <div className="settings__panel settings__panel--1">
         <h3>What type of sums do you want to play today?</h3>
         <div className="settings__button-container">{typeMap}</div>
-      </div>
+      </div> */}
+      <SettingsPanel1 stateChecker={panelSumType} handler={panel1Handler} status={settingStatus} />
       <div className={`settings__panel settings__panel--1 settings__panel--${panel2viz}`}>
         {bonds ? (
           <>
