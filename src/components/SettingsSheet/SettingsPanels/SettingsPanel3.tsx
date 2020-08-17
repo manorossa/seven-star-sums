@@ -38,11 +38,11 @@ const SettingsPanel1: React.FC<Panel3Props> = ({ stateChecker, handler, status, 
   const panel3viz = status > 2 ? 'show' : 'hide';
 
   return (
-    <div className={`settings__panel settings__panel--2 settings__panel--${panel3viz}`}>
+    <div className={`settings__panel settings__panel--${panel3viz}`}>
       {isBonds ? (
         <>
           <h3>Choose your bond number:</h3>
-          <div className="settings__button-container settings__button-container--small">{bondMap}</div>
+          <div className="settings__button-container settings__button-container--sml">{bondMap}</div>
         </>
       ) : (
         <>

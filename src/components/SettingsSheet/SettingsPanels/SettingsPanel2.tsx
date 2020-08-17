@@ -40,16 +40,16 @@ const SettingsPanel1: React.FC<Panel2Props> = ({ stateChecker, handler, status, 
   const panel2viz = status > 1 ? 'show' : 'hide';
 
   return (
-    <div className={`settings__panel settings__panel--1 settings__panel--${panel2viz}`}>
+    <div className={`settings__panel settings__panel--${panel2viz}`}>
       {isBonds ? (
         <>
           <h3>Do you want to do adding or taking away?</h3>
-          <div className="settings__button-container">{bondOperatorMap}</div>
+          <div className="settings__button-container settings__button-container--lge">{bondOperatorMap}</div>
         </>
       ) : (
         <>
           <h3>Do you want to do multiplication or division?</h3>
-          <div className="settings__button-container">{tableOperatorMap}</div>
+          <div className="settings__button-container settings__button-container--lge">{tableOperatorMap}</div>
         </>
       )}
     </div>

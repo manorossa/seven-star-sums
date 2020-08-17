@@ -25,9 +25,9 @@ const SettingsPanel1: React.FC<Panel1Props> = ({ stateChecker, handler, status }
   );
 
   return (
-    <div className="settings__panel settings__panel--1">
+    <div className="settings__panel">
       <h3>What type of sums do you want to play today?</h3>
-      <div className="settings__button-container">{typeMap}</div>
+      <div className="settings__button-container settings__button-container--lge">{typeMap}</div>
     </div>
   );
 };

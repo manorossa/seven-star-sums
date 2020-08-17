@@ -29,9 +29,9 @@ const SettingsPanel1: React.FC<Panel4Props> = ({ stateChecker, handler, status, 
   const panel4viz = status > 3 || isResetOperator ? 'show' : 'hide';
 
   return (
-    <div className={`settings__panel settings__panel--3 settings__panel--${panel4viz}`}>
+    <div className={`settings__panel settings__panel--${panel4viz}`}>
       <h3>How many lives do you want to have?</h3>
-      <div className="settings__button-container">{difficultyMap}</div>
+      <div className="settings__button-container settings__button-container--med">{difficultyMap}</div>
     </div>
   );
 };
