@@ -2,14 +2,14 @@ import React from 'react';
 import { buttonStyles, makeButtonStyles, buttonMap } from './ButtonMapper';
 import { GenericFunc } from '../../../types/types';
 
-interface Panel2Props {
+interface Panel3Props {
   stateChecker: number;
   handler: GenericFunc<number>;
   status: number;
   isBonds: boolean;
 }
 
-const SettingsPanel1: React.FC<Panel2Props> = ({ stateChecker, handler, status, isBonds }) => {
+const SettingsPanel1: React.FC<Panel3Props> = ({ stateChecker, handler, status, isBonds }) => {
   // BUTTON CONTENT
   const tableOptions = [2, 3, 4, 5, 8, 10];
   const bondOptions = [10, 20];
