@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import SettingsPanel1 from './SettingsPanels/SettingsPanel1';
 import SettingsPanel2 from './SettingsPanels/SettingsPanel2';
 import SettingsPanel3 from './SettingsPanels/SettingsPanel3';
+import SettingsPanel4 from './SettingsPanels/SettingsPanel4';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
-import { GenericFunc, OptionsMap, SumState } from '../../types/types';
+import { GenericFunc, SumState } from '../../types/types';
 import { useStatus } from '../../context/StatusContext';
 import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
@@ -75,22 +76,22 @@ const SettingsSheet: React.FC = () => {
   // PANEL VISIBILITY OPTIONS
   // const panel2viz = settingStatus > 1 ? 'show' : 'hide';
   // const panel3viz = settingStatus > 2 ? 'show' : 'hide';
-  const panel4viz = settingStatus > 3 || isResetOperator ? 'show' : 'hide';
+  // const panel4viz = settingStatus > 3 || isResetOperator ? 'show' : 'hide';
   const panel5viz = (settingStatus > 4 && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
 
   // RENDERING LOGIC
   const bonds = panelSumType === 'bonds';
 
   // BUTTON STYLING
-  const horizButtons = ['horizontal'];
+  // const horizButtons = ['horizontal'];
   const horizGreenButtons = ['horizontal', 'horizontal-green'];
   // const smallRoundButtons = ['round', 'round-small', 'round-white-border'];
 
-  const makeButtonStyles = (array1: string[]): string[][] => {
-    const array2 = [...array1, 'active'];
-    const array3 = [...array1, 'inactive'];
-    return [array1, array2, array3];
-  };
+  // const makeButtonStyles = (array1: string[]): string[][] => {
+  //   const array2 = [...array1, 'active'];
+  //   const array3 = [...array1, 'inactive'];
+  //   return [array1, array2, array3];
+  // };
 
   // BUTTON CONTENT
   // const typeOptions = ['bonds', 'tables'];
@@ -99,37 +100,37 @@ const SettingsSheet: React.FC = () => {
   // const tableOperatorOptions = ['x', '÷'];
   // const tableOptions = [2, 3, 4, 5, 8, 10];
   // const bondOptions = [10, 20];
-  const difficultyOptions = [7, 5, 3];
-  const difficultyText = ['Medium: 7', 'Hard: 5', ' Very hard: 3'];
+  // const difficultyOptions = [7, 5, 3];
+  // const difficultyText = ['Medium: 7', 'Hard: 5', ' Very hard: 3'];
 
   // CREATE BUTTON MAPS
-  const buttonMap = (
-    options: OptionsMap<string | number | SumState['op1'] | SumState['sumType']>,
-    stateCheck: string | number,
-    panelNum: number,
-    clickHandler: GenericFunc<SumState['sumType'] & SumState['op1'] & number>,
-    buttonStyle: string[][],
-    buttonText: number[] | string[]
-  ): JSX.Element[] =>
-    options.map(
-      (option: string | number | SumState['op1'] | SumState['sumType'], index: number): JSX.Element => {
-        const [butMod, butModAct, butModInact] = buttonStyle;
-        let buttonModifiers = butMod;
-        if (settingStatus > panelNum && stateCheck) {
-          buttonModifiers = option === stateCheck ? butModAct : butModInact;
-        }
-        return (
-          <Button
-            key={`panel-${panelNum}-${option}`}
-            type="button"
-            handler={(): void => clickHandler(option as SumState['sumType'] & SumState['op1'] & number)}
-            modifiers={buttonModifiers}
-          >
-            {buttonText[index]}
-          </Button>
-        );
-      }
-    );
+  // const buttonMap = (
+  //   options: OptionsMap<string | number | SumState['op1'] | SumState['sumType']>,
+  //   stateCheck: string | number,
+  //   panelNum: number,
+  //   clickHandler: GenericFunc<SumState['sumType'] & SumState['op1'] & number>,
+  //   buttonStyle: string[][],
+  //   buttonText: number[] | string[]
+  // ): JSX.Element[] =>
+  //   options.map(
+  //     (option: string | number | SumState['op1'] | SumState['sumType'], index: number): JSX.Element => {
+  //       const [butMod, butModAct, butModInact] = buttonStyle;
+  //       let buttonModifiers = butMod;
+  //       if (settingStatus > panelNum && stateCheck) {
+  //         buttonModifiers = option === stateCheck ? butModAct : butModInact;
+  //       }
+  //       return (
+  //         <Button
+  //           key={`panel-${panelNum}-${option}`}
+  //           type="button"
+  //           handler={(): void => clickHandler(option as SumState['sumType'] & SumState['op1'] & number)}
+  //           modifiers={buttonModifiers}
+  //         >
+  //           {buttonText[index]}
+  //         </Button>
+  //       );
+  //     }
+  //   );
 
   // const typeMap = buttonMap(typeOptions, panelSumType, 1, panel1Handler, makeButtonStyles(horizButtons), typeText);
   // const bondOperatorMap = buttonMap(
@@ -164,14 +165,14 @@ const SettingsSheet: React.FC = () => {
   //   makeButtonStyles(smallRoundButtons),
   //   tableOptions
   // );
-  const difficultyMap = buttonMap(
-    difficultyOptions,
-    difficulty,
-    4,
-    panel4Handler,
-    makeButtonStyles(horizButtons),
-    difficultyText
-  );
+  // const difficultyMap = buttonMap(
+  //   difficultyOptions,
+  //   difficulty,
+  //   4,
+  //   panel4Handler,
+  //   makeButtonStyles(horizButtons),
+  //   difficultyText
+  // );
 
   const finalSettings = (
     finalSumType: SumState['sumType'],
@@ -223,10 +224,16 @@ const SettingsSheet: React.FC = () => {
         )}
       </div> */}
       <SettingsPanel3 stateChecker={panelBaseNum} handler={panel3Handler} status={settingStatus} isBonds={bonds} />
-      <div className={`settings__panel settings__panel--3 settings__panel--${panel4viz}`}>
+      {/* <div className={`settings__panel settings__panel--3 settings__panel--${panel4viz}`}>
         <h3>How many lives do you want to have?</h3>
         <div className="settings__button-container">{difficultyMap}</div>
-      </div>
+      </div> */}
+      <SettingsPanel4
+        stateChecker={difficulty}
+        handler={panel4Handler}
+        status={settingStatus}
+        isResetOperator={isResetOperator}
+      />
       <div className={`settings__panel settings__panel--2 settings__panel--${panel5viz}`}>
         <Button
           type="button"
