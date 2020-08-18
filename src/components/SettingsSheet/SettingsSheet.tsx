@@ -12,6 +12,8 @@ import { useSum } from '../../context/SumContext';
 import { useScore } from '../../context/ScoreContext';
 import { getLocalSettings } from '../../helpers/helpers';
 
+type LocalOperator = SumState['op1'] & '';
+
 const SettingsSheet: React.FC = () => {
   // APP STATE FROM CONTEXT
   const { isLocalSettings, setGameStatus } = useStatus();
@@ -20,7 +22,7 @@ const SettingsSheet: React.FC = () => {
   // LOCAL STATE IN COMPONENT
   const [settingStatus, setSettingStatus] = useState(1);
   const [panelSumType, setPanelSumType] = useState('bonds' as SumState['sumType']);
-  const [operator, setOperator] = useState('+' as SumState['op1']);
+  const [operator, setOperator] = useState('+' as LocalOperator);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(7);
   const [isResetType, setIsResetType] = useState(false);
@@ -31,7 +33,7 @@ const SettingsSheet: React.FC = () => {
   useEffect(() => {
     if (isLocalSettings && localSettings) {
       setSettingStatus(5);
-      setOperator(localSettings.finalOperator);
+      setOperator(localSettings.finalOperator as LocalOperator);
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
       setPanelSumType(localSettings.finalSumType);
@@ -40,9 +42,10 @@ const SettingsSheet: React.FC = () => {
   }, []);
 
   // PANEL HANDLERS
-  const panelTypeHandler: GenericFunc<SumState['op1']> = (chosenType) => {
+  const panelTypeHandler: GenericFunc<SumState['sumType']> = (chosenType) => {
     if (isLocalSettings) {
       setPanelBaseNum(0);
+      setOperator('' as LocalOperator);
       setIsResetType(true);
       setIsResetOperator(false);
       setSettingStatus(5);
@@ -64,7 +67,7 @@ const SettingsSheet: React.FC = () => {
     if (isResetType && panelBaseNum > 0) {
       setSettingStatus(6);
     }
-    setOperator(chosenOperator as SumState['op1']);
+    setOperator(chosenOperator as LocalOperator);
   };
 
   const panelNumHandler: GenericFunc<number> = (chosenBaseNum) => {
@@ -96,7 +99,12 @@ const SettingsSheet: React.FC = () => {
     setOp1(finalOperator);
     setTotalLives(finalDifficulty);
     setGameStatus('resetGame');
-    const allSettings = { finalSumType, finalBaseNum, finalOperator, finalDifficulty };
+    const allSettings = {
+      finalSumType,
+      finalBaseNum,
+      finalOperator,
+      finalDifficulty
+    };
     window.localStorage.setItem('sevenStarSettings', JSON.stringify(allSettings));
   };
 
