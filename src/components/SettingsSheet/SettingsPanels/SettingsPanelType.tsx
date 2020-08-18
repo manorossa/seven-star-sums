@@ -4,7 +4,7 @@ import { GenericFunc, SumState } from '../../../types/types';
 
 interface PanelTypeProps {
   stateChecker: SumState['sumType'];
-  handler: GenericFunc<SumState['op1']>;
+  handler: GenericFunc<SumState['sumType']>;
   status: number;
 }
 
