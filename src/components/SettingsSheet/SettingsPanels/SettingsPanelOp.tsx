@@ -1,6 +1,7 @@
 import React from 'react';
 import { buttonStyles, makeButtonStyles, buttonMap } from './ButtonMapper';
 import { GenericFunc, SumState } from '../../../types/types';
+import SettingsPanel from '../../../UI/atoms/SettingsPanel/SettingsPanel';
 
 interface PanelOpProps {
   stateChecker: SumState['op1'];
@@ -36,24 +37,13 @@ const SettingsPanelOp: React.FC<PanelOpProps> = ({ stateChecker, handler, status
     status
   );
 
-  // PANEL VISIBILITY OPTIONS
-  const panel2viz = status > 1 ? 'show' : 'hide';
+  const panelButtons = isBonds ? bondOperatorMap : tableOperatorMap;
+  const title = isBonds ? 'Do you want to do adding or taking away?' : 'Do you want to do multiplication or division?';
 
-  return (
-    <div className={`settings__panel settings__panel--${panel2viz}`}>
-      {isBonds ? (
-        <>
-          <h3>Do you want to do adding or taking away?</h3>
-          <div className="settings__button-container settings__button-container--lge">{bondOperatorMap}</div>
-        </>
-      ) : (
-        <>
-          <h3>Do you want to do multiplication or division?</h3>
-          <div className="settings__button-container settings__button-container--lge">{tableOperatorMap}</div>
-        </>
-      )}
-    </div>
-  );
+  // PANEL VISIBILITY OPTIONS
+  const panelOpViz = status > 1 ? 'show' : 'hide';
+
+  return <SettingsPanel title={title} buttonMap={panelButtons} panelModifiers={panelOpViz} buttonModifiers="lge" />;
 };
 
 export default SettingsPanelOp;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { buttonStyles, makeButtonStyles, buttonMap } from './ButtonMapper';
 import { GenericFunc } from '../../../types/types';
+import SettingsPanel from '../../../UI/atoms/SettingsPanel/SettingsPanel';
 
 interface PanelLivesProps {
   stateChecker: number;
@@ -26,13 +27,15 @@ const SettingsPanelLives: React.FC<PanelLivesProps> = ({ stateChecker, handler, 
   );
 
   // PANEL VISIBILITY OPTIONS
-  const panelLivesviz = status > 3 || isResetOperator ? 'show' : 'hide';
+  const panelLivesViz = status > 3 || isResetOperator ? 'show' : 'hide';
 
   return (
-    <div className={`settings__panel settings__panel--${panelLivesviz}`}>
-      <h3>How many lives do you want to have?</h3>
-      <div className="settings__button-container settings__button-container--med">{difficultyMap}</div>
-    </div>
+    <SettingsPanel
+      title="How many lives do you want to have?"
+      buttonMap={difficultyMap}
+      panelModifiers={panelLivesViz}
+      buttonModifiers="med"
+    />
   );
 };
 

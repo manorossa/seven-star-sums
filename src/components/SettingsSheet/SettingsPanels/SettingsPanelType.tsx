@@ -1,6 +1,7 @@
 import React from 'react';
 import { buttonStyles, makeButtonStyles, buttonMap } from './ButtonMapper';
 import { GenericFunc, SumState } from '../../../types/types';
+import SettingsPanel from '../../../UI/atoms/SettingsPanel/SettingsPanel';
 
 interface PanelTypeProps {
   stateChecker: SumState['sumType'];
@@ -25,10 +26,7 @@ const SettingsPanelType: React.FC<PanelTypeProps> = ({ stateChecker, handler, st
   );
 
   return (
-    <div className="settings__panel">
-      <h3>What type of sums do you want to play today?</h3>
-      <div className="settings__button-container settings__button-container--lge">{typeMap}</div>
-    </div>
+    <SettingsPanel title="What type of sums do you want to play today?" buttonMap={typeMap} buttonModifiers="lge" />
   );
 };
 

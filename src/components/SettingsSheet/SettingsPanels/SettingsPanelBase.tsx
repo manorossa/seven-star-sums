@@ -1,6 +1,7 @@
 import React from 'react';
 import { buttonStyles, makeButtonStyles, buttonMap } from './ButtonMapper';
 import { GenericFunc } from '../../../types/types';
+import SettingsPanel from '../../../UI/atoms/SettingsPanel/SettingsPanel';
 
 interface PanelBaseProps {
   stateChecker: number;
@@ -34,23 +35,15 @@ const SettingsPanelBase: React.FC<PanelBaseProps> = ({ stateChecker, handler, st
     status
   );
 
+  const panelButtons = isBonds ? bondMap : tableMap;
+  const title = isBonds ? 'Choose your bond number' : 'Choose your times table';
+  const buttonMods = isBonds ? 'sml' : undefined;
+
   // PANEL VISIBILITY OPTIONS
-  const panel3viz = status > 2 ? 'show' : 'hide';
+  const panelBaseViz = status > 2 ? 'show' : 'hide';
 
   return (
-    <div className={`settings__panel settings__panel--${panel3viz}`}>
-      {isBonds ? (
-        <>
-          <h3>Choose your bond number:</h3>
-          <div className="settings__button-container settings__button-container--sml">{bondMap}</div>
-        </>
-      ) : (
-        <>
-          <h3>Choose your times table:</h3>
-          <div className="settings__button-container">{tableMap}</div>
-        </>
-      )}
-    </div>
+    <SettingsPanel title={title} buttonMap={panelButtons} panelModifiers={panelBaseViz} buttonModifiers={buttonMods} />
   );
 };
 
