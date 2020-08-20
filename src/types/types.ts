@@ -78,6 +78,7 @@ export interface SettingsModel {
   finalBaseNum: number;
   finalOperator: SumState['op1'];
   finalDifficulty: number;
+  finalAnswerCheck: SumState['answerCheck'];
 }
 
 // METHOD AND FUNCTION TYPES
