@@ -111,3 +111,19 @@ export const getSumNumberOrder = (
   };
   return numOrder[operator];
 };
+
+export const getCssClasses = (baseClass: string, modifiers: string | string[] | undefined): string => {
+  let CSSclasses = '';
+  if (modifiers) {
+    if (typeof modifiers === 'string') {
+      CSSclasses = `${baseClass} ${baseClass}--${modifiers}`;
+    }
+    if (typeof modifiers === 'object' && modifiers !== null) {
+      const expandedModifiers = modifiers.map((modifier) => `${baseClass}--${modifier}`).join(' ');
+      CSSclasses = `${baseClass} ${expandedModifiers}`;
+    }
+    return CSSclasses;
+  }
+  CSSclasses = baseClass;
+  return CSSclasses;
+};
