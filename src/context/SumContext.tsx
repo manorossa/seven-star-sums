@@ -12,6 +12,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
   const [baseNum, setBaseNum] = useState(20);
   const [op1, setOp1] = useState('+' as SumState['op1']);
   const [rightWrong, setRightWrong] = useState(null as SumState['rightWrong']);
+  const [answerCheck, setAnswerCheck] = useState(true);
 
   const sumState = useMemo(
     () => ({
@@ -22,15 +23,17 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       baseNum,
       op1,
       rightWrong,
+      answerCheck,
       setSumType,
       setPossibleNums,
       setNum1,
       setNum2,
       setBaseNum,
       setOp1,
-      setRightWrong
+      setRightWrong,
+      setAnswerCheck
     }),
-    [sumType, possibleNums, num1, num2, baseNum, op1, rightWrong]
+    [sumType, possibleNums, num1, num2, baseNum, op1, rightWrong, answerCheck]
   );
 
   return <Provider value={sumState}>{children}</Provider>;
@@ -45,13 +48,15 @@ const useSum = (): SumState => {
     baseNum,
     op1,
     rightWrong,
+    answerCheck,
     setSumType,
     setPossibleNums,
     setNum1,
     setNum2,
     setBaseNum,
     setOp1,
-    setRightWrong
+    setRightWrong,
+    setAnswerCheck
   } = useContext(SumContext);
 
   if (
@@ -62,13 +67,15 @@ const useSum = (): SumState => {
     baseNum === undefined ||
     op1 === undefined ||
     rightWrong === undefined ||
+    answerCheck === undefined ||
     setSumType === undefined ||
     setPossibleNums === undefined ||
     setNum1 === undefined ||
     setNum2 === undefined ||
     setBaseNum === undefined ||
     setOp1 === undefined ||
-    setRightWrong === undefined
+    setRightWrong === undefined ||
+    setAnswerCheck === undefined
   ) {
     throw new Error('useSum must be used within a SumProvider');
   }
@@ -81,13 +88,15 @@ const useSum = (): SumState => {
     baseNum,
     op1,
     rightWrong,
+    answerCheck,
     setSumType,
     setPossibleNums,
     setNum1,
     setNum2,
     setBaseNum,
     setOp1,
-    setRightWrong
+    setRightWrong,
+    setAnswerCheck
   };
 };
 

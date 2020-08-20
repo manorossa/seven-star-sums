@@ -62,6 +62,7 @@ export type SumState = {
   baseNum: number;
   op1: Operator1;
   rightWrong: boolean | null;
+  answerCheck: boolean;
   setSumType: StateSetter<SumState['sumType']>;
   setPossibleNums: StateSetter<SumState['possibleNums']>;
   setNum1: StateSetter<SumState['num1']>;
@@ -69,6 +70,7 @@ export type SumState = {
   setBaseNum: StateSetter<SumState['baseNum']>;
   setOp1: StateSetter<SumState['op1']>;
   setRightWrong: StateSetter<SumState['rightWrong']>;
+  setAnswerCheck: StateSetter<SumState['answerCheck']>;
 };
 
 export interface SettingsModel {
