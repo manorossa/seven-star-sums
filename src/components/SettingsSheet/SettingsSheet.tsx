@@ -3,6 +3,7 @@ import SettingsPanelType from './SettingsPanels/SettingsPanelType';
 import SettingsPanelOp from './SettingsPanels/SettingsPanelOp';
 import SettingsPanelBase from './SettingsPanels/SettingsPanelBase';
 import SettingsPanelLives from './SettingsPanels/SettingsPanelLives';
+import SettingsPanelCheck from './SettingsPanels/SettingsPanelCheck';
 import { buttonStyles } from './SettingsPanels/ButtonMapper';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
@@ -25,6 +26,7 @@ const SettingsSheet: React.FC = () => {
   const [operator, setOperator] = useState('+' as LocalOperator);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(0);
+  const [checkAns, setCheckAns] = useState('');
   const [isResetType, setIsResetType] = useState(false);
   const [isResetOperator, setIsResetOperator] = useState(false);
   const localSettings = getLocalSettings();
@@ -88,6 +90,11 @@ const SettingsSheet: React.FC = () => {
     setDifficulty(lives);
   };
 
+  const panelCheckHandler: GenericFunc<string> = (check) => {
+    setSettingStatus(8);
+    setCheckAns(check);
+  };
+
   const finalSettings = (
     finalSumType: SumState['sumType'],
     finalBaseNum: number,
@@ -110,7 +117,7 @@ const SettingsSheet: React.FC = () => {
 
   // PANEL VISIBILITY OPTIONS
   const nextButtonViz = (settingStatus > 3 && !isResetType && !isResetOperator) || settingStatus > 4 ? 'show' : 'hide';
-  const finalButtonViz = settingStatus > 6 ? 'show' : 'hide';
+  const finalButtonViz = settingStatus > 7 ? 'show' : 'hide';
 
   // RENDERING LOGIC
   const bonds = panelSumType === 'bonds';
@@ -143,6 +150,7 @@ const SettingsSheet: React.FC = () => {
             status={settingStatus}
             isResetOperator={isResetOperator}
           />
+          <SettingsPanelCheck stateChecker={checkAns} handler={panelCheckHandler} status={settingStatus} />
           <div className={`settings__panel settings__panel--${finalButtonViz}`}>
             <div className="settings__button-container settings__button-container--last settings__button-container--lge">
               <Button
