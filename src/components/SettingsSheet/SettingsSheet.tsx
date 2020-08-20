@@ -24,7 +24,7 @@ const SettingsSheet: React.FC = () => {
   const [panelSumType, setPanelSumType] = useState('bonds' as SumState['sumType']);
   const [operator, setOperator] = useState('+' as LocalOperator);
   const [panelBaseNum, setPanelBaseNum] = useState(2);
-  const [difficulty, setDifficulty] = useState(7);
+  const [difficulty, setDifficulty] = useState(0);
   const [isResetType, setIsResetType] = useState(false);
   const [isResetOperator, setIsResetOperator] = useState(false);
   const localSettings = getLocalSettings();
@@ -32,7 +32,7 @@ const SettingsSheet: React.FC = () => {
   // IF SETTINGS HAVE ALREADY BEEN SET THEN SHOW ALL OPTIONS FROM START
   useEffect(() => {
     if (isLocalSettings && localSettings) {
-      setSettingStatus(5);
+      setSettingStatus(4);
       setOperator(localSettings.finalOperator as LocalOperator);
       setPanelBaseNum(localSettings.finalBaseNum);
       setDifficulty(localSettings.finalDifficulty);
@@ -48,7 +48,7 @@ const SettingsSheet: React.FC = () => {
       setOperator('' as LocalOperator);
       setIsResetType(true);
       setIsResetOperator(false);
-      setSettingStatus(5);
+      setSettingStatus(4);
       setPanelSumType(chosenType as SumState['sumType']);
       return;
     }
@@ -62,10 +62,10 @@ const SettingsSheet: React.FC = () => {
     }
     if (isResetType) {
       setIsResetOperator(true);
-      setSettingStatus(5);
+      setSettingStatus(4);
     }
     if (isResetType && panelBaseNum > 0) {
-      setSettingStatus(6);
+      setSettingStatus(5);
     }
     setOperator(chosenOperator as LocalOperator);
   };
@@ -75,16 +75,16 @@ const SettingsSheet: React.FC = () => {
       setSettingStatus(4);
     }
     if (isResetOperator) {
-      setSettingStatus(6);
+      setSettingStatus(5);
     }
     setPanelBaseNum(chosenBaseNum);
   };
 
   const panelLivesHandler: GenericFunc<number> = (lives) => {
-    setSettingStatus(5);
-    if (isResetOperator) {
-      setSettingStatus(6);
-    }
+    setSettingStatus(7);
+    // if (isResetOperator) {
+    //   setSettingStatus(6);
+    // }
     setDifficulty(lives);
   };
 
@@ -109,33 +109,53 @@ const SettingsSheet: React.FC = () => {
   };
 
   // PANEL VISIBILITY OPTIONS
-  const panel5viz = (settingStatus > 4 && !isResetType && !isResetOperator) || settingStatus > 5 ? 'show' : 'hide';
+  const nextButtonViz = (settingStatus > 3 && !isResetType && !isResetOperator) || settingStatus > 4 ? 'show' : 'hide';
+  const finalButtonViz = settingStatus > 6 ? 'show' : 'hide';
 
   // RENDERING LOGIC
   const bonds = panelSumType === 'bonds';
 
   return (
     <div className="settings__sheet">
-      <SettingsPanelType stateChecker={panelSumType} handler={panelTypeHandler} status={settingStatus} />
-      <SettingsPanelOp stateChecker={operator} handler={panelOpHandler} status={settingStatus} isBonds={bonds} />
-      <SettingsPanelBase stateChecker={panelBaseNum} handler={panelNumHandler} status={settingStatus} isBonds={bonds} />
-      <SettingsPanelLives
-        stateChecker={difficulty}
-        handler={panelLivesHandler}
-        status={settingStatus}
-        isResetOperator={isResetOperator}
-      />
-      <div className={`settings__panel settings__panel--${panel5viz}`}>
-        <div className="settings__button-container settings__button-container--last settings__button-container--lge">
-          <Button
-            type="button"
-            handler={(): void => finalSettings(panelSumType, panelBaseNum, operator, difficulty)}
-            modifiers={buttonStyles.horizGreen}
-          >
-            Start the sums!
-          </Button>
-        </div>
-      </div>
+      {settingStatus < 6 ? (
+        <>
+          <SettingsPanelType stateChecker={panelSumType} handler={panelTypeHandler} status={settingStatus} />
+          <SettingsPanelOp stateChecker={operator} handler={panelOpHandler} status={settingStatus} isBonds={bonds} />
+          <SettingsPanelBase
+            stateChecker={panelBaseNum}
+            handler={panelNumHandler}
+            status={settingStatus}
+            isBonds={bonds}
+          />
+          <div className={`settings__panel settings__panel--${nextButtonViz}`}>
+            <div className="settings__button-container settings__button-container--last settings__button-container--lge">
+              <Button type="button" handler={(): void => setSettingStatus(6)} modifiers={buttonStyles.horizGreen}>
+                Next &gt;
+              </Button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <SettingsPanelLives
+            stateChecker={difficulty}
+            handler={panelLivesHandler}
+            status={settingStatus}
+            isResetOperator={isResetOperator}
+          />
+          <div className={`settings__panel settings__panel--${finalButtonViz}`}>
+            <div className="settings__button-container settings__button-container--last settings__button-container--lge">
+              <Button
+                type="button"
+                handler={(): void => finalSettings(panelSumType, panelBaseNum, operator, difficulty)}
+                modifiers={buttonStyles.horizGreen}
+              >
+                Start the sums!
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
