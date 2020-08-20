@@ -36,6 +36,7 @@ const SettingsPanelBase: React.FC<PanelBaseProps> = ({ stateChecker, handler, st
   );
 
   const panelButtons = isBonds ? bondMap : tableMap;
+  const panelKey = isBonds ? 'bonds' : 'table';
   const title = isBonds ? 'Choose your bond number' : 'Choose your times table';
   const buttonMods = isBonds ? 'sml' : undefined;
 
@@ -43,7 +44,13 @@ const SettingsPanelBase: React.FC<PanelBaseProps> = ({ stateChecker, handler, st
   const panelBaseViz = status > 2 ? 'show' : 'hide';
 
   return (
-    <SettingsPanel title={title} buttonMap={panelButtons} panelModifiers={panelBaseViz} buttonModifiers={buttonMods} />
+    <SettingsPanel
+      key={panelKey}
+      title={title}
+      buttonMap={panelButtons}
+      panelModifiers={panelBaseViz}
+      buttonModifiers={buttonMods}
+    />
   );
 };
 

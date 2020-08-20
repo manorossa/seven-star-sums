@@ -37,13 +37,22 @@ const SettingsPanelOp: React.FC<PanelOpProps> = ({ stateChecker, handler, status
     status
   );
 
+  const panelKey = isBonds ? 'bonds' : 'table';
   const panelButtons = isBonds ? bondOperatorMap : tableOperatorMap;
   const title = isBonds ? 'Do you want to do adding or taking away?' : 'Do you want to do multiplication or division?';
 
   // PANEL VISIBILITY OPTIONS
   const panelOpViz = status > 1 ? 'show' : 'hide';
 
-  return <SettingsPanel title={title} buttonMap={panelButtons} panelModifiers={panelOpViz} buttonModifiers="lge" />;
+  return (
+    <SettingsPanel
+      key={panelKey}
+      title={title}
+      buttonMap={panelButtons}
+      panelModifiers={panelOpViz}
+      buttonModifiers="lge"
+    />
+  );
 };
 
 export default SettingsPanelOp;
