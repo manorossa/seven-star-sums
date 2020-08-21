@@ -67,7 +67,7 @@ const Check: React.FC = (): JSX.Element => {
           </Button>
         </>
       ) : (
-        <div>Checking...</div>
+        <div />
       )}
     </div>
   );
