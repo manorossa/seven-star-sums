@@ -13,6 +13,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
   const [op1, setOp1] = useState('+' as SumState['op1']);
   const [rightWrong, setRightWrong] = useState(null as SumState['rightWrong']);
   const [answerCheck, setAnswerCheck] = useState(true);
+  const [isHard, setIsHard] = useState(true);
 
   const sumState = useMemo(
     () => ({
@@ -24,6 +25,7 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       op1,
       rightWrong,
       answerCheck,
+      isHard,
       setSumType,
       setPossibleNums,
       setNum1,
@@ -31,9 +33,10 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       setBaseNum,
       setOp1,
       setRightWrong,
-      setAnswerCheck
+      setAnswerCheck,
+      setIsHard
     }),
-    [sumType, possibleNums, num1, num2, baseNum, op1, rightWrong, answerCheck]
+    [sumType, possibleNums, num1, num2, baseNum, op1, rightWrong, answerCheck, isHard]
   );
 
   return <Provider value={sumState}>{children}</Provider>;
@@ -49,6 +52,7 @@ const useSum = (): SumState => {
     op1,
     rightWrong,
     answerCheck,
+    isHard,
     setSumType,
     setPossibleNums,
     setNum1,
@@ -56,7 +60,8 @@ const useSum = (): SumState => {
     setBaseNum,
     setOp1,
     setRightWrong,
-    setAnswerCheck
+    setAnswerCheck,
+    setIsHard
   } = useContext(SumContext);
 
   if (
@@ -68,6 +73,7 @@ const useSum = (): SumState => {
     op1 === undefined ||
     rightWrong === undefined ||
     answerCheck === undefined ||
+    isHard === undefined ||
     setSumType === undefined ||
     setPossibleNums === undefined ||
     setNum1 === undefined ||
@@ -75,7 +81,8 @@ const useSum = (): SumState => {
     setBaseNum === undefined ||
     setOp1 === undefined ||
     setRightWrong === undefined ||
-    setAnswerCheck === undefined
+    setAnswerCheck === undefined ||
+    setIsHard === undefined
   ) {
     throw new Error('useSum must be used within a SumProvider');
   }
@@ -89,6 +96,7 @@ const useSum = (): SumState => {
     op1,
     rightWrong,
     answerCheck,
+    isHard,
     setSumType,
     setPossibleNums,
     setNum1,
@@ -96,7 +104,8 @@ const useSum = (): SumState => {
     setBaseNum,
     setOp1,
     setRightWrong,
-    setAnswerCheck
+    setAnswerCheck,
+    setIsHard
   };
 };
 
