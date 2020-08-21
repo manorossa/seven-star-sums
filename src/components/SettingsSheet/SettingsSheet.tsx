@@ -4,6 +4,7 @@ import SettingsPanelOp from './SettingsPanels/SettingsPanelOp';
 import SettingsPanelBase from './SettingsPanels/SettingsPanelBase';
 import SettingsPanelLives from './SettingsPanels/SettingsPanelLives';
 import SettingsPanelCheck from './SettingsPanels/SettingsPanelCheck';
+import SettingsPanelHard from './SettingsPanels/SettingsPanelHard';
 import { buttonStyles } from './SettingsPanels/ButtonMapper';
 import Button from '../../UI/atoms/Button/Button';
 import './SettingsSheet.css';
@@ -27,6 +28,7 @@ const SettingsSheet: React.FC = () => {
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(0);
   const [checkAns, setCheckAns] = useState('');
+  const [hardSums, setHardSums] = useState('');
   const [isResetType, setIsResetType] = useState(false);
   const [isResetOperator, setIsResetOperator] = useState(false);
   const localSettings = getLocalSettings();
@@ -95,6 +97,11 @@ const SettingsSheet: React.FC = () => {
     setCheckAns(check);
   };
 
+  const panelHardHandler: GenericFunc<string> = (isHard) => {
+    setSettingStatus(9);
+    setHardSums(isHard);
+  };
+
   const finalSettings = (
     finalSumType: SumState['sumType'],
     finalBaseNum: number,
@@ -121,7 +128,7 @@ const SettingsSheet: React.FC = () => {
 
   // PANEL VISIBILITY OPTIONS
   const nextButtonViz = (settingStatus > 3 && !isResetType && !isResetOperator) || settingStatus > 4 ? 'show' : 'hide';
-  const finalButtonViz = settingStatus > 7 ? 'show' : 'hide';
+  const finalButtonViz = settingStatus > 8 ? 'show' : 'hide';
 
   // RENDERING LOGIC
   const bonds = panelSumType === 'bonds';
@@ -155,6 +162,9 @@ const SettingsSheet: React.FC = () => {
             isResetOperator={isResetOperator}
           />
           <SettingsPanelCheck stateChecker={checkAns} handler={panelCheckHandler} status={settingStatus} />
+          {panelSumType === 'tables' && (
+            <SettingsPanelHard stateChecker={hardSums} handler={panelHardHandler} status={settingStatus} />
+          )}
           <div className={`settings__panel settings__panel--${finalButtonViz}`}>
             <div className="settings__button-container settings__button-container--last settings__button-container--lge">
               <Button
