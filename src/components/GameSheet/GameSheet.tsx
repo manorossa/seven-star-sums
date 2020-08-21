@@ -13,17 +13,7 @@ import { definePossibleNums, defineSum } from '../../helpers/helpers';
 
 const GameSheet: React.FC = () => {
   const { gameStatus, setGameStatus } = useStatus();
-  const {
-    sumType,
-    baseNum,
-    op1,
-    possibleNums,
-    answerCheck,
-    setNum1,
-    setNum2,
-    setPossibleNums,
-    setRightWrong
-  } = useSum();
+  const { sumType, baseNum, op1, possibleNums, setNum1, setNum2, setPossibleNums, setRightWrong } = useSum();
   const { setPossibleAns, setCorrectAns } = useAnswer();
   const { totalLives, setLivesLeft, setScore, setWrongAnswers } = useScore();
 
@@ -88,7 +78,7 @@ const GameSheet: React.FC = () => {
       <Sum />
       <div className="answer-strip">
         <Answers />
-        {answerCheck && <Check />}
+        <Check />
         <Result />
       </div>
       <Score />
