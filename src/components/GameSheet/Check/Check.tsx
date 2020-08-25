@@ -11,7 +11,7 @@ import { getSumNumberOrder } from '../../../helpers/helpers';
 const Check: React.FC = (): JSX.Element => {
   const { setGameStatus } = useStatus();
   const { correctAns } = useAnswer();
-  const { op1, num1, num2, baseNum, answerCheck, setNum2, setRightWrong } = useSum();
+  const { op1, num1, num2, baseNum, answerCheck, possibleNums, setNum2, setRightWrong, setPossibleNums } = useSum();
   const { wrongAnswers, setLivesLeft, setScore, setWrongAnswers } = useScore();
 
   const assessAnswer = useCallback((): void => {
@@ -20,6 +20,7 @@ const Check: React.FC = (): JSX.Element => {
     setGameStatus('showResult');
     if (!isCorrect) {
       setLivesLeft((prevLives) => prevLives - 1);
+      setPossibleNums([...possibleNums].concat(num1 as number));
       const sumOrder = getSumNumberOrder(op1, num1, correctAns as number, baseNum);
       const sum = `${sumOrder[0]} ${op1} ${sumOrder[1]} = ${sumOrder[2]}`;
       setWrongAnswers([
