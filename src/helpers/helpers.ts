@@ -20,7 +20,14 @@ export const getNumberRange = (endNum: number): number[] => {
 
 // fn returns an array of numbers in order based on the type of sum chosen in settings
 // Runs when gameStatus is 'defineNums'
-export const definePossibleNums = (baseNum: SumState['baseNum'], sumType: SumState['sumType']): number[] => {
+export const definePossibleNums = (
+  baseNum: SumState['baseNum'],
+  sumType: SumState['sumType'],
+  isHard: SumState['isHard']
+): number[] => {
+  if (sumType === 'tables' && isHard) {
+    return [3, 4, 6, 7, 8, 9, 12];
+  }
   const numLimit = sumType === 'bonds' ? baseNum - 1 : 12;
   return getNumberRange(numLimit);
 };

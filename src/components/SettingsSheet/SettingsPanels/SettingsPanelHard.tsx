@@ -30,7 +30,7 @@ const SettingsPanelType: React.FC<PanelHardProps> = ({ stateChecker, handler, st
 
   return (
     <SettingsPanel
-      title="Do you want only do hard sums?"
+      title="Do you only want hard sums?"
       buttonMap={hardMap}
       panelModifiers={panelHardViz}
       buttonModifiers="lge"
