@@ -81,6 +81,7 @@ export interface SettingsModel {
   finalOperator: SumState['op1'];
   finalDifficulty: number;
   finalAnswerCheck: SumState['answerCheck'];
+  finalIsHard: SumState['isHard'];
 }
 
 // METHOD AND FUNCTION TYPES

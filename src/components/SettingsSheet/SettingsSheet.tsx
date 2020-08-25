@@ -19,7 +19,7 @@ type LocalOperator = SumState['op1'] & '';
 const SettingsSheet: React.FC = () => {
   // APP STATE FROM CONTEXT
   const { isLocalSettings, setGameStatus } = useStatus();
-  const { setSumType, setBaseNum, setOp1, setAnswerCheck } = useSum();
+  const { setSumType, setBaseNum, setOp1, setAnswerCheck, setIsHard } = useSum();
   const { setTotalLives } = useScore();
   // LOCAL STATE IN COMPONENT
   const [settingStatus, setSettingStatus] = useState(1);
@@ -107,21 +107,25 @@ const SettingsSheet: React.FC = () => {
     finalBaseNum: number,
     finalOperator: SumState['op1'],
     finalDifficulty: number,
-    finalAnsCheck: string
+    finalAnsCheck: string,
+    finalHardSums: string
   ): void => {
     const finalAnswerCheck = finalAnsCheck === 'true';
+    const finalIsHard = finalHardSums === 'true';
     setSumType(finalSumType);
     setBaseNum(finalBaseNum);
     setOp1(finalOperator);
     setTotalLives(finalDifficulty);
     setAnswerCheck(finalAnswerCheck);
+    setIsHard(finalIsHard);
     setGameStatus('resetGame');
     const allSettings = {
       finalSumType,
       finalBaseNum,
       finalOperator,
       finalDifficulty,
-      finalAnswerCheck
+      finalAnswerCheck,
+      finalIsHard
     };
     window.localStorage.setItem('sevenStarSettings', JSON.stringify(allSettings));
   };
@@ -169,7 +173,9 @@ const SettingsSheet: React.FC = () => {
             <div className="settings__button-container settings__button-container--last settings__button-container--lge">
               <Button
                 type="button"
-                handler={(): void => finalSettings(panelSumType, panelBaseNum, operator, difficulty, checkAns)}
+                handler={(): void => {
+                  finalSettings(panelSumType, panelBaseNum, operator, difficulty, checkAns, hardSums);
+                }}
                 modifiers={buttonStyles.horizGreen}
               >
                 Start the sums!
