@@ -28,7 +28,7 @@ const SettingsSheet: React.FC = () => {
   const [panelBaseNum, setPanelBaseNum] = useState(2);
   const [difficulty, setDifficulty] = useState(0);
   const [checkAns, setCheckAns] = useState(false);
-  const [hardSums, setHardSums] = useState('');
+  const [hardSums, setHardSums] = useState(false);
   const [isResetType, setIsResetType] = useState(false);
   const [isResetOperator, setIsResetOperator] = useState(false);
   const localSettings = getLocalSettings();
@@ -42,6 +42,7 @@ const SettingsSheet: React.FC = () => {
       setDifficulty(localSettings.finalDifficulty);
       setPanelSumType(localSettings.finalSumType);
       setCheckAns(localSettings.finalAnswerCheck);
+      setHardSums(localSettings.finalIsHard);
     }
     // eslint-disable-next-line
   }, []);
@@ -102,7 +103,8 @@ const SettingsSheet: React.FC = () => {
 
   const panelHardHandler: GenericFunc<string> = (isHard) => {
     setSettingStatus(9);
-    setHardSums(isHard);
+    const isHardBool = isHard === 'true';
+    setHardSums(isHardBool);
   };
 
   const finalSettings = (
@@ -170,14 +172,21 @@ const SettingsSheet: React.FC = () => {
           />
           <SettingsPanelCheck stateChecker={checkAns.toString()} handler={panelCheckHandler} status={settingStatus} />
           {panelSumType === 'tables' && (
-            <SettingsPanelHard stateChecker={hardSums} handler={panelHardHandler} status={settingStatus} />
+            <SettingsPanelHard stateChecker={hardSums.toString()} handler={panelHardHandler} status={settingStatus} />
           )}
           <div className={`settings__panel settings__panel--${finalButtonViz}`}>
             <div className="settings__button-container settings__button-container--last settings__button-container--lge">
               <Button
                 type="button"
                 handler={(): void => {
-                  finalSettings(panelSumType, panelBaseNum, operator, difficulty, checkAns.toString(), hardSums);
+                  finalSettings(
+                    panelSumType,
+                    panelBaseNum,
+                    operator,
+                    difficulty,
+                    checkAns.toString(),
+                    hardSums.toString()
+                  );
                 }}
                 modifiers={buttonStyles.horizGreen}
               >
