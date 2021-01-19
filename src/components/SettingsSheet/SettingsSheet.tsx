@@ -88,9 +88,6 @@ const SettingsSheet: React.FC = () => {
 
   const panelLivesHandler: GenericFunc<number> = (lives) => {
     setSettingStatus(7);
-    // if (isResetOperator) {
-    //   setSettingStatus(6);
-    // }
     setDifficulty(lives);
   };
 
