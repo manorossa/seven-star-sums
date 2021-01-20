@@ -13,7 +13,7 @@ import { definePossibleNums, defineSum } from '../../helpers/helpers';
 
 const GameSheet: React.FC = () => {
   const { gameStatus, setGameStatus } = useStatus();
-  const { sumType, baseNum, op1, possibleNums, setNum1, setNum2, setPossibleNums, setRightWrong } = useSum();
+  const { sumType, baseNum, op1, possibleNums, isHard, setNum1, setNum2, setPossibleNums, setRightWrong } = useSum();
   const { setPossibleAns, setCorrectAns } = useAnswer();
   const { totalLives, setLivesLeft, setScore, setWrongAnswers } = useScore();
 
@@ -43,11 +43,11 @@ const GameSheet: React.FC = () => {
 
   useEffect(() => {
     if (defineNumsStatus) {
-      const newNums = definePossibleNums(baseNum, sumType);
+      const newNums = definePossibleNums(baseNum, sumType, isHard);
       setPossibleNums([...possibleNums].concat(newNums));
       setGameStatus('defineSum');
     }
-  }, [defineNumsStatus, setGameStatus, baseNum, sumType, possibleNums, setPossibleNums]);
+  }, [defineNumsStatus, setGameStatus, baseNum, sumType, possibleNums, isHard, setPossibleNums]);
 
   useEffect(() => {
     if (defineSumStatus) {

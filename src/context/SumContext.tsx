@@ -12,6 +12,8 @@ const SumProvider = ({ children }: Props): JSX.Element => {
   const [baseNum, setBaseNum] = useState(20);
   const [op1, setOp1] = useState('+' as SumState['op1']);
   const [rightWrong, setRightWrong] = useState(null as SumState['rightWrong']);
+  const [answerCheck, setAnswerCheck] = useState(true);
+  const [isHard, setIsHard] = useState(true);
 
   const sumState = useMemo(
     () => ({
@@ -22,15 +24,19 @@ const SumProvider = ({ children }: Props): JSX.Element => {
       baseNum,
       op1,
       rightWrong,
+      answerCheck,
+      isHard,
       setSumType,
       setPossibleNums,
       setNum1,
       setNum2,
       setBaseNum,
       setOp1,
-      setRightWrong
+      setRightWrong,
+      setAnswerCheck,
+      setIsHard
     }),
-    [sumType, possibleNums, num1, num2, baseNum, op1, rightWrong]
+    [sumType, possibleNums, num1, num2, baseNum, op1, rightWrong, answerCheck, isHard]
   );
 
   return <Provider value={sumState}>{children}</Provider>;
@@ -45,13 +51,17 @@ const useSum = (): SumState => {
     baseNum,
     op1,
     rightWrong,
+    answerCheck,
+    isHard,
     setSumType,
     setPossibleNums,
     setNum1,
     setNum2,
     setBaseNum,
     setOp1,
-    setRightWrong
+    setRightWrong,
+    setAnswerCheck,
+    setIsHard
   } = useContext(SumContext);
 
   if (
@@ -62,13 +72,17 @@ const useSum = (): SumState => {
     baseNum === undefined ||
     op1 === undefined ||
     rightWrong === undefined ||
+    answerCheck === undefined ||
+    isHard === undefined ||
     setSumType === undefined ||
     setPossibleNums === undefined ||
     setNum1 === undefined ||
     setNum2 === undefined ||
     setBaseNum === undefined ||
     setOp1 === undefined ||
-    setRightWrong === undefined
+    setRightWrong === undefined ||
+    setAnswerCheck === undefined ||
+    setIsHard === undefined
   ) {
     throw new Error('useSum must be used within a SumProvider');
   }
@@ -81,13 +95,17 @@ const useSum = (): SumState => {
     baseNum,
     op1,
     rightWrong,
+    answerCheck,
+    isHard,
     setSumType,
     setPossibleNums,
     setNum1,
     setNum2,
     setBaseNum,
     setOp1,
-    setRightWrong
+    setRightWrong,
+    setAnswerCheck,
+    setIsHard
   };
 };
 

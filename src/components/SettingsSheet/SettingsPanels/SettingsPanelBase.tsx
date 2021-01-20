@@ -36,7 +36,7 @@ const SettingsPanelBase: React.FC<PanelBaseProps> = ({ stateChecker, handler, st
   );
 
   const panelButtons = isBonds ? bondMap : tableMap;
-  const panelKey = isBonds ? 'bonds' : 'table';
+  const panelId = isBonds ? 'bonds' : 'table';
   const title = isBonds ? 'Choose your bond number' : 'Choose your times table';
   const buttonMods = isBonds ? 'sml' : undefined;
 
@@ -45,7 +45,7 @@ const SettingsPanelBase: React.FC<PanelBaseProps> = ({ stateChecker, handler, st
 
   return (
     <SettingsPanel
-      key={panelKey}
+      id={panelId}
       title={title}
       buttonMap={panelButtons}
       panelModifiers={panelBaseViz}

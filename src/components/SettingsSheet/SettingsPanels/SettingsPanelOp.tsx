@@ -37,7 +37,7 @@ const SettingsPanelOp: React.FC<PanelOpProps> = ({ stateChecker, handler, status
     status
   );
 
-  const panelKey = isBonds ? 'bonds' : 'table';
+  const panelId = isBonds ? 'bonds' : 'table';
   const panelButtons = isBonds ? bondOperatorMap : tableOperatorMap;
   const title = isBonds ? 'Do you want to do adding or taking away?' : 'Do you want to do multiplication or division?';
 
@@ -46,7 +46,7 @@ const SettingsPanelOp: React.FC<PanelOpProps> = ({ stateChecker, handler, status
 
   return (
     <SettingsPanel
-      key={panelKey}
+      id={panelId}
       title={title}
       buttonMap={panelButtons}
       panelModifiers={panelOpViz}
