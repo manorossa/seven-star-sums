@@ -14,7 +14,6 @@
 
 # compiled CSS
 src/**/*.css
-src/containers/App/App.css
 
 # misc
 .DS_Store
